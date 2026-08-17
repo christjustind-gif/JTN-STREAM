@@ -1,51 +1,183 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    const API_URL = "http://localhost:3000/api/movies";
 
-    const homePage = document.getElementById("homePage");
-    const favoritesPage = document.getElementById("favoritesPage");
-    const downloadsPage = document.getElementById("downloadsPage");
+    /* =====================================================
+       CONFIGURATION
+    ===================================================== */
 
-    const favoriteList = document.getElementById("favoriteList");
-    const downloadList = document.getElementById("downloadList");
+    const API_URL =
+        "http://localhost:3000/api/movies";
 
-    const player = document.getElementById("player");
-    const video = document.getElementById("video");
-    const closePlayer = document.getElementById("closePlayer");
 
-    const searchBtn = document.getElementById("searchBtn");
-    const searchBox = document.getElementById("searchBox");
-    const searchInput = document.getElementById("searchInput");
+    /* =====================================================
+       ÉLÉMENTS
+    ===================================================== */
 
-    const homeBtn = document.getElementById("homeBtn");
-    const favoritesBtn = document.getElementById("favoritesBtn");
-    const downloadsBtn = document.getElementById("downloadsBtn");
+    const intro =
+        document.getElementById("intro");
 
-    const backFromFavorites =
-        document.getElementById("backFromFavorites");
+    const homePage =
+        document.getElementById("homePage");
 
-    const backFromDownloads =
-        document.getElementById("backFromDownloads");
+    const favoritesPage =
+        document.getElementById("favoritesPage");
+
+    const downloadsPage =
+        document.getElementById("downloadsPage");
+
+
+    const favoriteList =
+        document.getElementById("favoriteList");
+
+    const downloadList =
+        document.getElementById("downloadList");
+
+
+    /* LECTEUR */
+
+    const player =
+        document.getElementById("player");
+
+    const video =
+        document.getElementById("video");
+
+    const vdoFrame =
+        document.getElementById("vdoFrame");
+
+    const closePlayer =
+        document.getElementById("closePlayer");
+
+
+    /* RECHERCHE */
+
+    const searchBtn =
+        document.getElementById("searchBtn");
+
+    const searchBox =
+        document.getElementById("searchBox");
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+
+    /* NAVIGATION */
+
+    const homeBtn =
+        document.getElementById("homeBtn");
+
+    const favoritesBtn =
+        document.getElementById("favoritesBtn");
+
+    const downloadsBtn =
+        document.getElementById("downloadsBtn");
+
+    const settingsBtn =
+        document.getElementById("settingsBtn");
+
+    const settingsBtnBottom =
+        document.getElementById(
+            "settingsBtnBottom"
+        );
+
+
+    /* HERO */
 
     const heroPlay =
         document.getElementById("heroPlay");
 
+    const heroInfo =
+        document.getElementById("heroInfo");
+
 
     /* =====================================================
-       DONNÉES
+       FICHE FILM
+    ===================================================== */
+
+    const movieDetails =
+        document.getElementById(
+            "movieDetails"
+        );
+
+    const detailsClose =
+        document.getElementById(
+            "detailsClose"
+        );
+
+    const detailsPoster =
+        document.getElementById(
+            "detailsPoster"
+        );
+
+    const detailsTitle =
+        document.getElementById(
+            "detailsTitle"
+        );
+
+    const detailsMeta =
+        document.getElementById(
+            "detailsMeta"
+        );
+
+    const detailsDescription =
+        document.getElementById(
+            "detailsDescription"
+        );
+
+    const detailsWatch =
+        document.getElementById(
+            "detailsWatch"
+        );
+
+    const detailsDownload =
+        document.getElementById(
+            "detailsDownload"
+        );
+
+    const detailsList =
+        document.getElementById(
+            "detailsList"
+        );
+
+
+    /* =====================================================
+       VARIABLES
     ===================================================== */
 
     let movies = [];
 
+    let selectedMovie = null;
+
+
     let favorites =
         JSON.parse(
-            localStorage.getItem("JTN_STREAM_FAVORITES")
-        ) || [];
+            localStorage.getItem(
+                "JTN_STREAM_FAVORITES"
+            ) || "[]"
+        );
+
 
     let downloads =
         JSON.parse(
-            localStorage.getItem("JTN_STREAM_DOWNLOADS")
-        ) || [];
+            localStorage.getItem(
+                "JTN_STREAM_DOWNLOADS"
+            ) || "[]"
+        );
+
+
+    /* =====================================================
+       INTRO
+    ===================================================== */
+
+    setTimeout(() => {
+
+        if (intro) {
+
+            intro.style.display =
+                "none";
+
+        }
+
+    }, 3500);
 
 
     /* =====================================================
@@ -54,247 +186,899 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function showMessage(message) {
 
-        let box = document.getElementById("jtnMessage");
+        let box =
+            document.getElementById(
+                "jtnMessage"
+            );
+
 
         if (!box) {
 
-            box = document.createElement("div");
+            box =
+                document.createElement(
+                    "div"
+                );
 
-            box.id = "jtnMessage";
+            box.id =
+                "jtnMessage";
 
-            box.style.position = "fixed";
-            box.style.bottom = "80px";
-            box.style.left = "50%";
-            box.style.transform = "translateX(-50%)";
+            box.style.position =
+                "fixed";
 
-            box.style.zIndex = "99999";
+            box.style.left =
+                "50%";
 
-            box.style.background = "#181818";
-            box.style.color = "#fff";
+            box.style.bottom =
+                "90px";
 
-            box.style.padding = "14px 22px";
-            box.style.borderRadius = "14px";
+            box.style.transform =
+                "translateX(-50%)";
 
-            box.style.fontWeight = "600";
+            box.style.zIndex =
+                "999999";
+
+            box.style.background =
+                "#181818";
+
+            box.style.color =
+                "white";
+
+            box.style.padding =
+                "13px 20px";
+
+            box.style.borderRadius =
+                "14px";
+
+            box.style.fontWeight =
+                "bold";
+
+            box.style.fontSize =
+                "13px";
 
             box.style.boxShadow =
-                "0 10px 30px rgba(0,0,0,.5)";
+                "0 10px 35px rgba(0,0,0,.6)";
 
-            document.body.appendChild(box);
+            document.body.appendChild(
+                box
+            );
+
         }
 
-        box.textContent = message;
 
-        box.style.display = "block";
+        box.textContent =
+            message;
 
-        clearTimeout(window.jtnMessageTimer);
+        box.style.display =
+            "block";
+
+
+        clearTimeout(
+            window.jtnMessageTimer
+        );
+
 
         window.jtnMessageTimer =
             setTimeout(() => {
 
-                box.style.display = "none";
+                box.style.display =
+                    "none";
 
-            }, 3000);
+            }, 2800);
+
     }
 
 
     /* =====================================================
-       CHARGER LES FILMS AUTOMATIQUEMENT
+       CHARGER LES FILMS
     ===================================================== */
 
     async function loadMovies() {
 
         try {
 
-            showMessage("⏳ Chargement de JTN STREAM...");
+            showMessage(
+                "⏳ Chargement de JTN STREAM..."
+            );
+
 
             const response =
                 await fetch(API_URL);
 
+
             if (!response.ok) {
+
                 throw new Error(
-                    "Erreur HTTP " + response.status
+                    "HTTP " +
+                    response.status
                 );
+
             }
 
-            movies = await response.json();
+
+            const data =
+                await response.json();
+
+
+            movies =
+                Array.isArray(data)
+                    ? data
+                    : [];
+
 
             console.log(
                 "🎬 Films chargés :",
                 movies
             );
 
+
             renderMovies();
 
             updateFavoriteButtons();
+
+            renderFavorites();
+
+            renderDownloads();
+
+
+            /*
+             * Mettre le premier film
+             * dans le Hero
+             */
+
+            if (movies.length > 0) {
+
+                updateHero(
+                    movies[0]
+                );
+
+            }
+
 
             showMessage(
                 "🔥 JTN STREAM est prêt !"
             );
 
+
         } catch (error) {
 
             console.error(
-                "Erreur chargement films :",
+                "Erreur API :",
                 error
             );
 
+
             showMessage(
-                "❌ Impossible de contacter le serveur JTN STREAM"
+                "❌ Serveur JTN STREAM inaccessible"
             );
+
         }
+
     }
 
 
     /* =====================================================
-       AFFICHER LES FILMS
+       RENDU DES FILMS
     ===================================================== */
 
     function renderMovies() {
 
         const categories =
-            document.querySelectorAll(".category");
-
-        categories.forEach(category => {
-
-            const row =
-                category.querySelector(".movie-row");
-
-            if (!row) return;
-
-            row.innerHTML = "";
-        });
+            document.querySelectorAll(
+                ".category"
+            );
 
 
-        movies.forEach(movie => {
+        categories.forEach(
+            category => {
 
-            let category =
-                [...document.querySelectorAll(".category")]
-                .find(section => {
+                const row =
+                    category.querySelector(
+                        ".movie-row"
+                    );
 
-                    const title =
-                        section.querySelector("h2");
+                if (row) {
 
-                    if (!title) return false;
+                    row.innerHTML =
+                        "";
 
-                    return title.textContent
-                        .toLowerCase()
-                        .includes(
-                            movie.category
-                                .toLowerCase()
+                }
+
+            }
+        );
+
+
+        movies.forEach(
+            movie => {
+
+                const category =
+                    findCategory(
+                        movie.category
+                    );
+
+
+                if (!category) {
+
+                    return;
+
+                }
+
+
+                const row =
+                    category.querySelector(
+                        ".movie-row"
+                    );
+
+
+                if (!row) {
+
+                    return;
+
+                }
+
+
+                const article =
+                    document.createElement(
+                        "article"
+                    );
+
+
+                article.className =
+                    "movie";
+
+
+                article.dataset.id =
+                    movie.id;
+
+
+                article.dataset.title =
+                    movie.title || "";
+
+
+                article.dataset.video =
+                    movie.video || "";
+
+
+                article.dataset.download =
+                    movie.download || "";
+
+
+                article.innerHTML = `
+
+                    <div
+                        class="poster"
+                        style="
+                            background-image:
+                            url('${escapeAttribute(
+                                movie.poster || ""
+                            )}');
+                        "
+                    ></div>
+
+
+                    <h3>
+                        ${escapeHTML(
+                            movie.title ||
+                            "Sans titre"
+                        )}
+                    </h3>
+
+
+                    <div
+                        class="movie-actions"
+                    >
+
+                        <button
+                            class="watch-btn"
+                            type="button"
+                        >
+                            ▶ Regarder
+                        </button>
+
+
+                        <button
+                            class="favorite-btn"
+                            type="button"
+                        >
+                            ♡
+                        </button>
+
+                    </div>
+
+
+                    <button
+                        class="download-btn"
+                        type="button"
+                    >
+                        ⬇ Télécharger
+                    </button>
+
+                `;
+
+
+                row.appendChild(
+                    article
+                );
+
+
+                /*
+                 * CLIC SUR L'AFFICHE
+                 */
+
+                article.addEventListener(
+                    "click",
+                    event => {
+
+                        if (
+                            event.target.closest(
+                                ".watch-btn"
+                            ) ||
+                            event.target.closest(
+                                ".favorite-btn"
+                            ) ||
+                            event.target.closest(
+                                ".download-btn"
+                            )
+                        ) {
+
+                            return;
+
+                        }
+
+
+                        openMovieDetails(
+                            movie
                         );
-                });
+
+                    }
+                );
 
 
-            if (!category) {
+                /*
+                 * REGARDER
+                 */
 
-                category =
-                    document.querySelector(".category");
+                article
+                    .querySelector(
+                        ".watch-btn"
+                    )
+                    .addEventListener(
+                        "click",
+                        event => {
+
+                            event.stopPropagation();
+
+                            watchMovie(
+                                movie
+                            );
+
+                        }
+                    );
+
+
+                /*
+                 * FAVORIS
+                 */
+
+                article
+                    .querySelector(
+                        ".favorite-btn"
+                    )
+                    .addEventListener(
+                        "click",
+                        event => {
+
+                            event.stopPropagation();
+
+                            toggleFavorite(
+                                movie
+                            );
+
+                        }
+                    );
+
+
+                /*
+                 * TÉLÉCHARGEMENT
+                 */
+
+                article
+                    .querySelector(
+                        ".download-btn"
+                    )
+                    .addEventListener(
+                        "click",
+                        event => {
+
+                            event.stopPropagation();
+
+                            downloadMovie(
+                                movie
+                            );
+
+                        }
+                    );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       TROUVER UNE CATÉGORIE
+    ===================================================== */
+
+    function findCategory(categoryName) {
+
+        const name =
+            String(
+                categoryName || ""
+            )
+            .toLowerCase()
+            .trim();
+
+
+        const sections =
+            document.querySelectorAll(
+                ".category"
+            );
+
+
+        let result =
+            [...sections].find(
+                section => {
+
+                    const id =
+                        section.id
+                            .toLowerCase();
+
+
+                    return (
+                        id === name ||
+                        id.includes(name) ||
+                        name.includes(id)
+                    );
+
+                }
+            );
+
+
+        /*
+         * Quelques correspondances
+         */
+
+        if (!result) {
+
+            if (
+                name.includes("film") ||
+                name.includes("movie")
+            ) {
+
+                result =
+                    document.getElementById(
+                        "films"
+                    );
+
             }
 
-
-            const row =
-                category.querySelector(".movie-row");
-
-            if (!row) return;
+        }
 
 
-            const article =
-                document.createElement("article");
+        if (!result) {
 
-            article.className = "movie";
+            if (
+                name.includes("action")
+            ) {
 
-            article.dataset.id = movie.id;
-            article.dataset.title = movie.title;
-            article.dataset.video = movie.video;
+                result =
+                    document.getElementById(
+                        "action"
+                    );
 
+            }
 
-            article.innerHTML = `
-
-                <div
-                    class="poster"
-                    style="
-                        background-image:
-                        url('${movie.poster}');
-                    "
-                ></div>
-
-                <h3>
-                    ${escapeHTML(movie.title)}
-                </h3>
-
-                <div class="movie-actions">
-
-                    <button
-                        class="watch-btn"
-                        type="button"
-                    >
-                        ▶ Regarder
-                    </button>
-
-                    <button
-                        class="favorite-btn"
-                        type="button"
-                    >
-                        ♡
-                    </button>
-
-                </div>
-
-                <button
-                    class="download-btn"
-                    type="button"
-                >
-                    ⬇ Télécharger
-                </button>
-            `;
+        }
 
 
-            row.appendChild(article);
+        if (!result) {
+
+            if (
+                name.includes("com")
+            ) {
+
+                result =
+                    document.getElementById(
+                        "comedie"
+                    );
+
+            }
+
+        }
 
 
-            /* REGARDER */
+        if (!result) {
 
-            article
-                .querySelector(".watch-btn")
-                .addEventListener(
-                    "click",
-                    () => {
+            if (
+                name.includes("série") ||
+                name.includes("serie")
+            ) {
 
-                        watchMovie(movie);
+                result =
+                    document.getElementById(
+                        "series"
+                    );
 
-                    }
+            }
+
+        }
+
+
+        if (!result) {
+
+            if (
+                name.includes("anime") ||
+                name.includes("animé")
+            ) {
+
+                result =
+                    document.getElementById(
+                        "animes"
+                    );
+
+            }
+
+        }
+
+
+        return result;
+
+    }
+
+
+    /* =====================================================
+       HERO
+    ===================================================== */
+
+    function updateHero(movie) {
+
+        if (!movie) {
+
+            return;
+
+        }
+
+
+        const heroTitle =
+            document.getElementById(
+                "heroTitle"
+            );
+
+
+        const heroDescription =
+            document.getElementById(
+                "heroDescription"
+            );
+
+
+        if (heroTitle) {
+
+            heroTitle.innerHTML =
+                escapeHTML(
+                    movie.title ||
+                    "JTN STREAM"
+                )
+                .replace(
+                    /\s+/g,
+                    "<br>"
+                );
+
+        }
+
+
+        if (heroDescription) {
+
+            heroDescription.textContent =
+                movie.description ||
+                "Découvre ton nouvel espace de streaming.";
+
+        }
+
+
+        if (movie.poster) {
+
+            const hero =
+                document.querySelector(
+                    ".hero"
                 );
 
 
-            /* FAVORIS */
+            if (hero) {
 
-            article
-                .querySelector(".favorite-btn")
-                .addEventListener(
-                    "click",
-                    () => {
+                hero.style.backgroundImage =
+                    `
+                    linear-gradient(
+                        to top,
+                        #050505 3%,
+                        rgba(5,5,5,.55),
+                        transparent
+                    ),
+                    url("${escapeAttribute(
+                        movie.poster
+                    )}")
+                    `;
 
-                        toggleFavorite(movie);
+                hero.style.backgroundSize =
+                    "cover";
 
-                    }
+                hero.style.backgroundPosition =
+                    "center";
+
+            }
+
+        }
+
+    }
+
+
+    /* =====================================================
+       OUVRIR FICHE FILM
+    ===================================================== */
+
+    function openMovieDetails(movie) {
+
+        if (
+            !movieDetails ||
+            !movie
+        ) {
+
+            return;
+
+        }
+
+
+        selectedMovie =
+            movie;
+
+
+        detailsTitle.textContent =
+            movie.title ||
+            "Sans titre";
+
+
+        const year =
+            movie.year ||
+            "2026";
+
+
+        const age =
+            movie.age ||
+            "16+";
+
+
+        const quality =
+            movie.quality ||
+            "HD";
+
+
+        detailsMeta.textContent =
+            `${year} • ${age} • ${quality}`;
+
+
+        detailsDescription.textContent =
+            movie.description ||
+            `Découvre ${movie.title} sur JTN STREAM.`;
+
+
+        if (detailsPoster) {
+
+            if (movie.poster) {
+
+                detailsPoster.style.backgroundImage =
+                    `url("${escapeAttribute(
+                        movie.poster
+                    )}")`;
+
+            } else {
+
+                detailsPoster.style.backgroundImage =
+                    "linear-gradient(145deg,#441010,#111)";
+
+            }
+
+        }
+
+
+        updateDetailsFavoriteButton();
+
+
+        movieDetails.classList.add(
+            "active"
+        );
+
+
+        document.body.style.overflow =
+            "hidden";
+
+    }
+
+
+    /* =====================================================
+       FERMER FICHE
+    ===================================================== */
+
+    function closeMovieDetails() {
+
+        if (!movieDetails) {
+
+            return;
+
+        }
+
+
+        movieDetails.classList.remove(
+            "active"
+        );
+
+
+        document.body.style.overflow =
+            "";
+
+
+        selectedMovie =
+            null;
+
+    }
+
+
+    if (detailsClose) {
+
+        detailsClose.addEventListener(
+            "click",
+            closeMovieDetails
+        );
+
+    }
+
+
+    if (movieDetails) {
+
+        movieDetails.addEventListener(
+            "click",
+            event => {
+
+                if (
+                    event.target ===
+                    movieDetails
+                ) {
+
+                    closeMovieDetails();
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       REGARDER DEPUIS FICHE
+    ===================================================== */
+
+    if (detailsWatch) {
+
+        detailsWatch.addEventListener(
+            "click",
+            () => {
+
+                if (!selectedMovie) {
+
+                    return;
+
+                }
+
+
+                const movie =
+                    selectedMovie;
+
+
+                closeMovieDetails();
+
+
+                watchMovie(
+                    movie
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       TÉLÉCHARGER DEPUIS FICHE
+    ===================================================== */
+
+    if (detailsDownload) {
+
+        detailsDownload.addEventListener(
+            "click",
+            () => {
+
+                if (!selectedMovie) {
+
+                    return;
+
+                }
+
+
+                downloadMovie(
+                    selectedMovie
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       MA LISTE DEPUIS FICHE
+    ===================================================== */
+
+    if (detailsList) {
+
+        detailsList.addEventListener(
+            "click",
+            () => {
+
+                if (!selectedMovie) {
+
+                    return;
+
+                }
+
+
+                toggleFavorite(
+                    selectedMovie
                 );
 
 
-            /* TÉLÉCHARGEMENT */
+                updateDetailsFavoriteButton();
 
-            article
-                .querySelector(".download-btn")
-                .addEventListener(
-                    "click",
-                    () => {
+            }
+        );
 
-                        addDownload(movie);
+    }
 
-                    }
-                );
 
-        });
+    function updateDetailsFavoriteButton() {
+
+        if (
+            !detailsList ||
+            !selectedMovie
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            favorites.includes(
+                selectedMovie.id
+            )
+        ) {
+
+            detailsList.textContent =
+                "♥ Dans ma liste";
+
+        } else {
+
+            detailsList.textContent =
+                "♡ Ma liste";
+
+        }
 
     }
 
@@ -305,6 +1089,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function watchMovie(movie) {
 
+        if (!movie) {
+
+            return;
+
+        }
+
+
         if (!movie.video) {
 
             showMessage(
@@ -312,51 +1103,160 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
             return;
+
         }
 
 
-        if (!video || !player) {
-
-            showMessage(
-                "❌ Lecteur vidéo introuvable"
-            );
+        if (!player) {
 
             return;
+
         }
 
 
-        video.src = movie.video;
+        /*
+         * Détecter les lecteurs EMBED
+         */
 
-        player.style.display = "flex";
-
-        video.load();
-
-        video.play().catch(() => {
-
-            showMessage(
-                "▶ Appuie sur lecture pour démarrer la vidéo"
+        const isEmbed =
+            movie.video.includes(
+                "/embed/"
+            ) ||
+            movie.video.includes(
+                "fembed"
+            ) ||
+            movie.video.includes(
+                "iframe"
             );
 
-        });
+
+        if (
+            isEmbed &&
+            vdoFrame
+        ) {
+
+            if (video) {
+
+                video.pause();
+
+                video.removeAttribute(
+                    "src"
+                );
+
+                video.style.display =
+                    "none";
+
+            }
+
+
+            vdoFrame.src =
+                movie.video;
+
+
+            vdoFrame.style.display =
+                "block";
+
+
+            player.style.display =
+                "flex";
+
+
+            return;
+
+        }
+
+
+        /*
+         * Vidéo normale
+         */
+
+        if (vdoFrame) {
+
+            vdoFrame.src =
+                "";
+
+            vdoFrame.style.display =
+                "none";
+
+        }
+
+
+        if (video) {
+
+            video.style.display =
+                "block";
+
+
+            video.src =
+                movie.video;
+
+
+            video.load();
+
+
+            player.style.display =
+                "flex";
+
+
+            video.play()
+                .catch(
+                    () => {
+
+                        showMessage(
+                            "▶ Appuie sur lecture pour démarrer"
+                        );
+
+                    }
+                );
+
+        }
 
     }
 
 
     /* =====================================================
-       FERMER LE LECTEUR
+       FERMER LECTEUR
     ===================================================== */
 
     function closeVideo() {
 
-        if (!video || !player) return;
+        if (!player) {
 
-        video.pause();
+            return;
 
-        video.removeAttribute("src");
+        }
 
-        video.load();
 
-        player.style.display = "none";
+        if (video) {
+
+            video.pause();
+
+            video.removeAttribute(
+                "src"
+            );
+
+            video.load();
+
+            video.style.display =
+                "none";
+
+        }
+
+
+        if (vdoFrame) {
+
+            vdoFrame.src =
+                "";
+
+            vdoFrame.style.display =
+                "none";
+
+        }
+
+
+        player.style.display =
+            "none";
+
     }
 
 
@@ -374,32 +1274,34 @@ document.addEventListener("DOMContentLoaded", () => {
        FAVORIS
     ===================================================== */
 
-    function isFavorite(id) {
-
-        return favorites.includes(id);
-
-    }
-
-
     function toggleFavorite(movie) {
 
-        if (isFavorite(movie.id)) {
+        const id =
+            movie.id;
+
+
+        if (
+            favorites.includes(id)
+        ) {
 
             favorites =
                 favorites.filter(
-                    id => id !== movie.id
+                    item =>
+                        item !== id
                 );
 
+
             showMessage(
-                "♡ Retiré des favoris"
+                "♡ Retiré de ma liste"
             );
 
         } else {
 
-            favorites.push(movie.id);
+            favorites.push(id);
+
 
             showMessage(
-                "♥ Ajouté aux favoris"
+                "♥ Ajouté à ma liste"
             );
 
         }
@@ -407,7 +1309,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         localStorage.setItem(
             "JTN_STREAM_FAVORITES",
-            JSON.stringify(favorites)
+            JSON.stringify(
+                favorites
+            )
         );
 
 
@@ -421,219 +1325,362 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateFavoriteButtons() {
 
         document
-            .querySelectorAll(".movie")
-            .forEach(movieElement => {
+            .querySelectorAll(
+                ".movie"
+            )
+            .forEach(
+                movieElement => {
 
-                const id =
-                    movieElement.dataset.id;
+                    const id =
+                        movieElement.dataset.id;
 
-                const button =
-                    movieElement
-                        .querySelector(
+
+                    const button =
+                        movieElement.querySelector(
                             ".favorite-btn"
                         );
 
-                if (!button) return;
+
+                    if (!button) {
+
+                        return;
+
+                    }
 
 
-                if (isFavorite(id)) {
+                    if (
+                        favorites.includes(id)
+                    ) {
 
-                    button.textContent = "♥";
+                        button.textContent =
+                            "♥";
 
-                    button.classList.add(
-                        "active"
-                    );
+                        button.classList.add(
+                            "active"
+                        );
 
-                } else {
+                    } else {
 
-                    button.textContent = "♡";
+                        button.textContent =
+                            "♡";
 
-                    button.classList.remove(
-                        "active"
-                    );
+                        button.classList.remove(
+                            "active"
+                        );
+
+                    }
+
                 }
-
-            });
+            );
 
     }
 
 
     /* =====================================================
-       FAVORIS PAGE
+       PAGE FAVORIS
     ===================================================== */
 
     function renderFavorites() {
 
-        if (!favoriteList) return;
-
-        favoriteList.innerHTML = "";
-
-
-        const favoriteMovies =
-            movies.filter(
-                movie =>
-                    favorites.includes(movie.id)
-            );
-
-
-        if (favoriteMovies.length === 0) {
-
-            favoriteList.innerHTML = `
-                <div class="empty-message">
-                    <h3>♡ Aucun favori</h3>
-                    <p>
-                        Ajoute des films à tes favoris.
-                    </p>
-                </div>
-            `;
+        if (!favoriteList) {
 
             return;
+
         }
 
 
-        favoriteMovies.forEach(movie => {
+        favoriteList.innerHTML =
+            "";
 
-            const item =
-                document.createElement("div");
 
-            item.className =
-                "favorite-item";
+        const list =
+            movies.filter(
+                movie =>
+                    favorites.includes(
+                        movie.id
+                    )
+            );
 
-            item.innerHTML = `
-                <strong>
-                    ${escapeHTML(movie.title)}
-                </strong>
 
-                <button
-                    class="watch-btn"
-                    type="button"
-                >
-                    ▶ Regarder
-                </button>
+        if (
+            list.length === 0
+        ) {
+
+            favoriteList.innerHTML = `
+
+                <div class="empty-message">
+
+                    <h3>
+                        ♡ Ta liste est vide
+                    </h3>
+
+                    <p>
+                        Ajoute des films
+                        à ta liste.
+                    </p>
+
+                </div>
+
             `;
 
+            return;
 
-            item
-                .querySelector(".watch-btn")
-                .addEventListener(
-                    "click",
-                    () => {
+        }
 
-                        watchMovie(movie);
 
-                    }
+        list.forEach(
+            movie => {
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                item.className =
+                    "favorite-item";
+
+
+                item.innerHTML = `
+
+                    <strong>
+                        ${escapeHTML(
+                            movie.title
+                        )}
+                    </strong>
+
+                    <button
+                        class="watch-btn"
+                        type="button"
+                    >
+                        ▶ Regarder
+                    </button>
+
+                `;
+
+
+                item
+                    .querySelector(
+                        ".watch-btn"
+                    )
+                    .addEventListener(
+                        "click",
+                        () => {
+
+                            watchMovie(
+                                movie
+                            );
+
+                        }
+                    );
+
+
+                favoriteList.appendChild(
+                    item
                 );
 
-
-            favoriteList.appendChild(item);
-
-        });
+            }
+        );
 
     }
 
 
     /* =====================================================
-       TÉLÉCHARGEMENTS
+       TÉLÉCHARGEMENT
     ===================================================== */
 
-    function addDownload(movie) {
+    function downloadMovie(movie) {
 
-        if (!downloads.includes(movie.id)) {
+        if (!movie) {
 
-            downloads.push(movie.id);
+            return;
+
+        }
+
+
+        if (!movie.download) {
+
+            showMessage(
+                "⬇ Téléchargement bientôt disponible"
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * Enregistrer dans la liste
+         */
+
+        if (
+            !downloads.includes(
+                movie.id
+            )
+        ) {
+
+            downloads.push(
+                movie.id
+            );
 
             localStorage.setItem(
                 "JTN_STREAM_DOWNLOADS",
-                JSON.stringify(downloads)
+                JSON.stringify(
+                    downloads
+                )
             );
 
-            showMessage(
-                "⬇ Ajouté aux téléchargements"
-            );
-
-        } else {
-
-            showMessage(
-                "ℹ️ Déjà dans tes téléchargements"
-            );
         }
+
+
+        /*
+         * Ouvrir le lien
+         */
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+
+        link.href =
+            movie.download;
+
+
+        link.target =
+            "_blank";
+
+
+        link.rel =
+            "noopener noreferrer";
+
+
+        document.body.appendChild(
+            link
+        );
+
+
+        link.click();
+
+
+        link.remove();
 
 
         renderDownloads();
 
+
+        showMessage(
+            "⬇ Téléchargement lancé"
+        );
+
     }
 
 
+    /* =====================================================
+       PAGE TÉLÉCHARGEMENTS
+    ===================================================== */
+
     function renderDownloads() {
 
-        if (!downloadList) return;
+        if (!downloadList) {
 
-        downloadList.innerHTML = "";
+            return;
+
+        }
 
 
-        const downloadedMovies =
+        downloadList.innerHTML =
+            "";
+
+
+        const list =
             movies.filter(
                 movie =>
-                    downloads.includes(movie.id)
+                    downloads.includes(
+                        movie.id
+                    )
             );
 
 
-        if (downloadedMovies.length === 0) {
+        if (
+            list.length === 0
+        ) {
 
             downloadList.innerHTML = `
+
                 <div class="empty-message">
-                    <h3>⬇ Aucun téléchargement</h3>
+
+                    <h3>
+                        ⬇ Aucun téléchargement
+                    </h3>
+
                     <p>
                         Tes téléchargements
                         apparaîtront ici.
                     </p>
+
                 </div>
+
             `;
 
             return;
+
         }
 
 
-        downloadedMovies.forEach(movie => {
+        list.forEach(
+            movie => {
 
-            const item =
-                document.createElement("div");
-
-            item.className =
-                "download-item";
-
-
-            item.innerHTML = `
-
-                <strong>
-                    ${escapeHTML(movie.title)}
-                </strong>
-
-                <button
-                    class="watch-btn"
-                    type="button"
-                >
-                    ▶
-                </button>
-
-            `;
+                const item =
+                    document.createElement(
+                        "div"
+                    );
 
 
-            item
-                .querySelector(".watch-btn")
-                .addEventListener(
-                    "click",
-                    () => {
+                item.className =
+                    "download-item";
 
-                        watchMovie(movie);
 
-                    }
+                item.innerHTML = `
+
+                    <strong>
+                        ${escapeHTML(
+                            movie.title
+                        )}
+                    </strong>
+
+                    <button
+                        class="watch-btn"
+                        type="button"
+                    >
+                        ▶
+                    </button>
+
+                `;
+
+
+                item
+                    .querySelector(
+                        ".watch-btn"
+                    )
+                    .addEventListener(
+                        "click",
+                        () => {
+
+                            watchMovie(
+                                movie
+                            );
+
+                        }
+                    );
+
+
+                downloadList.appendChild(
+                    item
                 );
 
-
-            downloadList.appendChild(item);
-
-        });
+            }
+        );
 
     }
 
@@ -648,26 +1695,26 @@ document.addEventListener("DOMContentLoaded", () => {
             "click",
             () => {
 
-                if (!searchBox) return;
+                if (!searchBox) {
+
+                    return;
+
+                }
+
+
+                searchBox.classList.toggle(
+                    "active"
+                );
+
 
                 if (
-                    searchBox.style.display ===
-                    "block"
+                    searchBox.classList.contains(
+                        "active"
+                    )
                 ) {
 
-                    searchBox.style.display =
-                        "none";
+                    searchInput.focus();
 
-                } else {
-
-                    searchBox.style.display =
-                        "block";
-
-                    if (searchInput) {
-
-                        searchInput.focus();
-
-                    }
                 }
 
             }
@@ -689,20 +1736,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 document
-                    .querySelectorAll(".movie")
-                    .forEach(movie => {
+                    .querySelectorAll(
+                        ".movie"
+                    )
+                    .forEach(
+                        movie => {
 
-                        const title =
-                            movie.dataset.title
-                                .toLowerCase();
+                            const title =
+                                (
+                                    movie.dataset.title ||
+                                    ""
+                                ).toLowerCase();
 
 
-                        movie.style.display =
-                            title.includes(text)
-                                ? ""
-                                : "none";
+                            movie.style.display =
+                                title.includes(
+                                    text
+                                )
+                                    ? ""
+                                    : "none";
 
-                    });
+                        }
+                    );
 
             }
         );
@@ -716,27 +1771,88 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function showPage(page) {
 
-        if (homePage)
-            homePage.style.display = "none";
+        if (homePage) {
 
-        if (favoritesPage)
-            favoritesPage.style.display = "none";
+            homePage.style.display =
+                "none";
 
-        if (downloadsPage)
-            downloadsPage.style.display = "none";
+        }
 
 
-        if (page === "home" && homePage)
-            homePage.style.display = "block";
+        if (favoritesPage) {
+
+            favoritesPage.style.display =
+                "none";
+
+        }
+
+
+        if (downloadsPage) {
+
+            downloadsPage.style.display =
+                "none";
+
+        }
+
+
+        document
+            .querySelectorAll(
+                ".nav-btn"
+            )
+            .forEach(
+                button => {
+
+                    button.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
 
 
         if (
-            page === "favorites" &&
-            favoritesPage
+            page === "home"
         ) {
 
-            favoritesPage.style.display =
-                "block";
+            if (homePage) {
+
+                homePage.style.display =
+                    "block";
+
+            }
+
+
+            if (homeBtn) {
+
+                homeBtn.classList.add(
+                    "active"
+                );
+
+            }
+
+        }
+
+
+        if (
+            page === "favorites"
+        ) {
+
+            if (favoritesPage) {
+
+                favoritesPage.style.display =
+                    "block";
+
+            }
+
+
+            if (favoritesBtn) {
+
+                favoritesBtn.classList.add(
+                    "active"
+                );
+
+            }
+
 
             renderFavorites();
 
@@ -744,12 +1860,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         if (
-            page === "downloads" &&
-            downloadsPage
+            page === "downloads"
         ) {
 
-            downloadsPage.style.display =
-                "block";
+            if (downloadsPage) {
+
+                downloadsPage.style.display =
+                    "block";
+
+            }
+
+
+            if (downloadsBtn) {
+
+                downloadsBtn.classList.add(
+                    "active"
+                );
+
+            }
+
 
             renderDownloads();
 
@@ -768,7 +1897,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         homeBtn.addEventListener(
             "click",
-            () => showPage("home")
+            () => {
+
+                showPage(
+                    "home"
+                );
+
+            }
         );
 
     }
@@ -778,7 +1913,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         favoritesBtn.addEventListener(
             "click",
-            () => showPage("favorites")
+            () => {
+
+                showPage(
+                    "favorites"
+                );
+
+            }
         );
 
     }
@@ -788,7 +1929,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         downloadsBtn.addEventListener(
             "click",
-            () => showPage("downloads")
+            () => {
+
+                showPage(
+                    "downloads"
+                );
+
+            }
         );
 
     }
@@ -798,7 +1945,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         backFromFavorites.addEventListener(
             "click",
-            () => showPage("home")
+            () => {
+
+                showPage(
+                    "home"
+                );
+
+            }
         );
 
     }
@@ -808,7 +1961,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
         backFromDownloads.addEventListener(
             "click",
-            () => showPage("home")
+            () => {
+
+                showPage(
+                    "home"
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       PARAMÈTRES
+    ===================================================== */
+
+    function openSettings() {
+
+        window.location.href =
+            "settings.html";
+
+    }
+
+
+    if (settingsBtn) {
+
+        settingsBtn.addEventListener(
+            "click",
+            openSettings
+        );
+
+    }
+
+
+    if (settingsBtnBottom) {
+
+        settingsBtnBottom.addEventListener(
+            "click",
+            openSettings
         );
 
     }
@@ -824,9 +2015,13 @@ document.addEventListener("DOMContentLoaded", () => {
             "click",
             () => {
 
-                if (movies.length > 0) {
+                if (
+                    movies.length > 0
+                ) {
 
-                    watchMovie(movies[0]);
+                    watchMovie(
+                        movies[0]
+                    );
 
                 } else {
 
@@ -842,18 +2037,62 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    if (heroInfo) {
+
+        heroInfo.addEventListener(
+            "click",
+            () => {
+
+                if (
+                    movies.length > 0
+                ) {
+
+                    openMovieDetails(
+                        movies[0]
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
     /* =====================================================
-       HTML SÉCURISÉ
+       ÉCHAPPEMENT HTML
     ===================================================== */
 
     function escapeHTML(text) {
 
         const element =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
-        element.textContent = text;
+
+        element.textContent =
+            String(text || "");
+
 
         return element.innerHTML;
+
+    }
+
+
+    function escapeAttribute(text) {
+
+        return String(
+            text || ""
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
     }
 
@@ -862,7 +2101,10 @@ document.addEventListener("DOMContentLoaded", () => {
        DÉMARRAGE
     ===================================================== */
 
-    showPage("home");
+    showPage(
+        "home"
+    );
+
 
     renderFavorites();
 
@@ -870,4 +2112,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     loadMovies();
 
-});
+
+    console.log(
+        "🔥 JTN STREAM Ultimate chargé."
+    );
+
+});    
