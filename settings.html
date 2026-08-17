@@ -1,0 +1,983 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#050505"><title>Paramètres - JTN STREAM</title><style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(
+            circle at top,
+            #222 0%,
+            #0b0b0b 45%,
+            #000 100%
+        );
+    color: white;
+    font-family: Arial, sans-serif;
+    padding-bottom: 40px;
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+    background: rgba(0,0,0,0.9);
+    border-bottom: 1px solid #222;
+    backdrop-filter: blur(10px);
+}
+
+.back {
+    border: 0;
+    background: #222;
+    color: white;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.back:hover {
+    background: #e50914;
+}
+
+.logo {
+    color: #e50914;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: white;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    margin: 35px auto;
+    padding: 0 20px;
+}
+
+.title {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #999;
+    margin-bottom: 30px;
+}
+
+.settings-card {
+    background:
+        linear-gradient(
+            145deg,
+            #191919,
+            #101010
+        );
+    border: 1px solid #292929;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 18px;
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.25);
+}
+
+.card-title {
+    padding: 18px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid #292929;
+}
+
+.setting {
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 15px 20px;
+    border-bottom: 1px solid #222;
+}
+
+.setting:last-child {
+    border-bottom: 0;
+}
+
+.setting-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+}
+
+.icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #242424;
+    border-radius: 10px;
+    font-size: 21px;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.icon img {
+    width: 42px;
+    height: 42px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.setting-name {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.setting-description {
+    color: #888;
+    font-size: 12px;
+    margin-top: 4px;
+    word-break: break-word;
+}
+
+.account-button {
+    border: 0;
+    background: #e50914;
+    color: white;
+    padding: 11px 16px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.account-button:hover {
+    background: #ff1a25;
+}
+
+.account-button:active {
+    transform: scale(.97);
+}
+
+.switch {
+    position: relative;
+    width: 52px;
+    height: 29px;
+    flex-shrink: 0;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    inset: 0;
+    background: #444;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.slider:before {
+    content: "";
+    position: absolute;
+    width: 21px;
+    height: 21px;
+    left: 4px;
+    top: 4px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.switch input:checked + .slider {
+    background: #e50914;
+}
+
+.switch input:checked + .slider:before {
+    transform: translateX(23px);
+}
+
+select {
+    background: #252525;
+    color: white;
+    border: 1px solid #444;
+    border-radius: 6px;
+    padding: 9px 12px;
+    outline: none;
+}
+
+.danger {
+    border: 1px solid #632020;
+    background: #281010;
+    color: #ff7777;
+    padding: 9px 13px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.danger:hover {
+    background: #e50914;
+    color: white;
+}
+
+.about {
+    text-align: center;
+    padding: 25px 20px;
+}
+
+.about-logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #e50914;
+    margin-bottom: 8px;
+}
+
+.about-logo span {
+    color: white;
+}
+
+.version {
+    color: #777;
+    font-size: 13px;
+}
+
+.message {
+    position: fixed;
+    left: 50%;
+    bottom: 25px;
+    transform: translate(-50%, 100px);
+    background: #e50914;
+    color: white;
+    padding: 13px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    opacity: 0;
+    transition: 0.3s;
+    z-index: 100;
+    text-align: center;
+    max-width: 90%;
+}
+
+.message.show {
+    transform: translate(-50%, 0);
+    opacity: 1;
+}
+
+@media (max-width: 600px) {
+
+    .header {
+        padding: 0 15px;
+    }
+
+    .container {
+        padding: 0 14px;
+        margin-top: 25px;
+    }
+
+    .title {
+        font-size: 27px;
+    }
+
+    .setting {
+        padding: 14px;
+    }
+
+    .setting-description {
+        max-width: 210px;
+    }
+
+    .account-button {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+}
+
+</style></head><body><header class="header"><button
+class="back"
+onclick="goHome()">
+←
+</button>
+
+<div class="logo">
+    JTN <span>STREAM</span>
+</div></header><main class="container"><h1 class="title">
+    ⚙️ Paramètres
+</h1><p class="subtitle">
+    Personnalise ton expérience JTN STREAM.
+</p><!-- ================= COMPTE ================= --><section class="settings-card"><div class="card-title">
+    👤 Compte
+</div><div class="setting"><div class="setting-left"><div
+    class="icon"
+    id="accountIcon">
+    👤
+</div><div><div
+    class="setting-name"
+    id="accountName">
+    Compte Google
+</div><div
+    class="setting-description"
+    id="accountDescription">
+    Ajoute ton compte Google pour te connecter à JTN STREAM
+</div></div></div><button
+id="googleAccountBtn"
+class="account-button"
+type="button">
+
+Ajouter
+
+</button></div></section><!-- ================= APPARENCE ================= --><section class="settings-card"><div class="card-title">
+    🎨 Apparence
+</div><div class="setting"><div class="setting-left"><div class="icon">
+    🌙
+</div><div><div class="setting-name">
+    Mode sombre
+</div><div class="setting-description">
+    Utiliser le thème sombre
+</div></div></div><label class="switch"><input
+type="checkbox"
+id="darkMode"
+checked>
+
+<span class="slider"></span>
+
+</label></div></section><!-- ================= NOTIFICATIONS ================= --><section class="settings-card"><div class="card-title">
+    🔔 Notifications
+</div><div class="setting"><div class="setting-left"><div class="icon">
+    🔔
+</div><div><div class="setting-name">
+    Notifications
+</div><div class="setting-description">
+    Autoriser les notifications
+</div></div></div><label class="switch"><input
+type="checkbox"
+id="notifications"
+checked>
+
+<span class="slider"></span>
+
+</label></div></section><!-- ================= LECTURE ================= --><section class="settings-card"><div class="card-title">
+    📶 Lecture
+</div><div class="setting"><div class="setting-left"><div class="icon">
+    📱
+</div><div><div class="setting-name">
+    Données mobiles
+</div><div class="setting-description">
+    Autoriser la lecture avec les données mobiles
+</div></div></div><label class="switch"><input
+type="checkbox"
+id="mobileData">
+
+<span class="slider"></span>
+
+</label></div><div class="setting"><div class="setting-left"><div class="icon">
+    🎬
+</div><div><div class="setting-name">
+    Qualité vidéo
+</div><div class="setting-description">
+    Choisis la qualité de lecture
+</div></div></div><select id="quality"><option value="auto">
+    Automatique
+</option><option value="low">
+    Économique
+</option><option value="medium">
+    Moyenne
+</option><option value="high">
+    Haute
+</option></select></div></section><!-- ================= DONNÉES ================= --><section class="settings-card"><div class="card-title">
+    🗃️ Données
+</div><div class="setting"><div class="setting-left"><div class="icon">
+    ❤️
+</div><div><div class="setting-name">
+    Favoris
+</div><div class="setting-description">
+    Supprimer tous les favoris enregistrés
+</div></div></div><button
+class="danger"
+onclick="clearFavorites()">
+Effacer
+</button>
+
+</div><div class="setting"><div class="setting-left"><div class="icon">
+    🗑️
+</div><div><div class="setting-name">
+    Téléchargements
+</div><div class="setting-description">
+    Effacer les données de téléchargement
+</div></div></div><button
+class="danger"
+onclick="clearDownloads()">
+Effacer
+</button>
+
+</div></section><!-- ================= À PROPOS ================= --><section class="settings-card"><div class="card-title">
+    ℹ️ À propos
+</div><div class="about"><div class="about-logo">
+    JTN <span>STREAM</span>
+</div><p>
+    Application de streaming moderne.
+</p><br><div class="version">
+    Version 1.0
+</div></div></section></main><div
+    id="message"
+    class="message">
+</div><script type="module">
+
+/* =====================================================
+   FIREBASE
+   ===================================================== */
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut,
+    browserLocalPersistence,
+    setPersistence
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+
+
+/* =====================================================
+   CONFIGURATION FIREBASE
+   ===================================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyBRCxoXFDD3l9_3cWVw5NCt26tsBD4Q2UI",
+
+    authDomain:
+        "jtn-stream.firebaseapp.com",
+
+    projectId:
+        "jtn-stream",
+
+    storageBucket:
+        "jtn-stream.firebasestorage.app",
+
+    messagingSenderId:
+        "288537086482",
+
+    appId:
+        "1:288537086482:web:a85a42bee5931d093da6cb",
+
+    measurementId:
+        "G-E5GM1R2XG4"
+
+};
+
+
+/* =====================================================
+   FIREBASE APP
+   ===================================================== */
+
+const app =
+    initializeApp(firebaseConfig);
+
+
+/* =====================================================
+   AUTH
+   ===================================================== */
+
+const auth =
+    getAuth(app);
+
+
+/* =====================================================
+   SAUVEGARDE SESSION FIREBASE
+   ===================================================== */
+
+setPersistence(
+    auth,
+    browserLocalPersistence
+).catch(function(error) {
+
+    console.error(
+        "Erreur session Firebase :",
+        error
+    );
+
+});
+
+
+/* =====================================================
+   ÉLÉMENTS COMPTE
+   ===================================================== */
+
+const googleAccountBtn =
+    document.getElementById(
+        "googleAccountBtn"
+    );
+
+const accountName =
+    document.getElementById(
+        "accountName"
+    );
+
+const accountDescription =
+    document.getElementById(
+        "accountDescription"
+    );
+
+const accountIcon =
+    document.getElementById(
+        "accountIcon"
+    );
+
+
+/* =====================================================
+   UTILISATEUR FIREBASE
+   ===================================================== */
+
+onAuthStateChanged(
+    auth,
+    function(user) {
+
+        if (user) {
+
+            console.log(
+                "Utilisateur connecté :",
+                user
+            );
+
+
+            /* NOM */
+
+            accountName.textContent =
+                user.displayName ||
+                "Compte Google";
+
+
+            /* EMAIL */
+
+            accountDescription.textContent =
+                user.email ||
+                "Compte Google connecté";
+
+
+            /* PHOTO */
+
+            if (user.photoURL) {
+
+                accountIcon.innerHTML = "";
+
+                const img =
+                    document.createElement(
+                        "img"
+                    );
+
+                img.src =
+                    user.photoURL;
+
+                img.alt =
+                    "Photo de profil";
+
+                accountIcon.appendChild(
+                    img
+                );
+
+            } else {
+
+                accountIcon.textContent =
+                    "👤";
+
+            }
+
+
+            /* BOUTON */
+
+            googleAccountBtn.textContent =
+                "Se déconnecter";
+
+        } else {
+
+            accountName.textContent =
+                "Compte Google";
+
+            accountDescription.textContent =
+                "Ajoute ton compte Google pour te connecter à JTN STREAM";
+
+            accountIcon.innerHTML =
+                "👤";
+
+            googleAccountBtn.textContent =
+                "Ajouter";
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   BOUTON COMPTE
+   ===================================================== */
+
+googleAccountBtn.addEventListener(
+    "click",
+    async function() {
+
+        const user =
+            auth.currentUser;
+
+
+        /* =========================
+           DÉCONNEXION
+           ========================= */
+
+        if (user) {
+
+            try {
+
+                await signOut(auth);
+
+                showMessage(
+                    "Déconnexion réussie ✓"
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "Erreur déconnexion :",
+                    error
+                );
+
+                showMessage(
+                    "Erreur de déconnexion"
+                );
+
+            }
+
+            return;
+        }
+
+
+        /* =========================
+           CONNEXION
+           ========================= */
+
+        window.location.href =
+            "login.html";
+
+    }
+);
+
+
+/* =====================================================
+   ACCUEIL
+   ===================================================== */
+
+window.goHome =
+function() {
+
+    window.location.href =
+        "index.html";
+
+};
+
+
+/* =====================================================
+   MESSAGE
+   ===================================================== */
+
+function showMessage(text) {
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+    message.textContent =
+        text;
+
+    message.classList.add(
+        "show"
+    );
+
+
+    setTimeout(
+        function() {
+
+            message.classList.remove(
+                "show"
+            );
+
+        },
+        1800
+    );
+
+}
+
+
+/* =====================================================
+   SAUVEGARDE PARAMÈTRES
+   ===================================================== */
+
+function saveSetting(
+    key,
+    value
+) {
+
+    localStorage.setItem(
+        "JTN_" + key,
+        value
+    );
+
+}
+
+
+/* =====================================================
+   CHARGEMENT PARAMÈTRES
+   ===================================================== */
+
+function loadSettings() {
+
+    const darkMode =
+        localStorage.getItem(
+            "JTN_darkMode"
+        );
+
+    const notifications =
+        localStorage.getItem(
+            "JTN_notifications"
+        );
+
+    const mobileData =
+        localStorage.getItem(
+            "JTN_mobileData"
+        );
+
+    const quality =
+        localStorage.getItem(
+            "JTN_quality"
+        );
+
+
+    if (darkMode !== null) {
+
+        document.getElementById(
+            "darkMode"
+        ).checked =
+            darkMode === "true";
+
+    }
+
+
+    if (notifications !== null) {
+
+        document.getElementById(
+            "notifications"
+        ).checked =
+            notifications === "true";
+
+    }
+
+
+    if (mobileData !== null) {
+
+        document.getElementById(
+            "mobileData"
+        ).checked =
+            mobileData === "true";
+
+    }
+
+
+    if (quality !== null) {
+
+        document.getElementById(
+            "quality"
+        ).value =
+            quality;
+
+    }
+
+}
+
+
+/* =====================================================
+   MODE SOMBRE
+   ===================================================== */
+
+document
+.getElementById("darkMode")
+.addEventListener(
+    "change",
+    function() {
+
+        saveSetting(
+            "darkMode",
+            this.checked
+        );
+
+        showMessage(
+            "Mode enregistré ✓"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   NOTIFICATIONS
+   ===================================================== */
+
+document
+.getElementById("notifications")
+.addEventListener(
+    "change",
+    function() {
+
+        saveSetting(
+            "notifications",
+            this.checked
+        );
+
+        showMessage(
+            "Notifications enregistrées ✓"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   DONNÉES MOBILES
+   ===================================================== */
+
+document
+.getElementById("mobileData")
+.addEventListener(
+    "change",
+    function() {
+
+        saveSetting(
+            "mobileData",
+            this.checked
+        );
+
+        showMessage(
+            "Réglage enregistré ✓"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   QUALITÉ
+   ===================================================== */
+
+document
+.getElementById("quality")
+.addEventListener(
+    "change",
+    function() {
+
+        saveSetting(
+            "quality",
+            this.value
+        );
+
+        showMessage(
+            "Qualité vidéo enregistrée ✓"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   FAVORIS
+   ===================================================== */
+
+window.clearFavorites =
+function() {
+
+    const confirmDelete =
+        confirm(
+            "Effacer tous les favoris ?"
+        );
+
+
+    if (!confirmDelete) {
+        return;
+    }
+
+
+    localStorage.removeItem(
+        "JTN_FAVORITES"
+    );
+
+    localStorage.removeItem(
+        "favorites"
+    );
+
+
+    showMessage(
+        "Favoris effacés ✓"
+    );
+
+};
+
+
+/* =====================================================
+   TÉLÉCHARGEMENTS
+   ===================================================== */
+
+window.clearDownloads =
+function() {
+
+    const confirmDelete =
+        confirm(
+            "Effacer les téléchargements ?"
+        );
+
+
+    if (!confirmDelete) {
+        return;
+    }
+
+
+    localStorage.removeItem(
+        "JTN_DOWNLOADS"
+    );
+
+    localStorage.removeItem(
+        "downloads"
+    );
+
+
+    showMessage(
+        "Téléchargements effacés ✓"
+    );
+
+};
+
+
+/* =====================================================
+   DÉMARRAGE
+   ===================================================== */
+
+loadSettings();
+
+</script></body>
+</html>
