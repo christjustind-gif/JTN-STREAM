@@ -1,304 +1,624 @@
+/* =====================================================
+   JTN STREAM ULTIMATE
+   STYLE
+===================================================== */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+
 html {
     scroll-behavior: smooth;
 }
 
+
 body {
     background: #050505;
     color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    padding-bottom: 95px;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    padding-bottom: 100px;
+
     overflow-x: hidden;
 }
 
 
-/* ================= HEADER ================= */
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+#intro {
+    position: fixed;
+    inset: 0;
+
+    z-index: 999999;
+
+    background: #000;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    animation:
+        introOut 3.5s ease forwards;
+}
+
+
+.intro-glow {
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    border-radius: 50%;
+
+    background: #e50914;
+
+    filter: blur(100px);
+
+    opacity: .35;
+
+    animation:
+        introGlow 2s ease infinite alternate;
+}
+
+
+.intro-logo {
+    position: relative;
+
+    font-size: 58px;
+
+    font-weight: 1000;
+
+    letter-spacing: -3px;
+
+    opacity: 0;
+
+    animation:
+        introLogo 1.5s ease forwards;
+}
+
+
+.intro-logo span {
+    color: #e50914;
+}
+
+
+.intro-text {
+    position: relative;
+
+    margin-top: 8px;
+
+    font-size: 11px;
+
+    letter-spacing: 8px;
+
+    color: #aaa;
+
+    opacity: 0;
+
+    animation:
+        introText 1s ease forwards;
+
+    animation-delay: .7s;
+}
+
+
+@keyframes introLogo {
+
+    from {
+        opacity: 0;
+        transform: scale(.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+
+@keyframes introText {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+
+@keyframes introGlow {
+
+    from {
+        transform: scale(.8);
+        opacity: .2;
+    }
+
+    to {
+        transform: scale(1.2);
+        opacity: .45;
+    }
+
+}
+
+
+@keyframes introOut {
+
+    0%,
+    78% {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
 
 .header {
     position: fixed;
+
     top: 0;
     left: 0;
 
     width: 100%;
-    height: 58px;
 
-    z-index: 100;
+    height: 62px;
+
+    z-index: 500;
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
-    padding: 0 18px;
+    padding: 0 17px;
 
-    background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, .95),
-        transparent
-    );
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,.95),
+            rgba(0,0,0,.4),
+            transparent
+        );
 }
+
 
 .logo {
-    font-size: 20px;
-    font-weight: 900;
+    font-size: 21px;
+
+    font-weight: 1000;
+
     letter-spacing: 1px;
 }
+
 
 .logo span {
     color: #e50914;
 }
 
-.search-btn {
-    width: 40px;
-    height: 40px;
 
-    border: none;
-    border-radius: 50%;
+.header-actions {
+    display: flex;
 
-    background: rgba(255,255,255,.12);
-
-    color: white;
-
-    font-size: 18px;
+    gap: 8px;
 }
 
 
-/* ================= RECHERCHE ================= */
+.icon-btn {
+    width: 40px;
+    height: 40px;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.1);
+
+    color: white;
+
+    font-size: 17px;
+}
+
+
+/* =====================================================
+   MENU
+===================================================== */
+
+.top-menu {
+    position: fixed;
+
+    top: 62px;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 400;
+
+    display: flex;
+
+    gap: 20px;
+
+    padding: 7px 14px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(0,0,0,.45);
+
+    backdrop-filter: blur(10px);
+}
+
+
+.top-menu a {
+    color: #ddd;
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   RECHERCHE
+===================================================== */
 
 .search-box {
     position: fixed;
 
-    top: 58px;
+    top: 60px;
     left: 0;
 
     width: 100%;
 
-    z-index: 99;
+    z-index: 600;
+
+    display: none;
 
     padding: 10px 15px;
 
     background: #090909;
-
-    display: none;
 }
+
 
 .search-box.active {
     display: block;
 }
 
+
 .search-box input {
     width: 100%;
-    height: 45px;
+
+    height: 46px;
 
     border: 1px solid #333;
-    border-radius: 7px;
+
+    border-radius: 8px;
+
+    outline: none;
 
     background: #181818;
+
     color: white;
 
     padding: 0 15px;
 
-    outline: none;
-
-    font-size: 15px;
+    font-size: 14px;
 }
 
 
-/* ================= HERO ================= */
+/* =====================================================
+   HERO
+===================================================== */
 
 .hero {
     position: relative;
 
-    height: 570px;
+    height: 600px;
 
     display: flex;
+
     align-items: flex-end;
 
     background:
         linear-gradient(
-            to top,
-            #050505,
-            rgba(5,5,5,.25),
-            transparent
-        ),
-        linear-gradient(
             145deg,
-            #461010,
-            #111 55%,
+            #551313,
+            #171717 45%,
             #030303
         );
 }
 
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 70% 35%,
+            rgba(229,9,20,.35),
+            transparent 35%
+        );
+}
+
+
+.hero-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            #050505 3%,
+            rgba(5,5,5,.65) 35%,
+            transparent 75%
+        );
+}
+
+
 .hero-content {
+    position: relative;
+
+    z-index: 2;
+
     width: 100%;
 
-    padding: 0 20px 45px;
+    padding:
+        0 20px 48px;
 }
 
-.badge {
-    font-size: 11px;
 
-    font-weight: bold;
-
-    letter-spacing: 2px;
+.hero-badge {
+    display: inline-block;
 
     margin-bottom: 10px;
+
+    color: #e50914;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
 }
+
 
 .hero h1 {
-    font-size: 42px;
+    font-size: 46px;
 
-    line-height: .95;
+    line-height: .9;
 
-    margin-bottom: 14px;
+    margin-bottom: 12px;
+
+    font-weight: 1000;
+
+    letter-spacing: -2px;
 }
 
+
+.hero-meta {
+    display: flex;
+
+    gap: 7px;
+
+    color: #aaa;
+
+    font-size: 12px;
+
+    margin-bottom: 12px;
+}
+
+
 .hero p {
-    max-width: 330px;
+    max-width: 350px;
 
     color: #ddd;
 
-    font-size: 14px;
+    line-height: 1.5;
 
-    line-height: 1.45;
+    font-size: 13px;
 
-    margin-bottom: 20px;
+    margin-bottom: 19px;
 }
+
 
 .hero-buttons {
     display: flex;
+
     gap: 9px;
 }
 
+
 .hero-buttons button {
-    height: 42px;
+    height: 43px;
 
     border: none;
 
-    border-radius: 5px;
+    border-radius: 6px;
 
-    padding: 0 18px;
+    padding: 0 20px;
 
-    font-weight: bold;
+    font-weight: 800;
+
+    font-size: 13px;
 }
 
-.play-btn {
+
+.hero-play {
     background: white;
+
     color: black;
 }
 
-.info-btn {
-    background: #555;
+
+.hero-info {
+    background: #444;
+
     color: white;
 }
 
 
-/* ================= CONTENU ================= */
+/* =====================================================
+   CONTENU
+===================================================== */
 
 main {
-    margin-top: -25px;
     position: relative;
-    z-index: 5;
+
+    margin-top: -25px;
+
+    z-index: 10;
 }
+
 
 .category {
-    margin-bottom: 28px;
+    margin-bottom: 30px;
 }
 
-.category h2 {
-    font-size: 19px;
-    margin: 0 15px 10px;
+
+.section-title {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 15px;
+
+    margin-bottom: 10px;
 }
+
+
+.section-title h2 {
+    font-size: 19px;
+}
+
+
+.section-title span {
+    color: #999;
+
+    font-size: 10px;
+}
+
 
 .movie-row {
     display: flex;
 
-    gap: 9px;
+    gap: 10px;
 
     overflow-x: auto;
 
-    padding: 0 15px 8px;
+    padding:
+        0 15px 10px;
 
     scrollbar-width: none;
 }
+
 
 .movie-row::-webkit-scrollbar {
     display: none;
 }
 
+
+/* =====================================================
+   CARTE FILM
+===================================================== */
+
 .movie {
-    flex: 0 0 125px;
+    flex: 0 0 130px;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s ease;
 }
+
+
+.movie:active {
+    transform: scale(.96);
+}
+
 
 .poster {
-    width: 125px;
-    height: 180px;
+    position: relative;
 
-    border-radius: 5px;
+    width: 130px;
+
+    height: 190px;
+
+    overflow: hidden;
+
+    border-radius: 7px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #421010,
+            #111
+        );
 
     background-size: cover;
+
     background-position: center;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.3);
 }
 
-
-/* ================= POSTERS ================= */
-
-.poster1 {
-    background: linear-gradient(145deg,#601313,#111);
-}
-
-.poster2 {
-    background: linear-gradient(145deg,#071b32,#020205);
-}
-
-.poster3 {
-    background: linear-gradient(145deg,#5b3307,#111);
-}
-
-.poster4 {
-    background: linear-gradient(145deg,#263a2c,#050505);
-}
-
-.poster5 {
-    background: linear-gradient(145deg,#391212,#090909);
-}
-
-.poster6 {
-    background: linear-gradient(145deg,#171744,#050505);
-}
-
-.poster7 {
-    background: linear-gradient(145deg,#432a09,#090909);
-}
-
-.poster8 {
-    background: linear-gradient(145deg,#3d1749,#0b050e);
-}
-
-.poster9 {
-    background: linear-gradient(145deg,#173b39,#050908);
-}
-
-
-/* ================= FILMS ================= */
 
 .movie h3 {
-    font-size: 12px;
+    margin-top: 7px;
 
-    margin-top: 6px;
+    color: #ddd;
+
+    font-size: 12px;
 
     white-space: nowrap;
 
     overflow: hidden;
 
     text-overflow: ellipsis;
-
-    color: #ddd;
 }
+
 
 .movie-actions {
     display: flex;
@@ -308,10 +628,11 @@ main {
     margin-top: 7px;
 }
 
+
 .watch-btn {
     flex: 1;
 
-    border: none;
+    border: 0;
 
     border-radius: 5px;
 
@@ -323,8 +644,9 @@ main {
 
     font-size: 10px;
 
-    font-weight: bold;
+    font-weight: 900;
 }
+
 
 .favorite-btn {
     width: 35px;
@@ -337,25 +659,25 @@ main {
 
     color: white;
 
-    font-size: 20px;
-
-    line-height: 1;
+    font-size: 19px;
 }
 
+
 .favorite-btn.active {
+    color: white;
+
     background: #e50914;
 
     border-color: #e50914;
-
-    color: white;
 }
+
 
 .download-btn {
     width: 100%;
 
     margin-top: 5px;
 
-    padding: 8px 4px;
+    padding: 8px 3px;
 
     border: 1px solid #333;
 
@@ -367,33 +689,274 @@ main {
 
     font-size: 10px;
 
-    font-weight: bold;
-}
-
-.download-btn.downloaded {
-    background: #e50914;
-
-    border-color: #e50914;
+    font-weight: 800;
 }
 
 
-/* ================= PAGES ================= */
+/* =====================================================
+   FICHE FILM NETFLIX
+===================================================== */
 
-.favorites-page,
-.downloads-page {
+.movie-details {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 10000;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 10px;
+
+    background:
+        rgba(0,0,0,.82);
+
+    backdrop-filter:
+        blur(10px);
+
+    -webkit-backdrop-filter:
+        blur(10px);
+}
+
+
+.movie-details.active {
+    display: flex;
+}
+
+
+.details-box {
+    position: relative;
+
+    width: 100%;
+
+    max-width: 450px;
+
+    max-height: 94vh;
+
+    overflow-y: auto;
+
+    border-radius: 15px;
+
+    background: #181818;
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.8);
+
+    animation:
+        detailsOpen .25s ease;
+}
+
+
+@keyframes detailsOpen {
+
+    from {
+        opacity: 0;
+        transform: scale(.93);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+
+.details-close {
+    position: absolute;
+
+    top: 13px;
+    right: 13px;
+
+    z-index: 20;
+
+    width: 40px;
+    height: 40px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        rgba(0,0,0,.75);
+
+    color: white;
+
+    font-size: 18px;
+}
+
+
+.details-poster {
+    position: relative;
+
+    width: 100%;
+
+    height: 320px;
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-color: #222;
+}
+
+
+.poster-gradient {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            #181818,
+            transparent 70%
+        );
+}
+
+
+.details-content {
+    position: relative;
+
+    margin-top: -42px;
+
+    padding:
+        0 20px 25px;
+}
+
+
+.details-badge {
+    color: #e50914;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 7px;
+}
+
+
+.details-content h1 {
+    font-size: 29px;
+
+    font-weight: 1000;
+
+    margin-bottom: 7px;
+}
+
+
+.details-meta {
+    color: #aaa;
+
+    font-size: 12px;
+
+    margin-bottom: 15px;
+}
+
+
+.details-description {
+    color: #ddd;
+
+    font-size: 13px;
+
+    line-height: 1.55;
+
+    margin-bottom: 18px;
+}
+
+
+.details-buttons {
+    display: flex;
+
+    gap: 8px;
+}
+
+
+.details-watch,
+.details-download {
+    flex: 1;
+
+    height: 44px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    font-weight: 900;
+
+    font-size: 12px;
+}
+
+
+.details-watch {
+    background: white;
+
+    color: black;
+}
+
+
+.details-download {
+    background: #333;
+
+    color: white;
+}
+
+
+.details-list {
+    width: 100%;
+
+    height: 43px;
+
+    margin-top: 8px;
+
+    border: 1px solid #444;
+
+    border-radius: 6px;
+
+    background: #222;
+
+    color: white;
+
+    font-size: 12px;
+
+    font-weight: 900;
+}
+
+
+.details-info {
+    display: flex;
+
+    gap: 7px;
+
+    margin-top: 18px;
+
+    color: #777;
+
+    font-size: 10px;
+}
+
+
+/* =====================================================
+   PAGES
+===================================================== */
+
+.page {
     display: none;
 
     min-height: 100vh;
 
-    padding: 78px 15px 100px;
+    padding:
+        80px 15px 110px;
 
     background: #050505;
 }
 
-.favorites-page.active,
-.downloads-page.active {
-    display: block;
-}
 
 .page-header {
     display: flex;
@@ -405,23 +968,26 @@ main {
     margin-bottom: 12px;
 }
 
+
 .page-header h2 {
-    font-size: 22px;
+    font-size: 23px;
 }
 
+
 .page-description {
-    color: #888;
+    color: #777;
 
     font-size: 12px;
 
     margin-bottom: 20px;
 }
 
+
 .back-btn {
     width: 40px;
     height: 40px;
 
-    border: none;
+    border: 0;
 
     border-radius: 50%;
 
@@ -433,178 +999,101 @@ main {
 }
 
 
-/* ================= FAVORIS ================= */
+/* =====================================================
+   FAVORIS
+===================================================== */
 
 .favorite-list {
     display: grid;
 
     grid-template-columns:
-        repeat(2, minmax(0, 1fr));
+        repeat(2, minmax(0,1fr));
 
-    gap: 14px;
+    gap: 12px;
 }
 
-.favorite-card {
-    background: #151515;
 
-    border-radius: 7px;
-
-    padding-bottom: 10px;
-
-    overflow: hidden;
-}
-
-.favorite-card .poster {
-    width: 100%;
-    height: 210px;
-
-    border-radius: 0;
-}
-
-.favorite-card h3 {
-    font-size: 13px;
-
-    padding: 8px 8px 0;
-}
-
-.favorite-card-actions {
+.favorite-item {
     display: flex;
 
-    gap: 5px;
+    flex-direction: column;
 
-    padding: 8px;
-}
+    gap: 10px;
 
-.favorite-watch {
-    flex: 1;
+    padding: 12px;
 
-    border: none;
+    border-radius: 8px;
 
-    border-radius: 5px;
-
-    background: white;
-
-    color: black;
-
-    padding: 8px;
-
-    font-size: 10px;
-
-    font-weight: bold;
-}
-
-.favorite-remove {
-    border: 1px solid #333;
-
-    border-radius: 5px;
-
-    background: #222;
-
-    color: white;
-
-    padding: 8px;
-
-    font-size: 10px;
-}
-
-.empty-message {
-    text-align: center;
-
-    color: #777;
-
-    padding: 45px 10px;
+    background: #151515;
 }
 
 
-/* ================= TELECHARGEMENTS ================= */
+.favorite-item strong {
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   DOWNLOADS
+===================================================== */
 
 .download-list {
     display: flex;
 
     flex-direction: column;
 
-    gap: 12px;
+    gap: 10px;
 }
+
 
 .download-item {
     display: flex;
 
-    gap: 12px;
+    align-items: center;
 
-    padding: 10px;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding: 13px;
+
+    border-radius: 8px;
 
     background: #151515;
-
-    border-radius: 7px;
 }
 
-.download-item-poster {
-    width: 60px;
-    height: 85px;
 
-    flex-shrink: 0;
-
-    border-radius: 5px;
-
-    background: #252525;
+.download-item strong {
+    font-size: 13px;
 }
 
-.download-info {
-    flex: 1;
+
+.empty-message {
+    padding: 50px 15px;
+
+    text-align: center;
+
+    color: #777;
 }
 
-.download-info h3 {
-    font-size: 14px;
 
-    margin-bottom: 6px;
-}
-
-.download-info p {
-    color: #888;
-
-    font-size: 11px;
-}
-
-.watch-offline-btn,
-.delete-download-btn {
-    margin-top: 8px;
-
-    padding: 7px 9px;
-
-    border-radius: 5px;
-
-    font-size: 10px;
-
-    font-weight: bold;
-}
-
-.watch-offline-btn {
-    border: none;
-
-    background: white;
-
-    color: black;
-}
-
-.delete-download-btn {
-    border: 1px solid #333;
-
-    background: #222;
-
+.empty-message h3 {
     color: white;
 
-    margin-left: 4px;
+    margin-bottom: 8px;
 }
 
 
-/* ================= VIDEO ================= */
+/* =====================================================
+   LECTEUR
+===================================================== */
 
 .player {
     position: fixed;
 
     inset: 0;
 
-    z-index: 500;
+    z-index: 20000;
 
     display: none;
 
@@ -612,12 +1101,9 @@ main {
 
     justify-content: center;
 
-    background: black;
+    background: #000;
 }
 
-.player.active {
-    display: flex;
-}
 
 .player video {
     width: 100%;
@@ -625,22 +1111,37 @@ main {
     max-height: 100vh;
 }
 
+
+.player iframe {
+    display: none;
+
+    width: 100%;
+
+    height: 90vh;
+
+    border: 0;
+
+    background: #000;
+}
+
+
 .close-player {
     position: absolute;
 
     top: 15px;
     left: 15px;
 
-    z-index: 10;
+    z-index: 30;
 
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
 
     border: none;
 
     border-radius: 50%;
 
-    background: rgba(0,0,0,.7);
+    background:
+        rgba(0,0,0,.75);
 
     color: white;
 
@@ -648,23 +1149,38 @@ main {
 }
 
 
-/* ================= BARRE DU BAS ================= */
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+#jtnMessage {
+    text-align: center;
+
+    max-width: calc(100% - 30px);
+}
+
+
+/* =====================================================
+   NAVIGATION BAS
+===================================================== */
 
 .bottom-nav {
     position: fixed;
 
     left: 50%;
-    bottom: 14px;
+    bottom: 12px;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
-    width: calc(100% - 28px);
+    width:
+        calc(100% - 24px);
 
-    max-width: 500px;
+    max-width: 520px;
 
-    height: 64px;
+    height: 65px;
 
-    z-index: 300;
+    z-index: 9000;
 
     display: flex;
 
@@ -672,21 +1188,26 @@ main {
 
     justify-content: space-around;
 
-    background: rgba(20,20,20,.55);
-
-    backdrop-filter: blur(18px);
-
-    -webkit-backdrop-filter: blur(18px);
-
-    border: 1px solid rgba(255,255,255,.12);
+    border:
+        1px solid rgba(255,255,255,.1);
 
     border-radius: 22px;
 
+    background:
+        rgba(20,20,20,.65);
+
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
+
     box-shadow:
-        0 8px 30px rgba(0,0,0,.45);
+        0 10px 40px rgba(0,0,0,.5);
 }
 
-.bottom-nav button {
+
+.nav-btn {
     flex: 1;
 
     height: 100%;
@@ -695,7 +1216,7 @@ main {
 
     background: transparent;
 
-    color: rgba(255,255,255,.55);
+    color: #777;
 
     display: flex;
 
@@ -707,142 +1228,83 @@ main {
 
     gap: 3px;
 
-    font-size: 10px;
-
-    transition: .2s;
-}
-
-.bottom-nav button:active {
-    transform: scale(.9);
-}
-
-.bottom-nav button.active {
-    color: white;
-}
-
-.nav-icon {
-    font-size: 25px;
-
-    line-height: 25px;
-}
-
-.bottom-nav button span:last-child {
     font-size: 9px;
 }
 
 
-@media (max-width: 360px) {
+.nav-btn.active {
+    color: white;
+}
+
+
+.nav-icon {
+    font-size: 23px;
+
+    line-height: 25px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 380px) {
+
+    .hero {
+        height: 550px;
+    }
 
     .hero h1 {
-        font-size: 35px;
+        font-size: 38px;
     }
 
     .movie {
-        flex-basis: 110px;
+        flex-basis: 112px;
     }
 
     .poster {
-        width: 110px;
-        height: 158px;
+        width: 112px;
+        height: 165px;
     }
 
-    .favorite-card .poster {
-        height: 180px;
+    .details-poster {
+        height: 270px;
     }
 
-    .bottom-nav {
-        width: calc(100% - 20px);
-
-        bottom: 10px;
-
-        height: 60px;
+    .details-content h1 {
+        font-size: 24px;
     }
 
-    .nav-icon {
-        font-size: 22px;
-    }
 }
+
+
 /* =====================================================
-   INTRO NETFLIX JTN STREAM
-   ===================================================== */
+   DESKTOP
+===================================================== */
 
-#intro{
-    position:fixed;
-    inset:0;
-    background:#000;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    z-index:999999;
-    overflow:hidden;
-    animation:introFadeOut 5s forwards;
-}
+@media (min-width: 800px) {
 
-.intro-light{
-    position:absolute;
-    width:0;
-    height:100%;
-    background:#e50914;
-    box-shadow:0 0 60px #e50914;
-    animation:lightMove 1.2s ease forwards;
-}
+    .hero {
+        height: 650px;
+    }
 
-#introLogo{
-    width:220px;
-    max-width:70%;
-    opacity:0;
-    animation:logoShow 2s ease forwards;
-    animation-delay:1s;
-}
+    .hero-content {
+        padding-left: 60px;
 
-#intro h2{
-    margin-top:20px;
-    color:white;
-    letter-spacing:4px;
-    opacity:0;
-    animation:textShow 1s ease forwards;
-    animation-delay:2s;
-}
+        max-width: 650px;
+    }
 
-@keyframes lightMove{
-    0%{
-        width:0;
+    .hero h1 {
+        font-size: 65px;
     }
-    100%{
-        width:100%;
-        opacity:0;
-    }
-}
 
-@keyframes logoShow{
-    0%{
-        opacity:0;
-        transform:scale(.2);
+    .movie {
+        flex-basis: 160px;
     }
-    100%{
-        opacity:1;
-        transform:scale(1);
-        filter:drop-shadow(0 0 25px #e50914);
-    }
-}
 
-@keyframes textShow{
-    from{
-        opacity:0;
+    .poster {
+        width: 160px;
+        height: 230px;
     }
-    to{
-        opacity:1;
-    }
-}
 
-@keyframes introFadeOut{
-    0%,85%{
-        opacity:1;
-    }
-    100%{
-        opacity:0;
-        visibility:hidden;
-        pointer-events:none;
-    }
 }
