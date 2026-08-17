@@ -62,22 +62,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* NAVIGATION */
 
-    const homeBtn =
-        document.getElementById("homeBtn");
+const homeBtn =
+    document.getElementById("homeBtn");
 
-    const favoritesBtn =
-        document.getElementById("favoritesBtn");
+const favoritesBtn =
+    document.getElementById("favoritesBtn");
 
-    const downloadsBtn =
-        document.getElementById("downloadsBtn");
+const downloadsBtn =
+    document.getElementById("downloadsBtn");
 
-    const settingsBtn =
-        document.getElementById("settingsBtn");
+const backFromFavorites =
+    document.getElementById("backFromFavorites");
 
-    const settingsBtnBottom =
-        document.getElementById(
-            "settingsBtnBottom"
-        );
+const backFromDownloads =
+    document.getElementById("backFromDownloads");
+
+const settingsBtn =
+    document.getElementById("settingsBtn");
+
+const settingsBtnBottom =
+    document.getElementById(
+        "settingsBtnBottom"
+    );
+
 
 
     /* HERO */
