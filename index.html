@@ -968,32 +968,41 @@ document
 
                 if (id === "film1") {
 
-    const vdoFrame = document.getElementById("vdoFrame");
+    const vdoFrame =
+        document.getElementById("vdoFrame");
 
     if (vdoFrame) {
-        vdoFrame.src = "https://fembed.co/embed/N_Xc8eTr-4MGW";
+
+        video.pause();
+        video.style.display = "none";
+
+        vdoFrame.src =
+            "https://fembed.co/embed/N_Xc8eTr-4MGW";
+
+        vdoFrame.style.display = "block";
+
         player.style.display = "flex";
     }
 
     return;
-                }
+}
 
-                /* AUTRES FILMS */
+/* AUTRES FILMS */
 
-                const url =
-                    movie.dataset.video;
+const url =
+    movie.dataset.video;
 
-                if (url) {
+if (url) {
 
-                    openVideo(url);
+    openVideo(url);
 
-                } else {
+} else {
 
-                    alert(
-                        "La vidéo de ce film n'est pas encore disponible."
-                    );
+    alert(
+        "La vidéo de ce film n'est pas encore disponible."
+    );
 
-                }
+}
 
             }
         );
