@@ -1,0 +1,65 @@
+[
+  {
+    "id": "film1",
+    "title": "The Last Mission",
+    "category": "Films populaires",
+    "poster": "images/poster1.jpg",
+    "video": "video/the-last-mission.mp4"
+  },
+  {
+    "id": "film2",
+    "title": "Dark City",
+    "category": "Films populaires",
+    "poster": "images/poster2.jpg",
+    "video": "video/dark-city.mp4"
+  },
+  {
+    "id": "film3",
+    "title": "Fast Road",
+    "category": "Films populaires",
+    "poster": "images/poster3.jpg",
+    "video": "video/fast-road.mp4"
+  },
+  {
+    "id": "film4",
+    "title": "The Survivor",
+    "category": "Films populaires",
+    "poster": "images/poster4.jpg",
+    "video": "video/the-survivor.mp4"
+  },
+  {
+    "id": "film5",
+    "title": "War Zone",
+    "category": "Action",
+    "poster": "images/poster5.jpg",
+    "video": "video/war-zone.mp4"
+  },
+  {
+    "id": "film6",
+    "title": "Night Hunter",
+    "category": "Action",
+    "poster": "images/poster6.jpg",
+    "video": "video/night-hunter.mp4"
+  },
+  {
+    "id": "film7",
+    "title": "Final Target",
+    "category": "Action",
+    "poster": "images/poster7.jpg",
+    "video": "video/final-target.mp4"
+  },
+  {
+    "id": "film8",
+    "title": "Crazy Family",
+    "category": "Comédie",
+    "poster": "images/poster8.jpg",
+    "video": "video/crazy-family.mp4"
+  },
+  {
+    "id": "film9",
+    "title": "Best Friends",
+    "category": "Comédie",
+    "poster": "images/poster9.jpg",
+    "video": "video/best-friends.mp4"
+  }
+]
