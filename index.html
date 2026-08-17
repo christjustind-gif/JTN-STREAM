@@ -1,10 +1,1155 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
+
 <head>
-<title>JTN STREAM</title>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#050505"
+    >
+
+    <title>JTN STREAM</title>
+
+    <link rel="stylesheet" href="style.css">
+
 </head>
+
+
 <body>
-<h1>JTN STREAM</h1>
-<p>Ça marche !</p>
+
+    <!-- INTRO JTN STREAM -->
+
+    <div id="intro">
+        <div class="intro-light"></div>
+
+        <img
+            src="logo.png"
+            id="introLogo"
+            alt="JTN STREAM"
+        >
+
+        <h2>Bienvenue sur JTN STREAM</h2>
+    </div>
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="header">
+
+        <div class="logo">
+            JTN <span>STREAM</span>
+        </div>
+
+        <div class="header-actions">
+
+            <button
+                class="search-btn"
+                id="searchBtn"
+                type="button"
+                aria-label="Rechercher"
+            >
+                🔍
+            </button>
+
+            <button
+                id="settingsBtn"
+                class="settings-btn"
+                type="button"
+                aria-label="Paramètres"
+            >
+                ⚙️
+            </button>
+
+        </div>
+
+    </header>
+
+    <!-- LE RESTE DE TON CODE CONTINUE ICI -->
+
+
+<!-- =====================================================
+     HEADER
+     ===================================================== -->
+
+<header class="header">
+
+    <div class="logo">
+        JTN <span>STREAM</span>
+    </div>
+
+
+    <div class="header-actions">
+
+        <button
+            class="search-btn"
+            id="searchBtn"
+            type="button"
+            aria-label="Rechercher"
+        >
+            🔍
+        </button>
+
+
+        <button
+            id="settingsBtn"
+            class="settings-btn"
+            type="button"
+            aria-label="Paramètres"
+        >
+            ⚙️
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MENU
+     ===================================================== -->
+
+<nav class="menu">
+
+    <a href="#">Accueil</a>
+
+    <a href="#films">Films</a>
+
+    <a href="#series">Séries</a>
+
+    <a href="#animes">Animés</a>
+
+    <a href="settings.html">
+        ⚙️ Paramètres
+    </a>
+
+</nav>
+
+
+
+<!-- =====================================================
+     RECHERCHE
+     ===================================================== -->
+
+<div
+    class="search-box"
+    id="searchBox"
+>
+
+    <input
+        id="searchInput"
+        type="search"
+        placeholder="🔍 Rechercher un film..."
+        autocomplete="off"
+    >
+
+</div>
+
+
+
+<!-- =====================================================
+     HERO
+     ===================================================== -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            🔥 BIENVENUE SUR JTN STREAM
+        </div>
+
+
+        <h1>
+            THE LAST<br>
+            MISSION
+        </h1>
+
+
+        <p>
+            Découvre ton nouvel espace de streaming :
+            films, séries et animés.
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <button
+                class="play-btn"
+                id="heroPlay"
+                type="button"
+            >
+                ▶ Regarder
+            </button>
+
+
+            <button
+                class="info-btn"
+                type="button"
+            >
+                ⓘ Infos
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CONTENU PRINCIPAL
+     ===================================================== -->
+
+<main id="homePage">
+
+
+
+<!-- =====================================================
+     FILMS
+     ===================================================== -->
+
+<section
+    class="category"
+    id="films"
+>
+
+    <h2>
+        🎬 Films populaires
+    </h2>
+
+
+    <div class="movie-row">
+
+
+
+        <!-- FILM 1 -->
+
+        <article
+            class="movie"
+            data-id="film1"
+            data-title="The Last Mission"
+            data-video="#"
+        >
+
+            <div class="poster poster1"></div>
+
+            <h3>
+                The Last Mission
+            </h3>
+
+
+            <div class="movie-actions">
+
+                <button
+                    class="watch-btn"
+                    type="button"
+                >
+                    ▶ Regarder
+                </button>
+
+
+                <button
+                    class="favorite-btn"
+                    type="button"
+                    aria-label="Ajouter aux favoris"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <button
+                class="download-btn"
+                type="button"
+            >
+                ⬇ Télécharger
+            </button>
+
+        </article>
+
+
+
+        <!-- FILM 2 -->
+
+        <article
+            class="movie"
+            data-id="film2"
+            data-title="Dark City"
+            data-video="videos/dark-city.mp4"
+        >
+
+            <div class="poster poster2"></div>
+
+            <h3>
+                Dark City
+            </h3>
+
+
+            <div class="movie-actions">
+
+                <button
+                    class="watch-btn"
+                    type="button"
+                >
+                    ▶ Regarder
+                </button>
+
+
+                <button
+                    class="favorite-btn"
+                    type="button"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <button
+                class="download-btn"
+                type="button"
+            >
+                ⬇ Télécharger
+            </button>
+
+        </article>
+
+
+
+        <!-- FILM 3 -->
+
+        <article
+            class="movie"
+            data-id="film3"
+            data-title="Fast Road"
+            data-video="videos/fast-road.mp4"
+        >
+
+            <div class="poster poster3"></div>
+
+            <h3>
+                Fast Road
+            </h3>
+
+
+            <div class="movie-actions">
+
+                <button
+                    class="watch-btn"
+                    type="button"
+                >
+                    ▶ Regarder
+                </button>
+
+
+                <button
+                    class="favorite-btn"
+                    type="button"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <button
+                class="download-btn"
+                type="button"
+            >
+                ⬇ Télécharger
+            </button>
+
+        </article>
+
+
+
+        <!-- FILM 4 -->
+
+        <article
+            class="movie"
+            data-id="film4"
+            data-title="The Survivor"
+            data-video="videos/the-survivor.mp4"
+        >
+
+            <div class="poster poster4"></div>
+
+            <h3>
+                The Survivor
+            </h3>
+
+
+            <div class="movie-actions">
+
+                <button
+                    class="watch-btn"
+                    type="button"
+                >
+                    ▶ Regarder
+                </button>
+
+
+                <button
+                    class="favorite-btn"
+                    type="button"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <button
+                class="download-btn"
+                type="button"
+            >
+                ⬇ Télécharger
+            </button>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ACTION
+     ===================================================== -->
+
+<section
+    class="category"
+    id="action"
+>
+
+    <h2>
+        🔥 Action
+    </h2>
+
+
+    <div class="movie-row">
+
+
+
+        <!-- FILM 5 -->
+
+        <article
+            class="movie"
+            data-id="film5"
+            data-title="War Zone"
+            data-video="videos/war-zone.mp4"
+        >
+
+            <div class="poster poster5"></div>
+
+            <h3>
+                War Zone
+            </h3>
+
+
+            <div class="movie-actions">
+
+                <button
+                    class="watch-btn"
+                    type="button"
+                >
+                    ▶ Regarder
+                </button>
+
+
+                <button
+                    class="favorite-btn"
+                    type="button"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <button
+                class="download-btn"
+                type="button"
+            >
+                ⬇ Télécharger
+            </button>
+
+        </article>
+
+
+
+        <!-- FILM 6 -->
+
+        <article
+            class="movie"
+            data-id="film6"
+            data-title="Night Hunter"
+            data-video="videos/night-hunter.mp4"
+        >
+
+            <div class="poster poster6"></div>
+
+            <h3>
+                Night Hunter
+            </h3>
+
+
+            <div class="movie-actions">
+
+                <button
+                    class="watch-btn"
+                    type="button"
+                >
+                    ▶ Regarder
+                </button>
+
+
+                <button
+                    class="favorite-btn"
+                    type="button"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <button
+                class="download-btn"
+                type="button"
+            >
+                ⬇ Télécharger
+            </button>
+
+        </article>
+
+
+
+        <!-- FILM 7 -->
+
+        <article
+            class="movie"
+            data-id="film7"
+            data-title="Final Target"
+            data-video="videos/final-target.mp4"
+        >
+
+            <div class="poster poster7"></div>
+
+            <h3>
+                Final Target
+            </h3>
+
+
+            <div class="movie-actions">
+
+                <button
+                    class="watch-btn"
+                    type="button"
+                >
+                    ▶ Regarder
+                </button>
+
+
+                <button
+                    class="favorite-btn"
+                    type="button"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <button
+                class="download-btn"
+                type="button"
+            >
+                ⬇ Télécharger
+            </button>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     COMÉDIE
+     ===================================================== -->
+
+<section
+    class="category"
+    id="comedie"
+>
+
+    <h2>
+        😂 Comédie
+    </h2>
+
+
+    <div class="movie-row">
+
+
+
+        <!-- FILM 8 -->
+
+        <article
+            class="movie"
+            data-id="film8"
+            data-title="Crazy Family"
+            data-video="videos/crazy-family.mp4"
+        >
+
+            <div class="poster poster8"></div>
+
+            <h3>
+                Crazy Family
+            </h3>
+
+
+            <div class="movie-actions">
+
+                <button
+                    class="watch-btn"
+                    type="button"
+                >
+                    ▶ Regarder
+                </button>
+
+
+                <button
+                    class="favorite-btn"
+                    type="button"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <button
+                class="download-btn"
+                type="button"
+            >
+                ⬇ Télécharger
+            </button>
+
+        </article>
+
+
+
+        <!-- FILM 9 -->
+
+        <article
+            class="movie"
+            data-id="film9"
+            data-title="Best Friends"
+            data-video="videos/best-friends.mp4"
+        >
+
+            <div class="poster poster9"></div>
+
+            <h3>
+                Best Friends
+            </h3>
+
+
+            <div class="movie-actions">
+
+                <button
+                    class="watch-btn"
+                    type="button"
+                >
+                    ▶ Regarder
+                </button>
+
+
+                <button
+                    class="favorite-btn"
+                    type="button"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <button
+                class="download-btn"
+                type="button"
+            >
+                ⬇ Télécharger
+            </button>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SÉRIES
+     ===================================================== -->
+
+<section
+    class="category"
+    id="series"
+>
+
+    <h2>
+        📺 Séries
+    </h2>
+
+
+    <div class="movie-row">
+
+
+        <article
+            class="movie"
+            data-id="series1"
+            data-title="Dark Stories"
+            data-video="videos/dark-stories.mp4"
+        >
+
+            <div class="poster poster10"></div>
+
+            <h3>
+                Dark Stories
+            </h3>
+
+
+            <div class="movie-actions">
+
+                <button
+                    class="watch-btn"
+                    type="button"
+                >
+                    ▶ Regarder
+                </button>
+
+
+                <button
+                    class="favorite-btn"
+                    type="button"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <button
+                class="download-btn"
+                type="button"
+            >
+                ⬇ Télécharger
+            </button>
+
+        </article>
+
+
+
+        <article
+            class="movie"
+            data-id="series2"
+            data-title="City Life"
+            data-video="videos/city-life.mp4"
+        >
+
+            <div class="poster poster11"></div>
+
+            <h3>
+                City Life
+            </h3>
+
+
+            <div class="movie-actions">
+
+                <button
+                    class="watch-btn"
+                    type="button"
+                >
+                    ▶ Regarder
+                </button>
+
+
+                <button
+                    class="favorite-btn"
+                    type="button"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <button
+                class="download-btn"
+                type="button"
+            >
+                ⬇ Télécharger
+            </button>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ANIMÉS
+     ===================================================== -->
+
+<section
+    class="category"
+    id="animes"
+>
+
+    <h2>
+        ⚡ Animés
+    </h2>
+
+
+    <div class="movie-row">
+
+
+        <article
+            class="movie"
+            data-id="anime1"
+            data-title="Shadow Warriors"
+            data-video="videos/shadow-warriors.mp4"
+        >
+
+            <div class="poster poster12"></div>
+
+            <h3>
+                Shadow Warriors
+            </h3>
+
+
+            <div class="movie-actions">
+
+                <button
+                    class="watch-btn"
+                    type="button"
+                >
+                    ▶ Regarder
+                </button>
+
+
+                <button
+                    class="favorite-btn"
+                    type="button"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <button
+                class="download-btn"
+                type="button"
+            >
+                ⬇ Télécharger
+            </button>
+
+        </article>
+
+
+
+        <article
+            class="movie"
+            data-id="anime2"
+            data-title="Dragon Power"
+            data-video="videos/dragon-power.mp4"
+        >
+
+            <div class="poster poster13"></div>
+
+            <h3>
+                Dragon Power
+            </h3>
+
+
+            <div class="movie-actions">
+
+                <button
+                    class="watch-btn"
+                    type="button"
+                >
+                    ▶ Regarder
+                </button>
+
+
+                <button
+                    class="favorite-btn"
+                    type="button"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <button
+                class="download-btn"
+                type="button"
+            >
+                ⬇ Télécharger
+            </button>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FAVORIS
+     ===================================================== -->
+
+<section
+    class="favorites-page"
+    id="favoritesPage"
+>
+
+    <div class="page-header">
+
+        <button
+            class="back-btn"
+            id="backFromFavorites"
+            type="button"
+        >
+            ←
+        </button>
+
+
+        <h2>
+            ❤️ Mes favoris
+        </h2>
+
+    </div>
+
+
+    <p class="page-description">
+        Tes films préférés sont ici.
+    </p>
+
+
+    <div
+        class="favorite-list"
+        id="favoriteList"
+    ></div>
+
+</section>
+
+
+
+<!-- =====================================================
+     TÉLÉCHARGEMENTS
+     ===================================================== -->
+
+<section
+    class="downloads-page"
+    id="downloadsPage"
+>
+
+    <div class="page-header">
+
+        <button
+            class="back-btn"
+            id="backFromDownloads"
+            type="button"
+        >
+            ←
+        </button>
+
+
+        <h2>
+            ⬇️ Mes téléchargements
+        </h2>
+
+    </div>
+
+
+    <p class="page-description">
+        Tes vidéos disponibles hors connexion.
+    </p>
+
+
+    <div
+        class="download-list"
+        id="downloadList"
+    ></div>
+
+</section>
+
+
+
+<!-- =====================================================
+     LECTEUR VIDÉO
+     ===================================================== -->
+
+<div
+    class="player"
+    id="player"
+>
+
+    <button
+        class="close-player"
+        id="closePlayer"
+        type="button"
+        aria-label="Fermer"
+    >
+        ✕
+    </button>
+
+
+    <video
+        id="video"
+        controls
+        playsinline
+    ></video>
+
+</div>
+
+
+
+<!-- =====================================================
+     NAVIGATION MOBILE
+     ===================================================== -->
+
+<nav class="bottom-nav">
+
+
+    <button
+        id="homeBtn"
+        type="button"
+    >
+
+        <span class="nav-icon">
+            ⌂
+        </span>
+
+        <span>
+            Accueil
+        </span>
+
+    </button>
+
+
+
+    <button
+        id="favoritesBtn"
+        type="button"
+    >
+
+        <span class="nav-icon">
+            ♡
+        </span>
+
+        <span>
+            Favoris
+        </span>
+
+    </button>
+
+
+
+    <button
+        id="downloadsBtn"
+        type="button"
+    >
+
+        <span class="nav-icon">
+            ⬇
+        </span>
+
+        <span>
+            Téléchargements
+        </span>
+
+    </button>
+
+
+
+    <button
+        id="settingsBtnBottom"
+        type="button"
+        onclick="window.location.href='settings.html'"
+    >
+
+        <span class="nav-icon">
+            ⚙
+        </span>
+
+        <span>
+            Paramètres
+        </span>
+
+    </button>
+
+
+</nav>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+     ===================================================== -->
+
+<script src="script.js"></script>
+
+
+
+<script>
+document.addEventListener("click", function (event) {
+
+    var button = event.target.closest(
+        '[data-mega="the-last-mission"] .watch-btn'
+    );
+
+    if (!button) {
+        return;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    window.open(
+        "https://mega.nz/file/wngVEDTY#FAHG-PHCKcmlY7YrR2FIxZwLB--cF2uF37-dWvvB3xQ",
+        "_blank"
+    );
+
+}, true);
+</script>
+
 </body>
+
 </html>
