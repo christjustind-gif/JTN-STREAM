@@ -1,0 +1,351 @@
+<!DOCTYPE html><html lang="fr"><head>
+    <meta charset="UTF-8"><meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<meta name="theme-color" content="#050505">
+
+<title>Connexion - JTN STREAM</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        background: #050505;
+        color: white;
+        font-family: Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .login-container {
+        width: 92%;
+        max-width: 420px;
+        padding: 30px 22px;
+        text-align: center;
+    }
+
+    .logo {
+        font-size: 32px;
+        font-weight: 900;
+        margin-bottom: 35px;
+    }
+
+    .logo span {
+        color: #e50914;
+    }
+
+    .login-box {
+        background: #151515;
+        border-radius: 20px;
+        padding: 28px 22px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, .5);
+    }
+
+    h1 {
+        margin: 0 0 10px;
+        font-size: 27px;
+    }
+
+    .description {
+        color: #aaa;
+        margin-bottom: 25px;
+        line-height: 1.5;
+    }
+
+    .google-btn {
+        width: 100%;
+        min-height: 54px;
+        border: none;
+        border-radius: 10px;
+        background: white;
+        color: #222;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .google-btn:active {
+        transform: scale(.98);
+    }
+
+    .google-btn:disabled {
+        opacity: .6;
+        cursor: not-allowed;
+    }
+
+    .google-icon {
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .message {
+        margin-top: 18px;
+        min-height: 22px;
+        color: #aaa;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .back-btn {
+        display: inline-block;
+        margin-top: 25px;
+        color: #aaa;
+        text-decoration: none;
+    }
+
+    .back-btn:hover {
+        color: white;
+    }
+</style>
+
+</head><body><main class="login-container">
+
+    <div class="logo">
+        JTN <span>STREAM</span>
+    </div>
+
+
+    <section class="login-box">
+
+        <h1>Connexion</h1>
+
+        <p class="description">
+            Connecte-toi à JTN STREAM pour continuer.
+        </p>
+
+
+        <button
+            id="googleLogin"
+            class="google-btn"
+            type="button"
+        >
+            <span class="google-icon">G</span>
+            Continuer avec Google
+        </button>
+
+
+        <div
+            id="message"
+            class="message"
+        ></div>
+
+
+        <a
+            href="index.html"
+            class="back-btn"
+        >
+            ← Retour à JTN STREAM
+        </a>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     FIREBASE
+     ===================================================== -->
+
+<script type="module">
+
+    /* =====================================================
+       FIREBASE APP
+       ===================================================== */
+
+    import {
+        initializeApp
+    } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+
+
+    /* =====================================================
+       FIREBASE AUTH
+       ===================================================== */
+
+    import {
+        getAuth,
+        GoogleAuthProvider,
+        signInWithPopup
+    } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+
+
+    /* =====================================================
+       CONFIGURATION FIREBASE
+       ===================================================== */
+
+    const firebaseConfig = {
+
+        apiKey:
+            "AIzaSyBRCxoXFDD3l9_3cWVw5NCt26tsBD4Q2UI",
+
+        authDomain:
+            "jtn-stream.firebaseapp.com",
+
+        projectId:
+            "jtn-stream",
+
+        storageBucket:
+            "jtn-stream.firebasestorage.app",
+
+        messagingSenderId:
+            "288537086482",
+
+        appId:
+            "1:288537086482:web:a85a42bee5931d093da6cb",
+
+        measurementId:
+            "G-E5GM1R2XG4"
+
+    };
+
+
+    /* =====================================================
+       INITIALISER FIREBASE
+       ===================================================== */
+
+    const app =
+        initializeApp(firebaseConfig);
+
+
+    /* =====================================================
+       INITIALISER AUTHENTIFICATION
+       ===================================================== */
+
+    const auth =
+        getAuth(app);
+
+
+    /* =====================================================
+       FOURNISSEUR GOOGLE
+       ===================================================== */
+
+    const provider =
+        new GoogleAuthProvider();
+
+
+    /* =====================================================
+       ÉLÉMENTS HTML
+       ===================================================== */
+
+    const googleLogin =
+        document.getElementById("googleLogin");
+
+    const message =
+        document.getElementById("message");
+
+
+    /* =====================================================
+       CONNEXION AVEC GOOGLE
+       ===================================================== */
+
+    googleLogin.addEventListener(
+        "click",
+        async function () {
+
+            message.textContent =
+                "Connexion à Google...";
+
+            googleLogin.disabled = true;
+
+
+            try {
+
+                const result =
+                    await signInWithPopup(
+                        auth,
+                        provider
+                    );
+
+
+                const user =
+                    result.user;
+
+
+                console.log(
+                    "Utilisateur connecté :",
+                    user
+                );
+
+
+                message.textContent =
+                    "Connexion réussie ✓";
+
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            "index.html";
+
+                    },
+                    700
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Erreur Firebase :",
+                    error
+                );
+
+
+                if (
+                    error.code ===
+                    "auth/popup-closed-by-user"
+                ) {
+
+                    message.textContent =
+                        "Connexion annulée.";
+
+                }
+
+                else if (
+                    error.code ===
+                    "auth/popup-blocked"
+                ) {
+
+                    message.textContent =
+                        "La fenêtre Google a été bloquée par le navigateur.";
+
+                }
+
+                else if (
+                    error.code ===
+                    "auth/unauthorized-domain"
+                ) {
+
+                    message.textContent =
+                        "Ce domaine n'est pas autorisé dans Firebase.";
+
+                }
+
+                else {
+
+                    message.textContent =
+                        "Impossible de se connecter avec Google.";
+
+                }
+
+
+                googleLogin.disabled = false;
+
+            }
+
+        }
+    );
+
+</script>
+
+</body></html>
