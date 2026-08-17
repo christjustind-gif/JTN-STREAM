@@ -1023,15 +1023,26 @@ if (heroPlay) {
         "click",
         function () {
 
-            window.open(
-                THE_LAST_MISSION_URL,
-                "_blank"
-            );
+            const vdoFrame =
+                document.getElementById("vdoFrame");
+
+            if (vdoFrame) {
+
+                video.pause();
+                video.style.display = "none";
+
+                vdoFrame.src =
+                    "https://fembed.co/embed/N_Xc8eTr-4MGW";
+
+                vdoFrame.style.display = "block";
+
+                player.style.display = "flex";
+            }
 
         }
     );
 
-}
+}                
 
 
 /* =====================================================
