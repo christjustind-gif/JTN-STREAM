@@ -177,7 +177,7 @@
 
 
 <!-- =====================================================
-     CONTENU PRINCIPAL
+     ACCUEIL
 ===================================================== -->
 
 <main id="homePage">
@@ -199,6 +199,8 @@
     <div class="movie-row">
 
 
+        <!-- FILM 1 -->
+
         <article
             class="movie"
             data-id="film1"
@@ -216,6 +218,8 @@
 
         </article>
 
+
+        <!-- FILM 2 -->
 
         <article
             class="movie"
@@ -235,6 +239,8 @@
         </article>
 
 
+        <!-- FILM 3 -->
+
         <article
             class="movie"
             data-id="film3"
@@ -252,6 +258,8 @@
 
         </article>
 
+
+        <!-- FILM 4 -->
 
         <article
             class="movie"
@@ -502,6 +510,130 @@
 
 
 <!-- =====================================================
+     FICHE DU FILM
+===================================================== -->
+
+<section
+    class="movie-details-page"
+    id="movieDetailsPage"
+>
+
+    <button
+        class="details-close"
+        id="closeMovieDetails"
+        type="button"
+    >
+        ✕
+    </button>
+
+
+    <div
+        class="details-backdrop"
+        id="detailsBackdrop"
+    ></div>
+
+
+    <div class="movie-details-content">
+
+
+        <!-- AFFICHE -->
+
+        <div
+            class="details-poster"
+            id="detailsPoster"
+        ></div>
+
+
+        <!-- TITRE -->
+
+        <h1
+            id="detailsTitle"
+            class="details-title"
+        >
+            The Last Mission
+        </h1>
+
+
+        <!-- INFORMATIONS -->
+
+        <div
+            class="details-info"
+            id="detailsInfo"
+        >
+            Film • Action
+        </div>
+
+
+        <!-- BOUTONS -->
+
+        <div class="details-actions">
+
+            <button
+                class="details-watch-btn"
+                id="detailsWatchBtn"
+                type="button"
+            >
+                ▶ Regarder
+            </button>
+
+
+            <button
+                class="details-download-btn"
+                id="detailsDownloadBtn"
+                type="button"
+            >
+                ⬇ Télécharger
+            </button>
+
+
+            <button
+                class="details-favorite-btn"
+                id="detailsFavoriteBtn"
+                type="button"
+            >
+                ♡ Ajouter aux favoris
+            </button>
+
+        </div>
+
+
+        <!-- DESCRIPTION -->
+
+        <div class="details-description">
+
+            <h2>
+                Description
+            </h2>
+
+            <p id="detailsDescription">
+                Découvre ce film sur JTN STREAM.
+                Une nouvelle aventure t'attend.
+            </p>
+
+        </div>
+
+
+        <!-- AUTRES FILMS -->
+
+        <section class="details-recommendations">
+
+            <h2>
+                🎬 Tu pourrais aussi aimer
+            </h2>
+
+            <div
+                class="details-movie-row"
+                id="detailsRecommendations"
+            ></div>
+
+        </section>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
      FAVORIS
 ===================================================== -->
 
@@ -576,7 +708,7 @@
 
 
 <!-- =====================================================
-     LECTEUR
+     LECTEUR VIDÉO
 ===================================================== -->
 
 <div
@@ -619,7 +751,7 @@
 
 
 <!-- =====================================================
-     NAVIGATION MOBILE
+     NAVIGATION BAS
 ===================================================== -->
 
 <nav class="bottom-nav">
@@ -697,5 +829,4 @@
 <script src="script.js"></script>
 
 </body>
-
 </html>
