@@ -4,8 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
        JTN STREAM — CONFIGURATION
     ===================================================== */
 
-    const TMDB_API_KEY =
-        "5d807776205681c8cd883f1613d529ec";
+    const TMDB_API_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZDgwNzc3NjIwNTY4MWM4Y2Q4ODNmMTYxM2Q1MjllYyIsIm5iZiI6MTc4NzA2NzEyNi4yMDgsInN1YiI6IjZhODQ3YWY2NThiYzMyOTYzZDJiYjc5NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.IY6NXG4HAHmvdHuKjA2CTG7o23k-QVsZqd2xOURjOWs";
 
     const TMDB_IMAGE =
         "https://image.tmdb.org/t/p/";
