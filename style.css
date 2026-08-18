@@ -806,7 +806,6 @@ main {
     z-index: 999999;
 
     display: flex;
-
     flex-direction: column;
 
     justify-content: center;
@@ -814,34 +813,42 @@ main {
 
     background: #000;
 
-    animation: introOut 3s forwards;
+    overflow: hidden;
+
+    animation: introOut 3.5s forwards;
 }
 
+/* IMAGE / LOGO JTN */
 .intro-logo {
-    font-size: 42px;
-    font-weight: 900;
+    width: 180px;
+    height: 180px;
 
-    letter-spacing: 2px;
+    background-image: url("jtn-logo.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 
-    animation: logoIn 1.5s forwards;
+    animation: logoIn 1.5s ease-out forwards;
+
+    position: relative;
+    z-index: 2;
 }
 
-.intro-logo span {
-    color: #e50914;
-}
-
+/* TEXTE SOUS LE LOGO */
 #intro h2 {
     margin-top: 15px;
 
     font-size: 11px;
-
     letter-spacing: 4px;
+
+    color: white;
 
     opacity: 0;
 
     animation: textIn 1s 1s forwards;
 }
 
+/* LIGNE ROUGE */
 .intro-light {
     position: absolute;
 
@@ -852,10 +859,12 @@ main {
 
     box-shadow: 0 0 40px #e50914;
 
-    animation: light 1.2s forwards;
+    animation: light 1.2s ease-out forwards;
 }
 
+/* LIGNE QUI TRAVERSE L'ÉCRAN */
 @keyframes light {
+
     from {
         transform: translateX(-100%);
     }
@@ -863,9 +872,12 @@ main {
     to {
         transform: translateX(100%);
     }
+
 }
 
+/* LOGO QUI APPARAÎT */
 @keyframes logoIn {
+
     from {
         opacity: 0;
         transform: scale(.5);
@@ -875,17 +887,31 @@ main {
         opacity: 1;
         transform: scale(1);
     }
+
 }
 
+/* TEXTE QUI APPARAÎT */
 @keyframes textIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
     to {
         opacity: 1;
+        transform: translateY(0);
     }
+
 }
 
+/* INTRO QUI DISPARAÎT */
 @keyframes introOut {
-    0%,80% {
+
+    0%, 80% {
         opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
     }
 
     100% {
@@ -893,6 +919,7 @@ main {
         visibility: hidden;
         pointer-events: none;
     }
+
 }
 
 
