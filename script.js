@@ -375,6 +375,103 @@ loadTMDBMovies();
         }
 
     }
+// =====================================================
+// TMDB — CHARGEMENT DE TOUS LES FILMS
+// =====================================================
+
+async function loadTMDBMovies() {
+
+    for (const movie of movies) {
+
+        try {
+
+            const response = await fetch(
+                "https://api.themoviedb.org/3/search/movie" +
+                "?query=" +
+                encodeURIComponent(movie.title) +
+                "&language=fr-FR" +
+                "&include_adult=false" +
+                "&page=1",
+                {
+                    headers: {
+                        Authorization:
+                            "Bearer " + TMDB_API_KEY,
+                        accept:
+                            "application/json"
+                    }
+                }
+            );
+
+            if (!response.ok) {
+                console.error(
+                    "TMDB erreur :",
+                    response.status
+                );
+                continue;
+            }
+
+            const data =
+                await response.json();
+
+            if (
+                !data.results ||
+                data.results.length === 0
+            ) {
+                console.warn(
+                    "❌ Film non trouvé : " +
+                    movie.title
+                );
+                continue;
+            }
+
+            const tmdbMovie =
+                data.results[0];
+
+            movie.tmdbId =
+                tmdbMovie.id;
+
+            if (tmdbMovie.title) {
+                movie.title =
+                    tmdbMovie.title;
+            }
+
+            if (tmdbMovie.poster_path) {
+                movie.poster =
+                    "https://image.tmdb.org/t/p/w500" +
+                    tmdbMovie.poster_path;
+            }
+
+            if (tmdbMovie.backdrop_path) {
+                movie.backdrop =
+                    "https://image.tmdb.org/t/p/w1280" +
+                    tmdbMovie.backdrop_path;
+            }
+
+            movie.overview =
+                tmdbMovie.overview || "";
+
+            movie.rating =
+                tmdbMovie.vote_average || 0;
+
+            movie.releaseDate =
+                tmdbMovie.release_date || "";
+
+        } catch (error) {
+
+            console.error(
+                "Erreur TMDB pour " +
+                movie.title,
+                error
+            );
+        }
+    }
+
+    updateTMDBDisplay();
+
+    console.log(
+        "🎬 TMDB terminé pour tous les films"
+    );
+}
 
 
     /* =====================================================
@@ -386,7 +483,7 @@ loadTMDBMovies();
         if (
             !TMDB_API_KEY ||
             TMDB_API_KEY ===
-                "COLLE_TA_NOUVELLE_CLE_ICI"
+                "4a612e6631a19b542b88a5b684d4d083"
         ) {
 
             console.warn(
