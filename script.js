@@ -359,104 +359,171 @@ loadTMDBMovies();
         }
 
     }
-// =====================================================
-// TMDB — CHARGEMENT DE TOUS LES FILMS
-// =====================================================
+    /* =====================================================
+       TMDB — CHARGER LES INFORMATIONS
+       ===================================================== */
 
-async function loadTMDBMovies() {
+    async function loadTMDBMovies() {
 
-    for (const movie of movies) {
+        if (!TMDB_API_KEY) {
 
-        try {
-
-            const response = await fetch(
-                "https://api.themoviedb.org/3/search/movie" +
-                "?query=" +
-                encodeURIComponent(movie.title) +
-                "&language=fr-FR" +
-                "&include_adult=false" +
-                "&page=1",
-                {
-                    headers: {
-                        Authorization:
-                            "Bearer " + TMDB_API_KEY,
-                        accept:
-                            "application/json"
-                    }
-                }
+            console.warn(
+                "Clé TMDB non configurée."
             );
 
-            if (!response.ok) {
-                console.error(
-                    "TMDB erreur :",
-                    response.status
-                );
-                continue;
-            }
+            return;
 
-            const data =
-                await response.json();
-
-            if (
-                !data.results ||
-                data.results.length === 0
-            ) {
-                console.warn(
-                    "❌ Film non trouvé : " +
-                    movie.title
-                );
-                continue;
-            }
-
-            const tmdbMovie =
-                data.results[0];
-
-            movie.tmdbId =
-                tmdbMovie.id;
-
-            if (tmdbMovie.title) {
-                movie.title =
-                    tmdbMovie.title;
-            }
-
-            if (tmdbMovie.poster_path) {
-                movie.poster =
-                    "https://image.tmdb.org/t/p/w500" +
-                    tmdbMovie.poster_path;
-            }
-
-            if (tmdbMovie.backdrop_path) {
-                movie.backdrop =
-                    "https://image.tmdb.org/t/p/w1280" +
-                    tmdbMovie.backdrop_path;
-            }
-
-            movie.overview =
-                tmdbMovie.overview || "";
-
-            movie.rating =
-                tmdbMovie.vote_average || 0;
-
-            movie.releaseDate =
-                tmdbMovie.release_date || "";
-
-        } catch (error) {
-
-            console.error(
-                "Erreur TMDB pour " +
-                movie.title,
-                error
-            );
         }
+
+        for (const movie of movies) {
+
+            try {
+
+                const result =
+                    await searchTMDB(
+                        movie.title
+                    );
+
+                if (!result) {
+
+                    console.warn(
+                        "TMDB : film non trouvé :",
+                        movie.title
+                    );
+
+                    continue;
+                }
+
+                /* ID TMDB */
+
+                movie.tmdbId =
+                    result.id;
+
+                /* TITRE OFFICIEL */
+
+                movie.tmdbTitle =
+                    result.title ||
+                    movie.title;
+
+                /* RÉSUMÉ */
+
+                movie.overview =
+                    result.overview ||
+                    "";
+
+                /* NOTE */
+
+                movie.rating =
+                    result.vote_average ||
+                    0;
+
+                /* DATE */
+
+                movie.releaseDate =
+                    result.release_date ||
+                    "";
+
+                /* AFFICHE */
+
+                movie.tmdbPoster =
+                    result.poster_path
+                        ? "https://image.tmdb.org/t/p/w500" +
+                          result.poster_path
+                        : "";
+
+                /* IMAGE DE FOND */
+
+                movie.backdrop =
+                    result.backdrop_path
+                        ? "https://image.tmdb.org/t/p/w1280" +
+                          result.backdrop_path
+                        : "";
+
+                /* DÉTAILS COMPLETS */
+
+                const details =
+                    await getTMDBDetails(
+                        result.id
+                    );
+
+                if (details) {
+
+                    movie.overview =
+                        details.overview ||
+                        movie.overview;
+
+                    movie.rating =
+                        details.vote_average ||
+                        movie.rating;
+
+                    movie.releaseDate =
+                        details.release_date ||
+                        movie.releaseDate;
+
+                    if (
+                        details.poster_path
+                    ) {
+
+                        movie.tmdbPoster =
+                            "https://image.tmdb.org/t/p/w500" +
+                            details.poster_path;
+
+                    }
+
+                    if (
+                        details.backdrop_path
+                    ) {
+
+                        movie.backdrop =
+                            "https://image.tmdb.org/t/p/w1280" +
+                            details.backdrop_path;
+
+                    }
+
+                    movie.genres =
+                        details.genres || [];
+
+                }
+
+                /* TMDB devient l'affiche principale */
+
+                if (
+                    movie.tmdbPoster
+                ) {
+
+                    movie.poster =
+                        movie.tmdbPoster;
+
+                }
+
+                /* Mettre à jour la carte */
+
+                updateMovieCard(
+                    movie
+                );
+
+                console.log(
+                    "✅ TMDB chargé :",
+                    movie.tmdbTitle
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "❌ Erreur TMDB pour",
+                    movie.title,
+                    error
+                );
+
+            }
+
+        }
+
+        console.log(
+            "🎬 TMDB terminé pour tous les films"
+        );
+
     }
-
-    updateTMDBDisplay();
-
-    console.log(
-        "🎬 TMDB terminé pour tous les films"
-    );
-}
-
 
     /* =====================================================
        TMDB — CHARGER LES INFORMATIONS
