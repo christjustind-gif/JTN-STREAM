@@ -89,127 +89,111 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const movies = [
 
-        {
-            id: "film1",
-            title: "The Last Mission",
-            category: "Films",
-            type: "iframe",
-            video:
-                "https://fembed.co/embed/N_Xc8eTr-4MGW",
-            poster:
-                "the-last-mission.jpg"
-        },
-  
+    {
+        id: "film1",
+        title: "Avengers: Endgame",
+        category: "Films",
+        type: "video",
+        video: "videos/avengers-endgame.mp4"
+    },
 
-        {
-            id: "film2",
-            title: "Dark City",
-            category: "Films",
-            type: "video",
-            video:
-                "videos/dark-city.mp4"
-        },
+    {
+        id: "film2",
+        title: "Spider-Man: No Way Home",
+        category: "Films",
+        type: "video",
+        video: "videos/spider-man-no-way-home.mp4"
+    },
 
-        {
-            id: "film3",
-            title: "Fast Road",
-            category: "Films",
-            type: "video",
-            video:
-                "videos/fast-road.mp4"
-        },
+    {
+        id: "film3",
+        title: "The Dark Knight",
+        category: "Films",
+        type: "video",
+        video: "videos/the-dark-knight.mp4"
+    },
 
-        {
-            id: "film4",
-            title: "The Survivor",
-            category: "Films",
-            type: "video",
-            video:
-                "videos/the-survivor.mp4"
-        },
+    {
+        id: "film4",
+        title: "Top Gun: Maverick",
+        category: "Films",
+        type: "video",
+        video: "videos/top-gun-maverick.mp4"
+    },
 
-        {
-            id: "film5",
-            title: "War Zone",
-            category: "Action",
-            type: "video",
-            video:
-                "videos/war-zone.mp4"
-        },
+    {
+        id: "film5",
+        title: "Avatar",
+        category: "Films",
+        type: "video",
+        video: "videos/avatar.mp4"
+    },
 
-        {
-            id: "film6",
-            title: "Night Hunter",
-            category: "Action",
-            type: "video",
-            video:
-                "videos/night-hunter.mp4"
-        },
+    {
+        id: "film6",
+        title: "Titanic",
+        category: "Films",
+        type: "video",
+        video: "videos/titanic.mp4"
+    },
 
-        {
-            id: "film7",
-            title: "Final Target",
-            category: "Action",
-            type: "video",
-            video:
-                "videos/final-target.mp4"
-        },
+    {
+        id: "film7",
+        title: "Inception",
+        category: "Films",
+        type: "video",
+        video: "videos/inception.mp4"
+    },
 
-        {
-            id: "film8",
-            title: "Crazy Family",
-            category: "Comédie",
-            type: "video",
-            video:
-                "videos/crazy-family.mp4"
-        },
+    {
+        id: "film8",
+        title: "Interstellar",
+        category: "Films",
+        type: "video",
+        video: "videos/interstellar.mp4"
+    },
 
-        {
-            id: "film9",
-            title: "Best Friends",
-            category: "Comédie",
-            type: "video",
-            video:
-                "videos/best-friends.mp4"
-        },
+    {
+        id: "film9",
+        title: "The Matrix",
+        category: "Films",
+        type: "video",
+        video: "videos/the-matrix.mp4"
+    },
 
-        {
-            id: "series1",
-            title: "Dark Stories",
-            category: "Séries",
-            type: "video",
-            video:
-                "videos/dark-stories.mp4"
-        },
+    {
+        id: "film10",
+        title: "John Wick",
+        category: "Action",
+        type: "video",
+        video: "videos/john-wick.mp4"
+    },
 
-        {
-            id: "series2",
-            title: "City Life",
-            category: "Séries",
-            type: "video",
-            video:
-                "videos/city-life.mp4"
-        },
+    {
+        id: "film11",
+        title: "Joker",
+        category: "Films",
+        type: "video",
+        video: "videos/joker.mp4"
+    },
 
-        {
-            id: "anime1",
-            title: "Shadow Warriors",
-            category: "Animés",
-            type: "video",
-            video:
-                "videos/shadow-warriors.mp4"
-        },
+    {
+        id: "film12",
+        title: "Jurassic World",
+        category: "Films",
+        type: "video",
+        video: "videos/jurassic-world.mp4"
+    },
 
-        {
-            id: "anime2",
-            title: "Dragon Power",
-            category: "Animés",
-            type: "video",
-            video:
-                "videos/dragon-power.mp4"
-        }
+    {
+        id: "film13",
+        title: "Black Panther",
+        category: "Action",
+        type: "video",
+        video: "videos/black-panther.mp4"
+    }
 
-    ];
+];
     function updateTMDBDisplay() {
 
     movies.forEach(function (movie) {
