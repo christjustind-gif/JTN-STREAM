@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
        ===================================================== */
 
     const TMDB_API_KEY =
-        "COLLE_TA_NOUVELLE_CLE_ICI";
+        "5d807776205681c8cd883f1613d529ec";
 
 
     /* =====================================================
