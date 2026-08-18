@@ -1,53 +1,25 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="theme-color"
-        content="#050505"
-    >
-
-    <title>JTN STREAM</title>
-
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050505">
+<title>JTN STREAM</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- =====================================================
-     INTRO
-===================================================== -->
+<!-- ================= INTRO ================= -->
 
 <div id="intro">
-
     <div class="intro-light"></div>
-
-    <img
-        src="logo.png"
-        id="introLogo"
-        alt="JTN STREAM"
-    >
-
-    <h2>
-        Bienvenue sur JTN STREAM
-    </h2>
-
+    <div class="intro-logo">JTN <span>STREAM</span></div>
+    <h2>BIENVENUE SUR JTN STREAM</h2>
 </div>
 
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
+<!-- ================= HEADER ================= -->
 
 <header class="header">
 
@@ -57,64 +29,18 @@
 
     <div class="header-actions">
 
-        <button
-            class="search-btn"
-            id="searchBtn"
-            type="button"
-        >
-            🔍
-        </button>
+        <button id="searchBtn" class="round-btn">🔍</button>
 
-        <button
-            class="settings-btn"
-            id="settingsBtn"
-            type="button"
-        >
-            ⚙️
-        </button>
+        <button id="settingsBtn" class="round-btn">⚙️</button>
 
     </div>
 
 </header>
 
 
-<!-- =====================================================
-     MENU
-===================================================== -->
+<!-- ================= RECHERCHE ================= -->
 
-<nav class="menu">
-
-    <a href="#">
-        Accueil
-    </a>
-
-    <a href="#films">
-        Films
-    </a>
-
-    <a href="#series">
-        Séries
-    </a>
-
-    <a href="#animes">
-        Animés
-    </a>
-
-    <a href="settings.html">
-        ⚙️ Paramètres
-    </a>
-
-</nav>
-
-
-<!-- =====================================================
-     RECHERCHE
-===================================================== -->
-
-<div
-    class="search-box"
-    id="searchBox"
->
+<div id="searchBox" class="search-box">
 
     <input
         id="searchInput"
@@ -126,16 +52,27 @@
 </div>
 
 
-<!-- =====================================================
-     HERO
-===================================================== -->
+<!-- ================= MENU ================= -->
+
+<nav class="menu">
+
+    <button data-scroll="films">Films</button>
+    <button data-scroll="action">Action</button>
+    <button data-scroll="comedie">Comédie</button>
+    <button data-scroll="series">Séries</button>
+    <button data-scroll="animes">Animés</button>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
 
 <section class="hero">
 
     <div class="hero-content">
 
         <div class="badge">
-            🔥 BIENVENUE SUR JTN STREAM
+            🔥 JTN STREAM ORIGINAL
         </div>
 
         <h1>
@@ -143,26 +80,22 @@
             MISSION
         </h1>
 
+        <div class="hero-meta">
+            2026 &nbsp;•&nbsp; 16+ &nbsp;•&nbsp; HD
+        </div>
+
         <p>
             Découvre ton nouvel espace de streaming :
-            films, séries et animés.
+            films, séries et animés réunis au même endroit.
         </p>
 
         <div class="hero-buttons">
 
-            <button
-                class="play-btn"
-                id="heroPlay"
-                type="button"
-            >
+            <button id="heroPlay" class="play-btn">
                 ▶ Regarder
             </button>
 
-            <button
-                class="info-btn"
-                id="heroInfo"
-                type="button"
-            >
+            <button id="heroInfo" class="info-btn">
                 ⓘ Infos
             </button>
 
@@ -173,859 +106,606 @@
 </section>
 
 
-<!-- =====================================================
-     CONTENU PRINCIPAL
-===================================================== -->
+<!-- ================= CONTENU ================= -->
 
 <main id="homePage">
 
+    <section class="category" id="films">
 
-<!-- =====================================================
-     FILMS
-===================================================== -->
+        <h2>🎬 Films populaires</h2>
 
-<section
-    class="category"
-    id="films"
->
+        <div class="movie-row">
 
-    <h2>
-        🎬 Films populaires
-    </h2>
-
-    <div class="movie-row">
-
-
-        <!-- THE LAST MISSION -->
-
-        <article
-            class="movie"
-            data-id="film1"
-            data-title="The Last Mission"
-            data-video="https://fembed.co/embed/N_Xc8eTr-4MGW"
-        >
-
-            <div
-                class="poster poster1"
-            ></div>
-
-            <h3>
-                The Last Mission
-            </h3>
-
-            <div class="movie-actions">
-
-                <button
-                    class="watch-btn"
-                    type="button"
-                >
-                    ▶ Regarder
-                </button>
-
-                <button
-                    class="favorite-btn"
-                    type="button"
-                >
-                    ♡
-                </button>
-
-            </div>
-
-            <button
-                class="download-btn"
-                type="button"
+            <article
+                class="movie"
+                data-id="film1"
+                data-title="The Last Mission"
+                data-year="2026"
+                data-age="16+"
+                data-quality="HD"
+                data-category="Film"
+                data-description="Une nouvelle mission commence. Découvre The Last Mission sur JTN STREAM."
+                data-video=""
+                data-external="https://fembed.co/embed/N_Xc8eTr-4MGW"
             >
-                ⬇ Télécharger
-            </button>
 
-        </article>
+                <div class="poster poster1"></div>
 
+                <h3>The Last Mission</h3>
 
-        <!-- DARK CITY -->
+                <div class="movie-actions">
 
-        <article
-            class="movie"
-            data-id="film2"
-            data-title="Dark City"
-            data-video="videos/dark-city.mp4"
-        >
+                    <button class="watch-btn">
+                        ▶ Regarder
+                    </button>
 
-            <div
-                class="poster poster2"
-            ></div>
+                    <button class="favorite-btn">
+                        ♡
+                    </button>
 
-            <h3>
-                Dark City
-            </h3>
+                </div>
 
-            <div class="movie-actions">
-
-                <button
-                    class="watch-btn"
-                    type="button"
-                >
-                    ▶ Regarder
+                <button class="download-btn">
+                    ⬇ Télécharger
                 </button>
 
-                <button
-                    class="favorite-btn"
-                    type="button"
-                >
-                    ♡
-                </button>
+            </article>
 
-            </div>
 
-            <button
-                class="download-btn"
-                type="button"
+            <article
+                class="movie"
+                data-id="film2"
+                data-title="Dark City"
+                data-year="2026"
+                data-age="16+"
+                data-quality="HD"
+                data-category="Action"
+                data-description="Dans une ville plongée dans l'obscurité, une nouvelle aventure commence."
+                data-video="videos/dark-city.mp4"
             >
-                ⬇ Télécharger
-            </button>
 
-        </article>
+                <div class="poster poster2"></div>
 
+                <h3>Dark City</h3>
 
-        <!-- FAST ROAD -->
+                <div class="movie-actions">
 
-        <article
-            class="movie"
-            data-id="film3"
-            data-title="Fast Road"
-            data-video="videos/fast-road.mp4"
-        >
+                    <button class="watch-btn">
+                        ▶ Regarder
+                    </button>
 
-            <div
-                class="poster poster3"
-            ></div>
+                    <button class="favorite-btn">
+                        ♡
+                    </button>
 
-            <h3>
-                Fast Road
-            </h3>
+                </div>
 
-            <div class="movie-actions">
-
-                <button
-                    class="watch-btn"
-                    type="button"
-                >
-                    ▶ Regarder
+                <button class="download-btn">
+                    ⬇ Télécharger
                 </button>
 
-                <button
-                    class="favorite-btn"
-                    type="button"
-                >
-                    ♡
-                </button>
+            </article>
 
-            </div>
 
-            <button
-                class="download-btn"
-                type="button"
+            <article
+                class="movie"
+                data-id="film3"
+                data-title="Fast Road"
+                data-year="2026"
+                data-age="13+"
+                data-quality="HD"
+                data-category="Action"
+                data-description="Une course folle sur les routes les plus dangereuses."
+                data-video="videos/fast-road.mp4"
             >
-                ⬇ Télécharger
-            </button>
 
-        </article>
+                <div class="poster poster3"></div>
 
+                <h3>Fast Road</h3>
 
-        <!-- THE SURVIVOR -->
+                <div class="movie-actions">
 
-        <article
-            class="movie"
-            data-id="film4"
-            data-title="The Survivor"
-            data-video="videos/the-survivor.mp4"
-        >
+                    <button class="watch-btn">
+                        ▶ Regarder
+                    </button>
 
-            <div
-                class="poster poster4"
-            ></div>
+                    <button class="favorite-btn">
+                        ♡
+                    </button>
 
-            <h3>
-                The Survivor
-            </h3>
+                </div>
 
-            <div class="movie-actions">
-
-                <button
-                    class="watch-btn"
-                    type="button"
-                >
-                    ▶ Regarder
+                <button class="download-btn">
+                    ⬇ Télécharger
                 </button>
 
-                <button
-                    class="favorite-btn"
-                    type="button"
-                >
-                    ♡
-                </button>
+            </article>
 
-            </div>
 
-            <button
-                class="download-btn"
-                type="button"
+            <article
+                class="movie"
+                data-id="film4"
+                data-title="The Survivor"
+                data-year="2026"
+                data-age="13+"
+                data-quality="HD"
+                data-category="Action"
+                data-description="Un survivant doit trouver un moyen de rentrer chez lui."
+                data-video="videos/the-survivor.mp4"
             >
-                ⬇ Télécharger
-            </button>
 
-        </article>
+                <div class="poster poster4"></div>
 
-    </div>
+                <h3>The Survivor</h3>
 
-</section>
+                <div class="movie-actions">
 
+                    <button class="watch-btn">
+                        ▶ Regarder
+                    </button>
 
-<!-- =====================================================
-     ACTION
-===================================================== -->
+                    <button class="favorite-btn">
+                        ♡
+                    </button>
 
-<section
-    class="category"
-    id="action"
->
+                </div>
 
-    <h2>
-        🔥 Action
-    </h2>
-
-    <div class="movie-row">
-
-        <article
-            class="movie"
-            data-id="film5"
-            data-title="War Zone"
-            data-video="videos/war-zone.mp4"
-        >
-
-            <div class="poster poster5"></div>
-
-            <h3>
-                War Zone
-            </h3>
-
-            <div class="movie-actions">
-
-                <button
-                    class="watch-btn"
-                    type="button"
-                >
-                    ▶ Regarder
+                <button class="download-btn">
+                    ⬇ Télécharger
                 </button>
 
-                <button
-                    class="favorite-btn"
-                    type="button"
-                >
-                    ♡
-                </button>
+            </article>
 
-            </div>
+        </div>
 
-            <button
-                class="download-btn"
-                type="button"
+    </section>
+
+
+    <section class="category" id="action">
+
+        <h2>🔥 Action</h2>
+
+        <div class="movie-row">
+
+            <article
+                class="movie"
+                data-id="film5"
+                data-title="War Zone"
+                data-year="2026"
+                data-age="16+"
+                data-quality="HD"
+                data-category="Action"
+                data-description="Une mission dangereuse dans une zone de guerre."
+                data-video="videos/war-zone.mp4"
             >
-                ⬇ Télécharger
-            </button>
 
-        </article>
+                <div class="poster poster5"></div>
 
+                <h3>War Zone</h3>
 
-        <article
-            class="movie"
-            data-id="film6"
-            data-title="Night Hunter"
-            data-video="videos/night-hunter.mp4"
-        >
+                <div class="movie-actions">
+                    <button class="watch-btn">▶ Regarder</button>
+                    <button class="favorite-btn">♡</button>
+                </div>
 
-            <div class="poster poster6"></div>
-
-            <h3>
-                Night Hunter
-            </h3>
-
-            <div class="movie-actions">
-
-                <button
-                    class="watch-btn"
-                    type="button"
-                >
-                    ▶ Regarder
+                <button class="download-btn">
+                    ⬇ Télécharger
                 </button>
 
-                <button
-                    class="favorite-btn"
-                    type="button"
-                >
-                    ♡
-                </button>
+            </article>
 
-            </div>
 
-            <button
-                class="download-btn"
-                type="button"
+            <article
+                class="movie"
+                data-id="film6"
+                data-title="Night Hunter"
+                data-year="2026"
+                data-age="16+"
+                data-quality="HD"
+                data-category="Action"
+                data-description="Un chasseur traque sa cible pendant la nuit."
+                data-video="videos/night-hunter.mp4"
             >
-                ⬇ Télécharger
-            </button>
 
-        </article>
+                <div class="poster poster6"></div>
 
+                <h3>Night Hunter</h3>
 
-        <article
-            class="movie"
-            data-id="film7"
-            data-title="Final Target"
-            data-video="videos/final-target.mp4"
-        >
+                <div class="movie-actions">
+                    <button class="watch-btn">▶ Regarder</button>
+                    <button class="favorite-btn">♡</button>
+                </div>
 
-            <div class="poster poster7"></div>
-
-            <h3>
-                Final Target
-            </h3>
-
-            <div class="movie-actions">
-
-                <button
-                    class="watch-btn"
-                    type="button"
-                >
-                    ▶ Regarder
+                <button class="download-btn">
+                    ⬇ Télécharger
                 </button>
 
-                <button
-                    class="favorite-btn"
-                    type="button"
-                >
-                    ♡
-                </button>
+            </article>
 
-            </div>
 
-            <button
-                class="download-btn"
-                type="button"
+            <article
+                class="movie"
+                data-id="film7"
+                data-title="Final Target"
+                data-year="2026"
+                data-age="16+"
+                data-quality="HD"
+                data-category="Action"
+                data-description="Une dernière mission. Une seule cible."
+                data-video="videos/final-target.mp4"
             >
-                ⬇ Télécharger
-            </button>
 
-        </article>
+                <div class="poster poster7"></div>
 
-    </div>
+                <h3>Final Target</h3>
 
-</section>
+                <div class="movie-actions">
+                    <button class="watch-btn">▶ Regarder</button>
+                    <button class="favorite-btn">♡</button>
+                </div>
 
-
-<!-- =====================================================
-     COMÉDIE
-===================================================== -->
-
-<section
-    class="category"
-    id="comedie"
->
-
-    <h2>
-        😂 Comédie
-    </h2>
-
-    <div class="movie-row">
-
-        <article
-            class="movie"
-            data-id="film8"
-            data-title="Crazy Family"
-            data-video="videos/crazy-family.mp4"
-        >
-
-            <div class="poster poster8"></div>
-
-            <h3>
-                Crazy Family
-            </h3>
-
-            <div class="movie-actions">
-
-                <button
-                    class="watch-btn"
-                    type="button"
-                >
-                    ▶ Regarder
+                <button class="download-btn">
+                    ⬇ Télécharger
                 </button>
 
-                <button
-                    class="favorite-btn"
-                    type="button"
-                >
-                    ♡
-                </button>
+            </article>
 
-            </div>
+        </div>
 
-            <button
-                class="download-btn"
-                type="button"
+    </section>
+
+
+    <section class="category" id="comedie">
+
+        <h2>😂 Comédie</h2>
+
+        <div class="movie-row">
+
+            <article
+                class="movie"
+                data-id="film8"
+                data-title="Crazy Family"
+                data-year="2026"
+                data-age="10+"
+                data-quality="HD"
+                data-category="Comédie"
+                data-description="Une famille complètement folle dans une aventure pleine de surprises."
+                data-video="videos/crazy-family.mp4"
             >
-                ⬇ Télécharger
-            </button>
 
-        </article>
+                <div class="poster poster8"></div>
 
+                <h3>Crazy Family</h3>
 
-        <article
-            class="movie"
-            data-id="film9"
-            data-title="Best Friends"
-            data-video="videos/best-friends.mp4"
-        >
+                <div class="movie-actions">
+                    <button class="watch-btn">▶ Regarder</button>
+                    <button class="favorite-btn">♡</button>
+                </div>
 
-            <div class="poster poster9"></div>
-
-            <h3>
-                Best Friends
-            </h3>
-
-            <div class="movie-actions">
-
-                <button
-                    class="watch-btn"
-                    type="button"
-                >
-                    ▶ Regarder
+                <button class="download-btn">
+                    ⬇ Télécharger
                 </button>
 
-                <button
-                    class="favorite-btn"
-                    type="button"
-                >
-                    ♡
-                </button>
+            </article>
 
-            </div>
 
-            <button
-                class="download-btn"
-                type="button"
+            <article
+                class="movie"
+                data-id="film9"
+                data-title="Best Friends"
+                data-year="2026"
+                data-age="10+"
+                data-quality="HD"
+                data-category="Comédie"
+                data-description="Deux meilleurs amis vivent une aventure qu'ils n'oublieront jamais."
+                data-video="videos/best-friends.mp4"
             >
-                ⬇ Télécharger
-            </button>
 
-        </article>
+                <div class="poster poster9"></div>
 
-    </div>
+                <h3>Best Friends</h3>
 
-</section>
+                <div class="movie-actions">
+                    <button class="watch-btn">▶ Regarder</button>
+                    <button class="favorite-btn">♡</button>
+                </div>
 
-
-<!-- =====================================================
-     SÉRIES
-===================================================== -->
-
-<section
-    class="category"
-    id="series"
->
-
-    <h2>
-        📺 Séries
-    </h2>
-
-    <div class="movie-row">
-
-        <article
-            class="movie"
-            data-id="series1"
-            data-title="Dark Stories"
-            data-video="videos/dark-stories.mp4"
-        >
-
-            <div class="poster poster10"></div>
-
-            <h3>
-                Dark Stories
-            </h3>
-
-            <div class="movie-actions">
-
-                <button
-                    class="watch-btn"
-                    type="button"
-                >
-                    ▶ Regarder
+                <button class="download-btn">
+                    ⬇ Télécharger
                 </button>
 
-                <button
-                    class="favorite-btn"
-                    type="button"
-                >
-                    ♡
-                </button>
+            </article>
 
-            </div>
+        </div>
 
-            <button
-                class="download-btn"
-                type="button"
+    </section>
+
+
+    <section class="category" id="series">
+
+        <h2>📺 Séries</h2>
+
+        <div class="movie-row">
+
+            <article
+                class="movie"
+                data-id="series1"
+                data-title="Dark Stories"
+                data-year="2026"
+                data-age="16+"
+                data-quality="HD"
+                data-category="Série"
+                data-description="Des histoires mystérieuses se déroulent dans une ville étrange."
+                data-video="videos/dark-stories.mp4"
             >
-                ⬇ Télécharger
-            </button>
 
-        </article>
+                <div class="poster poster10"></div>
 
+                <h3>Dark Stories</h3>
 
-        <article
-            class="movie"
-            data-id="series2"
-            data-title="City Life"
-            data-video="videos/city-life.mp4"
-        >
+                <div class="movie-actions">
+                    <button class="watch-btn">▶ Regarder</button>
+                    <button class="favorite-btn">♡</button>
+                </div>
 
-            <div class="poster poster11"></div>
-
-            <h3>
-                City Life
-            </h3>
-
-            <div class="movie-actions">
-
-                <button
-                    class="watch-btn"
-                    type="button"
-                >
-                    ▶ Regarder
+                <button class="download-btn">
+                    ⬇ Télécharger
                 </button>
 
-                <button
-                    class="favorite-btn"
-                    type="button"
-                >
-                    ♡
-                </button>
+            </article>
 
-            </div>
 
-            <button
-                class="download-btn"
-                type="button"
+            <article
+                class="movie"
+                data-id="series2"
+                data-title="City Life"
+                data-year="2026"
+                data-age="13+"
+                data-quality="HD"
+                data-category="Série"
+                data-description="La vie quotidienne d'un groupe de jeunes dans une grande ville."
+                data-video="videos/city-life.mp4"
             >
-                ⬇ Télécharger
-            </button>
 
-        </article>
+                <div class="poster poster11"></div>
 
-    </div>
+                <h3>City Life</h3>
 
-</section>
+                <div class="movie-actions">
+                    <button class="watch-btn">▶ Regarder</button>
+                    <button class="favorite-btn">♡</button>
+                </div>
 
-
-<!-- =====================================================
-     ANIMÉS
-===================================================== -->
-
-<section
-    class="category"
-    id="animes"
->
-
-    <h2>
-        ⚡ Animés
-    </h2>
-
-    <div class="movie-row">
-
-        <article
-            class="movie"
-            data-id="anime1"
-            data-title="Shadow Warriors"
-            data-video="videos/shadow-warriors.mp4"
-        >
-
-            <div class="poster poster12"></div>
-
-            <h3>
-                Shadow Warriors
-            </h3>
-
-            <div class="movie-actions">
-
-                <button
-                    class="watch-btn"
-                    type="button"
-                >
-                    ▶ Regarder
+                <button class="download-btn">
+                    ⬇ Télécharger
                 </button>
 
-                <button
-                    class="favorite-btn"
-                    type="button"
-                >
-                    ♡
-                </button>
+            </article>
 
-            </div>
+        </div>
 
-            <button
-                class="download-btn"
-                type="button"
+    </section>
+
+
+    <section class="category" id="animes">
+
+        <h2>⚡ Animés</h2>
+
+        <div class="movie-row">
+
+            <article
+                class="movie"
+                data-id="anime1"
+                data-title="Shadow Warriors"
+                data-year="2026"
+                data-age="13+"
+                data-quality="HD"
+                data-category="Animé"
+                data-description="Des guerriers de l'ombre doivent protéger leur monde."
+                data-video="videos/shadow-warriors.mp4"
             >
-                ⬇ Télécharger
-            </button>
 
-        </article>
+                <div class="poster poster12"></div>
 
+                <h3>Shadow Warriors</h3>
 
-        <article
-            class="movie"
-            data-id="anime2"
-            data-title="Dragon Power"
-            data-video="videos/dragon-power.mp4"
-        >
+                <div class="movie-actions">
+                    <button class="watch-btn">▶ Regarder</button>
+                    <button class="favorite-btn">♡</button>
+                </div>
 
-            <div class="poster poster13"></div>
-
-            <h3>
-                Dragon Power
-            </h3>
-
-            <div class="movie-actions">
-
-                <button
-                    class="watch-btn"
-                    type="button"
-                >
-                    ▶ Regarder
+                <button class="download-btn">
+                    ⬇ Télécharger
                 </button>
 
-                <button
-                    class="favorite-btn"
-                    type="button"
-                >
-                    ♡
-                </button>
+            </article>
 
-            </div>
 
-            <button
-                class="download-btn"
-                type="button"
+            <article
+                class="movie"
+                data-id="anime2"
+                data-title="Dragon Power"
+                data-year="2026"
+                data-age="10+"
+                data-quality="HD"
+                data-category="Animé"
+                data-description="Un jeune héros découvre un pouvoir extraordinaire."
+                data-video="videos/dragon-power.mp4"
             >
-                ⬇ Télécharger
-            </button>
 
-        </article>
+                <div class="poster poster13"></div>
 
-    </div>
+                <h3>Dragon Power</h3>
 
-</section>
+                <div class="movie-actions">
+                    <button class="watch-btn">▶ Regarder</button>
+                    <button class="favorite-btn">♡</button>
+                </div>
+
+                <button class="download-btn">
+                    ⬇ Télécharger
+                </button>
+
+            </article>
+
+        </div>
+
+    </section>
 
 </main>
 
 
-<!-- =====================================================
-     FAVORIS
-===================================================== -->
+<!-- ================= PAGE FAVORIS ================= -->
 
-<section
-    class="favorites-page"
-    id="favoritesPage"
->
+<section id="favoritesPage" class="special-page">
 
     <div class="page-header">
 
-        <button
-            class="back-btn"
-            id="backFromFavorites"
-            type="button"
-        >
+        <button id="backFromFavorites" class="back-btn">
             ←
         </button>
 
-        <h2>
-            ❤️ Mes favoris
-        </h2>
+        <h2>❤️ Ma liste</h2>
 
     </div>
 
-    <p class="page-description">
-        Tes films préférés sont ici.
-    </p>
-
-    <div
-        class="favorite-list"
-        id="favoriteList"
-    ></div>
+    <div id="favoriteList"></div>
 
 </section>
 
 
-<!-- =====================================================
-     TÉLÉCHARGEMENTS
-===================================================== -->
+<!-- ================= PAGE DOWNLOAD ================= -->
 
-<section
-    class="downloads-page"
-    id="downloadsPage"
->
+<section id="downloadsPage" class="special-page">
 
     <div class="page-header">
 
-        <button
-            class="back-btn"
-            id="backFromDownloads"
-            type="button"
-        >
+        <button id="backFromDownloads" class="back-btn">
             ←
         </button>
 
-        <h2>
-            ⬇️ Mes téléchargements
-        </h2>
+        <h2>⬇️ Téléchargements</h2>
 
     </div>
 
-    <p class="page-description">
-        Tes vidéos disponibles hors connexion.
-    </p>
-
-    <div
-        class="download-list"
-        id="downloadList"
-    ></div>
+    <div id="downloadList"></div>
 
 </section>
 
 
-<!-- =====================================================
-     LECTEUR
-===================================================== -->
+<!-- ================= FICHE FILM ================= -->
 
-<div
-    class="player"
-    id="player"
->
+<section id="movieDetails" class="movie-details">
 
-    <button
-        class="close-player"
-        id="closePlayer"
-        type="button"
-    >
-        ✕
+    <button id="closeDetails" class="details-back">
+        ←
     </button>
 
+    <div class="details-background"></div>
 
-    <!-- LECTEUR VIDÉO LOCAL -->
+    <div class="details-content">
+
+        <div class="details-poster" id="detailsPoster"></div>
+
+        <div class="details-info">
+
+            <div class="details-label">
+                🎬 JTN STREAM
+            </div>
+
+            <h1 id="detailsTitle">
+                THE LAST MISSION
+            </h1>
+
+            <div class="details-meta">
+
+                <span id="detailsYear">2026</span>
+                <span>•</span>
+                <span id="detailsAge">16+</span>
+                <span>•</span>
+                <span id="detailsQuality">HD</span>
+
+            </div>
+
+            <p id="detailsDescription">
+                Découvre ce film sur JTN STREAM.
+            </p>
+
+            <div class="details-buttons">
+
+                <button id="detailsWatch" class="details-watch">
+                    ▶ Regarder
+                </button>
+
+                <button id="detailsFavorite" class="details-favorite">
+                    ♡ Ma liste
+                </button>
+
+                <button id="detailsDownload" class="details-download">
+                    ⬇ Télécharger
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= LECTEUR ================= -->
+
+<div id="player" class="player">
+
+    <button id="closePlayer" class="close-player">
+        ✕
+    </button>
 
     <video
         id="video"
         controls
         playsinline
-        style="display:none;"
     ></video>
-
-
-    <!-- LECTEUR POUR THE LAST MISSION -->
 
     <iframe
         id="vdoFrame"
         src=""
         allow="autoplay; fullscreen"
         allowfullscreen
-        style="
-            display:none;
-            width:100%;
-            height:90vh;
-            border:0;
-            background:#000;
-        "
     ></iframe>
 
 </div>
 
 
-<!-- =====================================================
-     NAVIGATION MOBILE
-===================================================== -->
+<!-- ================= BARRE MOBILE ================= -->
 
 <nav class="bottom-nav">
 
-    <button
-        id="homeBtn"
-        type="button"
-    >
-
-        <span class="nav-icon">
-            ⌂
-        </span>
-
-        <span>
-            Accueil
-        </span>
-
+    <button id="homeBtn">
+        <span>⌂</span>
+        <small>Accueil</small>
     </button>
 
-
-    <button
-        id="favoritesBtn"
-        type="button"
-    >
-
-        <span class="nav-icon">
-            ♡
-        </span>
-
-        <span>
-            Favoris
-        </span>
-
+    <button id="favoritesBtn">
+        <span>♡</span>
+        <small>Ma liste</small>
     </button>
 
-
-    <button
-        id="downloadsBtn"
-        type="button"
-    >
-
-        <span class="nav-icon">
-            ⬇
-        </span>
-
-        <span>
-            Téléchargements
-        </span>
-
+    <button id="downloadsBtn">
+        <span>⬇</span>
+        <small>Téléchargements</small>
     </button>
 
-
-    <button
-        id="settingsBtnBottom"
-        type="button"
-    >
-
-        <span class="nav-icon">
-            ⚙
-        </span>
-
-        <span>
-            Paramètres
-        </span>
-
+    <button id="settingsBtnBottom">
+        <span>⚙</span>
+        <small>Paramètres</small>
     </button>
 
 </nav>
 
 
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
-
 <script src="script.js"></script>
 
 </body>
-
-    </html>
+</html>
