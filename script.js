@@ -13,6 +13,59 @@ const TMDB_API_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlOWRjMjc3MWUwYjdmYjI0NTBhZ
 
 const TMDB_IMAGE = "https://image.tmdb.org/t/p/w500";
 const TMDB_BACKDROP = "https://image.tmdb.org/t/p/w1280";
+/* =====================================================
+   RECHERCHE LIBRARY OF CONGRESS
+===================================================== */
+
+async function searchLOC(movieName) {
+
+    if (!movieName) {
+        return [];
+    }
+
+    try {
+
+        const response =
+            await fetch(
+                LOC_API +
+                "/videos/?q=" +
+                encodeURIComponent(movieName) +
+                "&fo=json"
+            );
+
+        if (!response.ok) {
+
+            throw new Error(
+                "LOC HTTP " +
+                response.status
+            );
+
+        }
+
+        const data =
+            await response.json();
+
+        if (
+            !data.results ||
+            !Array.isArray(data.results)
+        ) {
+
+            return [];
+        }
+
+        return data.results;
+
+    } catch (error) {
+
+        console.error(
+            "Erreur Library of Congress :",
+            error
+        );
+
+        return [];
+
+    }
+}
 
 
 /* =====================================================
@@ -2721,3 +2774,22 @@ document.addEventListener(
 
     }
 );
+/* =====================================================
+   TEST LIBRARY OF CONGRESS
+===================================================== */
+
+async function testLOC() {
+
+    const results =
+        await searchLOC(
+            "The Great Train Robbery"
+        );
+
+    console.log(
+        "Résultats Library of Congress :",
+        results
+    );
+
+}
+
+testLOC();
