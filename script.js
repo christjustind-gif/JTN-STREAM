@@ -90,7 +90,7 @@ type: "iframe",
 video:
     "https://fembed.co/embed/N_Xc8eTr-4MGW",
 poster:
-    "images/the-last-mission.jpg"
+    "the-last-mission.jpg"
         },
 
         {
