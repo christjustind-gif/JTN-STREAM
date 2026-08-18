@@ -84,11 +84,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         {
             id: "film1",
-            title: "The Last Mission",
-            category: "Films",
-            type: "iframe",
-            video:
-                "https://fembed.co/embed/N_Xc8eTr-4MGW"
+title: "The Last Mission",
+category: "Films",
+type: "iframe",
+video:
+    "https://fembed.co/embed/N_Xc8eTr-4MGW",
+poster:
+    "images/the-last-mission.jpg"
         },
 
         {
