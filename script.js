@@ -13,11 +13,19 @@ const TMDB_API_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlOWRjMjc3MWUwYjdmYjI0NTBhZ
 
 const TMDB_IMAGE = "https://image.tmdb.org/t/p/w500";
 const TMDB_BACKDROP = "https://image.tmdb.org/t/p/w1280";
-/* =====================================================
-   RECHERCHE LIBRARY OF CONGRESS
+/* ===/* =====================================================
+   INTERNET ARCHIVE
 ===================================================== */
 
-async function searchLOC(movieName) {
+const IA_API =
+    "https://archive.org";
+
+
+/* =====================================================
+   RECHERCHE INTERNET ARCHIVE
+===================================================== */
+
+async function searchInternetArchive(movieName) {
 
     if (!movieName) {
         return [];
@@ -25,18 +33,29 @@ async function searchLOC(movieName) {
 
     try {
 
+        const url =
+            IA_API +
+            "/advancedsearch.php?q=" +
+            encodeURIComponent(
+                'title:("' +
+                movieName +
+                '") AND mediatype:movies'
+            ) +
+            "&fl[]=identifier" +
+            "&fl[]=title" +
+            "&fl[]=description" +
+            "&fl[]=year" +
+            "&rows=20" +
+            "&page=1" +
+            "&output=json";
+
         const response =
-            await fetch(
-                LOC_API +
-                "/videos/?q=" +
-                encodeURIComponent(movieName) +
-                "&fo=json"
-            );
+            await fetch(url);
 
         if (!response.ok) {
 
             throw new Error(
-                "LOC HTTP " +
+                "Internet Archive HTTP " +
                 response.status
             );
 
@@ -46,25 +65,29 @@ async function searchLOC(movieName) {
             await response.json();
 
         if (
-            !data.results ||
-            !Array.isArray(data.results)
+            !data.response ||
+            !Array.isArray(
+                data.response.docs
+            )
         ) {
 
             return [];
+
         }
 
-        return data.results;
+        return data.response.docs;
 
     } catch (error) {
 
         console.error(
-            "Erreur Library of Congress :",
+            "Erreur Internet Archive :",
             error
         );
 
         return [];
 
     }
+
 }
 
 
@@ -2775,21 +2798,21 @@ document.addEventListener(
     }
 );
 /* =====================================================
-   TEST LIBRARY OF CONGRESS
+   TEST INTERNET ARCHIVE
 ===================================================== */
 
-async function testLOC() {
+async function testInternetArchive() {
 
     const results =
-        await searchLOC(
+        await searchInternetArchive(
             "The Great Train Robbery"
         );
 
     console.log(
-        "Résultats Library of Congress :",
+        "Résultats Internet Archive :",
         results
     );
 
 }
 
-testLOC();
+testInternetArchive();
