@@ -938,27 +938,33 @@ poster:
                 : null;
 
 
-        if (
-            originalPoster &&
-            poster
-        ) {
+        if (poster) {
 
-            const style =
-                window.getComputedStyle(
-                    originalPoster
-                );
+    if (movie.poster) {
 
-            poster.style.background =
-                style.background;
+        poster.style.backgroundImage =
+            "url('" + movie.poster + "')";
 
-            poster.style.backgroundImage =
-                style.backgroundImage;
+    } else if (originalPoster) {
 
-            poster.style.backgroundSize =
-                "cover";
+        const style =
+            window.getComputedStyle(
+                originalPoster
+            );
 
-            poster.style.backgroundPosition =
-                "center";
+        poster.style.background =
+            style.background;
+
+        poster.style.backgroundImage =
+            style.backgroundImage;
+
+    }
+
+    poster.style.backgroundSize =
+        "cover";
+
+    poster.style.backgroundPosition =
+        "center";
 
         }
 
