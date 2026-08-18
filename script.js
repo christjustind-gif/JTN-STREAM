@@ -13,7 +13,7 @@ const TMDB_API_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlOWRjMjc3MWUwYjdmYjI0NTBhZ
 
 const TMDB_IMAGE = "https://image.tmdb.org/t/p/w500";
 const TMDB_BACKDROP = "https://image.tmdb.org/t/p/w1280";
-/* ===/* =====================================================
+/* =====================================================
    INTERNET ARCHIVE
 ===================================================== */
 
