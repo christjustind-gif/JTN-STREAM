@@ -1504,15 +1504,4 @@ console.log(
 );
 
 });
-
-    searchInput.addEventListener(
-        "input",
-        function () {
-
-            const text =
-                searchInput.value
-                    .toLowerCase()
-                    .trim();
-
-
-            docu
+🎬 Ce qui change
