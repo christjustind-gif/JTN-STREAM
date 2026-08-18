@@ -1341,5 +1341,45 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
     } // ← FIN DE openMovieDetails
+    /* =====================================================
+   CLIC SUR UN FILM → OUVRIR LA FICHE
+   ===================================================== */
 
-                                           
+document.querySelectorAll(".movie").forEach(function (movieElement) {
+
+    movieElement.addEventListener("click", function (event) {
+
+        // Ne pas ouvrir la fiche si on clique sur un bouton
+        if (
+            event.target.closest(".favorite-btn") ||
+            event.target.closest("button")
+        ) {
+            return;
+        }
+
+        const movieId =
+            movieElement.dataset.id;
+
+        const movie =
+            movies.find(function (item) {
+                return item.id === movieId;
+            });
+
+        if (movie) {
+
+            openMovieDetails(movie);
+
+        } else {
+
+            console.error(
+                "Film introuvable :",
+                movieId
+            );
+
+        }
+
+    });
+
+});
+
+                                  
