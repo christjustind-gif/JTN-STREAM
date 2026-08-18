@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+    const TMDB_API_KEY = "COLLE_TA_CLÉ_ICI";d7a0845fcd89686e3338f754db2b8699
+
     /* =====================================================
        JTN STREAM
        SCRIPT COMPLET
