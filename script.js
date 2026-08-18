@@ -1,10 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    const TMDB_API_KEY = "d7a0845fcd89686e3338f754db2b8699";
+    /* =====================================================
+       TMDB
+       ===================================================== */
+
+    const TMDB_API_KEY =
+        "4a612e6631a19b542b88a5b684d4d083";
+
 
     /* =====================================================
        JTN STREAM
-       SCRIPT COMPLET
        ===================================================== */
 
 
@@ -86,13 +91,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         {
             id: "film1",
-title: "The Last Mission",
-category: "Films",
-type: "iframe",
-video:
-    "https://fembed.co/embed/N_Xc8eTr-4MGW",
-poster:
-    "the-last-mission.jpg"
+            title: "The Last Mission",
+            category: "Films",
+            type: "iframe",
+            video:
+                "https://fembed.co/embed/N_Xc8eTr-4MGW",
+            poster:
+                "the-last-mission.jpg"
         },
 
         {
@@ -100,7 +105,8 @@ poster:
             title: "Dark City",
             category: "Films",
             type: "video",
-            video: "videos/dark-city.mp4"
+            video:
+                "videos/dark-city.mp4"
         },
 
         {
@@ -108,7 +114,8 @@ poster:
             title: "Fast Road",
             category: "Films",
             type: "video",
-            video: "videos/fast-road.mp4"
+            video:
+                "videos/fast-road.mp4"
         },
 
         {
@@ -116,7 +123,8 @@ poster:
             title: "The Survivor",
             category: "Films",
             type: "video",
-            video: "videos/the-survivor.mp4"
+            video:
+                "videos/the-survivor.mp4"
         },
 
         {
@@ -124,7 +132,8 @@ poster:
             title: "War Zone",
             category: "Action",
             type: "video",
-            video: "videos/war-zone.mp4"
+            video:
+                "videos/war-zone.mp4"
         },
 
         {
@@ -132,7 +141,8 @@ poster:
             title: "Night Hunter",
             category: "Action",
             type: "video",
-            video: "videos/night-hunter.mp4"
+            video:
+                "videos/night-hunter.mp4"
         },
 
         {
@@ -140,7 +150,8 @@ poster:
             title: "Final Target",
             category: "Action",
             type: "video",
-            video: "videos/final-target.mp4"
+            video:
+                "videos/final-target.mp4"
         },
 
         {
@@ -148,7 +159,8 @@ poster:
             title: "Crazy Family",
             category: "Comédie",
             type: "video",
-            video: "videos/crazy-family.mp4"
+            video:
+                "videos/crazy-family.mp4"
         },
 
         {
@@ -156,7 +168,8 @@ poster:
             title: "Best Friends",
             category: "Comédie",
             type: "video",
-            video: "videos/best-friends.mp4"
+            video:
+                "videos/best-friends.mp4"
         },
 
         {
@@ -164,7 +177,8 @@ poster:
             title: "Dark Stories",
             category: "Séries",
             type: "video",
-            video: "videos/dark-stories.mp4"
+            video:
+                "videos/dark-stories.mp4"
         },
 
         {
@@ -172,7 +186,8 @@ poster:
             title: "City Life",
             category: "Séries",
             type: "video",
-            video: "videos/city-life.mp4"
+            video:
+                "videos/city-life.mp4"
         },
 
         {
@@ -180,7 +195,8 @@ poster:
             title: "Shadow Warriors",
             category: "Animés",
             type: "video",
-            video: "videos/shadow-warriors.mp4"
+            video:
+                "videos/shadow-warriors.mp4"
         },
 
         {
@@ -188,10 +204,421 @@ poster:
             title: "Dragon Power",
             category: "Animés",
             type: "video",
-            video: "videos/dragon-power.mp4"
+            video:
+                "videos/dragon-power.mp4"
         }
 
     ];
+
+
+    /* =====================================================
+       TMDB — RECHERCHE
+       ===================================================== */
+
+    async function searchTMDB(movieName) {
+
+        try {
+
+            const response =
+                await fetch(
+                    "https://api.themoviedb.org/3/search/movie" +
+                    "?query=" +
+                    encodeURIComponent(movieName) +
+                    "&language=fr-FR" +
+                    "&include_adult=false",
+                    {
+                        headers: {
+                            Authorization:
+                                "Bearer " +
+                                TMDB_API_KEY,
+
+                            accept:
+                                "application/json"
+                        }
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "TMDB HTTP " +
+                    response.status
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            if (
+                data.results &&
+                data.results.length > 0
+            ) {
+
+                return data.results[0];
+
+            }
+
+
+            return null;
+
+        } catch (error) {
+
+            console.error(
+                "Erreur TMDB :",
+                error
+            );
+
+            return null;
+        }
+
+    }
+
+
+    /* =====================================================
+       TMDB — DÉTAILS DU FILM
+       ===================================================== */
+
+    async function getTMDBDetails(movieId) {
+
+        try {
+
+            const response =
+                await fetch(
+                    "https://api.themoviedb.org/3/movie/" +
+                    movieId +
+                    "?language=fr-FR",
+                    {
+                        headers: {
+                            Authorization:
+                                "Bearer " +
+                                TMDB_API_KEY,
+
+                            accept:
+                                "application/json"
+                        }
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "TMDB DETAILS HTTP " +
+                    response.status
+                );
+
+            }
+
+
+            return await response.json();
+
+        } catch (error) {
+
+            console.error(
+                "Erreur détails TMDB :",
+                error
+            );
+
+            return null;
+        }
+
+    }
+
+
+    /* =====================================================
+       TMDB — CHARGER LES INFORMATIONS
+       ===================================================== */
+
+    async function loadTMDBMovies() {
+
+        if (
+            !TMDB_API_KEY ||
+            TMDB_API_KEY ===
+                "COLLE_TA_NOUVELLE_CLE_ICI"
+        ) {
+
+            console.warn(
+                "Clé TMDB non configurée."
+            );
+
+            return;
+
+        }
+
+
+        for (
+            const movie of movies
+        ) {
+
+            try {
+
+                const result =
+                    await searchTMDB(
+                        movie.title
+                    );
+
+
+                if (!result) {
+
+                    console.warn(
+                        "TMDB : film non trouvé :",
+                        movie.title
+                    );
+
+                    continue;
+                }
+
+
+                movie.tmdbId =
+                    result.id;
+
+
+                movie.tmdbTitle =
+                    result.title ||
+                    movie.title;
+
+
+                movie.overview =
+                    result.overview ||
+                    "";
+
+
+                movie.rating =
+                    result.vote_average ||
+                    0;
+
+
+                movie.releaseDate =
+                    result.release_date ||
+                    "";
+
+
+                movie.tmdbPoster =
+                    result.poster_path
+                        ? "https://image.tmdb.org/t/p/w500" +
+                          result.poster_path
+                        : "";
+
+
+                movie.backdrop =
+                    result.backdrop_path
+                        ? "https://image.tmdb.org/t/p/w1280" +
+                          result.backdrop_path
+                        : "";
+
+
+                if (
+                    result.genre_ids &&
+                    Array.isArray(
+                        result.genre_ids
+                    )
+                ) {
+
+                    movie.tmdbGenreIds =
+                        result.genre_ids;
+
+                }
+
+
+                /*
+                 * Récupérer les détails
+                 * complets de TMDB
+                 */
+
+                const details =
+                    await getTMDBDetails(
+                        result.id
+                    );
+
+
+                if (details) {
+
+                    movie.overview =
+                        details.overview ||
+                        movie.overview;
+
+
+                    movie.rating =
+                        details.vote_average ||
+                        movie.rating;
+
+
+                    movie.releaseDate =
+                        details.release_date ||
+                        movie.releaseDate;
+
+
+                    movie.tmdbPoster =
+                        details.poster_path
+                            ? "https://image.tmdb.org/t/p/w500" +
+                              details.poster_path
+                            : movie.tmdbPoster;
+
+
+                    movie.backdrop =
+                        details.backdrop_path
+                            ? "https://image.tmdb.org/t/p/w1280" +
+                              details.backdrop_path
+                            : movie.backdrop;
+
+
+                    movie.genres =
+                        details.genres || [];
+
+                }
+
+
+                /*
+                 * TMDB devient l'affiche principale.
+                 * Si TMDB n'a pas d'affiche,
+                 * on garde l'affiche locale.
+                 */
+
+                if (
+                    movie.tmdbPoster
+                ) {
+
+                    movie.poster =
+                        movie.tmdbPoster;
+
+                }
+
+
+                /*
+                 * Mettre à jour la carte
+                 * déjà présente sur l'accueil
+                 */
+
+                updateMovieCard(
+                    movie
+                );
+
+
+                console.log(
+                    "TMDB chargé :",
+                    movie.title
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "Erreur TMDB pour",
+                    movie.title,
+                    error
+                );
+
+            }
+
+        }
+
+    }
+
+
+    /* =====================================================
+       METTRE À JOUR UNE CARTE
+       ===================================================== */
+
+    function updateMovieCard(movie) {
+
+        const movieElement =
+            document.querySelector(
+                '.movie[data-id="' +
+                movie.id +
+                '"]'
+            );
+
+
+        if (!movieElement) {
+            return;
+        }
+
+
+        /*
+         * Titre
+         */
+
+        const titleElement =
+            movieElement.querySelector(
+                "h3, .movie-title, .title"
+            );
+
+
+        if (titleElement) {
+
+            titleElement.textContent =
+                movie.tmdbTitle ||
+                movie.title;
+
+        }
+
+
+        /*
+         * Dataset
+         */
+
+        movieElement.dataset.title =
+            movie.tmdbTitle ||
+            movie.title;
+
+
+        /*
+         * Affiche
+         */
+
+        const poster =
+            movieElement.querySelector(
+                ".poster"
+            );
+
+
+        if (
+            poster &&
+            movie.poster
+        ) {
+
+            poster.style.backgroundImage =
+                "url('" +
+                movie.poster +
+                "')";
+
+            poster.style.backgroundSize =
+                "cover";
+
+            poster.style.backgroundPosition =
+                "center";
+
+        }
+
+
+        /*
+         * Image <img> éventuelle
+         */
+
+        const image =
+            movieElement.querySelector(
+                "img"
+            );
+
+
+        if (
+            image &&
+            movie.poster
+        ) {
+
+            image.src =
+                movie.poster;
+
+            image.alt =
+                movie.tmdbTitle ||
+                movie.title;
+
+        }
+
+    }
 
 
     /* =====================================================
@@ -209,8 +636,15 @@ poster:
                 ) || "[]"
             );
 
-        if (!Array.isArray(favorites)) {
+
+        if (
+            !Array.isArray(
+                favorites
+            )
+        ) {
+
             favorites = [];
+
         }
 
     } catch (error) {
@@ -235,8 +669,15 @@ poster:
                 ) || "[]"
             );
 
-        if (!Array.isArray(downloads)) {
+
+        if (
+            !Array.isArray(
+                downloads
+            )
+        ) {
+
             downloads = [];
+
         }
 
     } catch (error) {
@@ -257,26 +698,39 @@ poster:
                 "jtnMessage"
             );
 
+
         if (!box) {
 
             box =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
-            box.id = "jtnMessage";
 
-            box.style.position = "fixed";
-            box.style.bottom = "90px";
-            box.style.left = "50%";
+            box.id =
+                "jtnMessage";
+
+
+            box.style.position =
+                "fixed";
+
+            box.style.bottom =
+                "90px";
+
+            box.style.left =
+                "50%";
 
             box.style.transform =
                 "translateX(-50%)";
 
-            box.style.zIndex = "999999";
+            box.style.zIndex =
+                "999999";
 
             box.style.background =
                 "#181818";
 
-            box.style.color = "white";
+            box.style.color =
+                "white";
 
             box.style.padding =
                 "14px 20px";
@@ -290,24 +744,37 @@ poster:
             box.style.textAlign =
                 "center";
 
-            document.body.appendChild(box);
+
+            document.body.appendChild(
+                box
+            );
+
         }
 
-        box.textContent = message;
 
-        box.style.display = "block";
+        box.textContent =
+            message;
+
+
+        box.style.display =
+            "block";
+
 
         clearTimeout(
             window.jtnMessageTimer
         );
 
+
         window.jtnMessageTimer =
-            setTimeout(function () {
+            setTimeout(
+                function () {
 
-                box.style.display =
-                    "none";
+                    box.style.display =
+                        "none";
 
-            }, 2500);
+                },
+                2500
+            );
 
     }
 
@@ -319,10 +786,14 @@ poster:
     function escapeHTML(text) {
 
         const element =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
+
 
         element.textContent =
             text || "";
+
 
         return element.innerHTML;
 
@@ -339,6 +810,7 @@ poster:
             return;
         }
 
+
         if (!player) {
 
             showMessage(
@@ -346,10 +818,9 @@ poster:
             );
 
             return;
+
         }
 
-
-        /* Fermer l'ancien lecteur */
 
         if (video) {
 
@@ -363,6 +834,7 @@ poster:
 
             video.style.display =
                 "none";
+
         }
 
 
@@ -372,12 +844,13 @@ poster:
 
             vdoFrame.style.display =
                 "none";
+
         }
 
 
-        /* =================================================
-           IFRAME
-           ================================================= */
+        /*
+         * IFRAME
+         */
 
         if (
             movie.type === "iframe" &&
@@ -391,24 +864,30 @@ poster:
                 );
 
                 return;
+
             }
+
 
             vdoFrame.src =
                 movie.video;
 
+
             vdoFrame.style.display =
                 "block";
+
 
             player.style.display =
                 "flex";
 
+
             return;
+
         }
 
 
-        /* =================================================
-           VIDÉO
-           ================================================= */
+        /*
+         * VIDÉO
+         */
 
         if (
             movie.type === "video" &&
@@ -419,13 +898,17 @@ poster:
             video.src =
                 movie.video;
 
+
             video.style.display =
                 "block";
+
 
             player.style.display =
                 "flex";
 
+
             video.load();
+
 
             video.play().catch(
                 function () {
@@ -437,7 +920,9 @@ poster:
                 }
             );
 
+
             return;
+
         }
 
 
@@ -466,6 +951,7 @@ poster:
 
             video.style.display =
                 "none";
+
         }
 
 
@@ -475,6 +961,7 @@ poster:
 
             vdoFrame.style.display =
                 "none";
+
         }
 
 
@@ -482,6 +969,7 @@ poster:
 
             player.style.display =
                 "none";
+
         }
 
     }
@@ -516,28 +1004,38 @@ poster:
     function updateFavoriteButtons() {
 
         document
-            .querySelectorAll(".movie")
+            .querySelectorAll(
+                ".movie"
+            )
             .forEach(
-                function (movieElement) {
+                function (
+                    movieElement
+                ) {
 
                     const id =
                         movieElement.dataset.id;
+
 
                     const button =
                         movieElement.querySelector(
                             ".favorite-btn"
                         );
 
+
                     if (!button) {
                         return;
                     }
 
+
                     if (
-                        favorites.includes(id)
+                        favorites.includes(
+                            id
+                        )
                     ) {
 
                         button.textContent =
                             "♥";
+
 
                         button.classList.add(
                             "active"
@@ -547,6 +1045,7 @@ poster:
 
                         button.textContent =
                             "♡";
+
 
                         button.classList.remove(
                             "active"
@@ -577,10 +1076,12 @@ poster:
                 favorites.filter(
                     function (id) {
 
-                        return id !== movie.id;
+                        return id !==
+                            movie.id;
 
                     }
                 );
+
 
             showMessage(
                 "♡ Retiré des favoris"
@@ -591,6 +1092,7 @@ poster:
             favorites.push(
                 movie.id
             );
+
 
             showMessage(
                 "♥ Ajouté aux favoris"
@@ -642,6 +1144,7 @@ poster:
             );
 
             return;
+
         }
 
 
@@ -649,9 +1152,11 @@ poster:
             movie.id
         );
 
+
         saveDownloads();
 
         renderDownloads();
+
 
         showMessage(
             "⬇ Ajouté aux téléchargements"
@@ -671,12 +1176,11 @@ poster:
         }
 
 
-        /* Supprimer une ancienne fiche */
-
         const oldDetails =
             document.getElementById(
                 "movieDetails"
             );
+
 
         if (oldDetails) {
             oldDetails.remove();
@@ -684,7 +1188,10 @@ poster:
 
 
         const details =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
+
 
         details.id =
             "movieDetails";
@@ -707,6 +1214,42 @@ poster:
 
         details.style.padding =
             "70px 18px 100px";
+
+
+        const title =
+            movie.tmdbTitle ||
+            movie.title;
+
+
+        const description =
+            movie.overview ||
+            "Aucune description disponible.";
+
+
+        const rating =
+            movie.rating
+                ? Number(
+                    movie.rating
+                ).toFixed(1)
+                : "—";
+
+
+        const releaseDate =
+            movie.releaseDate ||
+            "—";
+
+
+        const genres =
+            movie.genres &&
+            movie.genres.length
+                ? movie.genres
+                    .map(
+                        function (genre) {
+                            return genre.name;
+                        }
+                    )
+                    .join(", ")
+                : movie.category;
 
 
         details.innerHTML = `
@@ -761,13 +1304,40 @@ poster:
                 <h1
                     style="
                         font-size:28px;
+                        margin-bottom:10px;
+                    "
+                >
+                    ${escapeHTML(title)}
+                </h1>
+
+
+                <div
+                    style="
+                        color:#aaa;
                         margin-bottom:18px;
                     "
                 >
-                    ${escapeHTML(
-                        movie.title
+                    ⭐ ${escapeHTML(
+                        rating
                     )}
-                </h1>
+                    &nbsp; • &nbsp;
+                    📅 ${escapeHTML(
+                        releaseDate
+                    )}
+                </div>
+
+
+                <div
+                    style="
+                        color:#aaa;
+                        margin-bottom:20px;
+                        line-height:1.6;
+                    "
+                >
+                    🎭 ${escapeHTML(
+                        genres
+                    )}
+                </div>
 
 
                 <div
@@ -814,8 +1384,8 @@ poster:
                             favorites.includes(
                                 movie.id
                             )
-                            ? "♥ Retirer des favoris"
-                            : "♡ Ajouter aux favoris"
+                                ? "♥ Retirer des favoris"
+                                : "♡ Ajouter aux favoris"
                         }
                     </button>
 
@@ -844,7 +1414,7 @@ poster:
                     style="
                         margin-top:28px;
                         color:#aaa;
-                        line-height:1.6;
+                        line-height:1.7;
                     "
                 >
 
@@ -855,29 +1425,13 @@ poster:
                             margin-bottom:10px;
                         "
                     >
-                        Informations
+                        Description
                     </h2>
 
                     <p>
                         ${escapeHTML(
-                            movie.category
+                            description
                         )}
-                    </p>
-
-                    <p
-                        style="
-                            margin-top:15px;
-                        "
-                    >
-                        Découvre
-                        <strong
-                            style="color:white;"
-                        >
-                            ${escapeHTML(
-                                movie.title
-                            )}
-                        </strong>
-                        sur JTN STREAM.
                     </p>
 
                 </div>
@@ -915,7 +1469,7 @@ poster:
 
 
         /* =================================================
-           AFFICHER L'AFFICHE EXISTANTE
+           AFFICHE
            ================================================= */
 
         const poster =
@@ -924,49 +1478,23 @@ poster:
             );
 
 
-        const originalMovie =
-            document.querySelector(
-                '.movie[data-id="' +
-                movie.id +
-                '"]'
-            );
+        if (
+            poster &&
+            movie.poster
+        ) {
+
+            poster.style.backgroundImage =
+                "url('" +
+                movie.poster +
+                "')";
 
 
-        const originalPoster =
-            originalMovie
-                ? originalMovie.querySelector(
-                    ".poster"
-                )
-                : null;
+            poster.style.backgroundSize =
+                "cover";
 
 
-        if (poster) {
-
-    if (movie.poster) {
-
-        poster.style.backgroundImage =
-            "url('" + movie.poster + "')";
-
-    } else if (originalPoster) {
-
-        const style =
-            window.getComputedStyle(
-                originalPoster
-            );
-
-        poster.style.background =
-            style.background;
-
-        poster.style.backgroundImage =
-            style.backgroundImage;
-
-    }
-
-    poster.style.backgroundSize =
-        "cover";
-
-    poster.style.backgroundPosition =
-        "center";
+            poster.style.backgroundPosition =
+                "center";
 
         }
 
@@ -1008,21 +1536,12 @@ poster:
                     );
 
 
-                    if (
+                    this.textContent =
                         favorites.includes(
                             movie.id
                         )
-                    ) {
-
-                        this.textContent =
-                            "♥ Retirer des favoris";
-
-                    } else {
-
-                        this.textContent =
-                            "♡ Ajouter aux favoris";
-
-                    }
+                            ? "♥ Retirer des favoris"
+                            : "♡ Ajouter aux favoris";
 
                 }
             );
@@ -1094,6 +1613,7 @@ poster:
                             "div"
                         );
 
+
                     card.style.flex =
                         "0 0 125px";
 
@@ -1117,6 +1637,8 @@ poster:
                                         #461010,
                                         #111
                                     );
+                                background-size:cover;
+                                background-position:center;
                             "
                         ></div>
 
@@ -1131,6 +1653,7 @@ poster:
                             "
                         >
                             ${escapeHTML(
+                                item.tmdbTitle ||
                                 item.title
                             )}
                         </p>
@@ -1138,51 +1661,21 @@ poster:
                     `;
 
 
-                    /* récupérer affiche */
-
                     const otherPoster =
                         card.querySelector(
                             ".details-other-poster"
                         );
 
 
-                    const original =
-                        document.querySelector(
-                            '.movie[data-id="' +
-                            item.id +
-                            '"]'
-                        );
-
-
-                    const originalPoster =
-                        original
-                            ? original.querySelector(
-                                ".poster"
-                            )
-                            : null;
-
-
                     if (
-                        originalPoster &&
-                        otherPoster
+                        otherPoster &&
+                        item.poster
                     ) {
 
-                        const style =
-                            window.getComputedStyle(
-                                originalPoster
-                            );
-
-                        otherPoster.style.background =
-                            style.background;
-
                         otherPoster.style.backgroundImage =
-                            style.backgroundImage;
-
-                        otherPoster.style.backgroundSize =
-                            "cover";
-
-                        otherPoster.style.backgroundPosition =
-                            "center";
+                            "url('" +
+                            item.poster +
+                            "')";
 
                     }
 
@@ -1224,16 +1717,13 @@ poster:
     document
         .querySelectorAll(".movie")
         .forEach(
-            function (movieElement) {
+            function (
+                movieElement
+            ) {
 
                 movieElement.addEventListener(
                     "click",
                     function (event) {
-
-                        /*
-                         * Si on clique sur un bouton,
-                         * le bouton garde son propre rôle.
-                         */
 
                         if (
                             event.target.closest(
@@ -1252,9 +1742,12 @@ poster:
 
                         const movie =
                             movies.find(
-                                function (item) {
+                                function (
+                                    item
+                                ) {
 
-                                    return item.id === id;
+                                    return item.id ===
+                                        id;
 
                                 }
                             );
@@ -1267,6 +1760,7 @@ poster:
                             );
 
                             return;
+
                         }
 
 
@@ -1286,7 +1780,9 @@ poster:
        ===================================================== */
 
     document
-        .querySelectorAll(".watch-btn")
+        .querySelectorAll(
+            ".watch-btn"
+        )
         .forEach(
             function (button) {
 
@@ -1310,26 +1806,20 @@ poster:
                         }
 
 
-                        const id =
-                            movieElement.dataset.id;
-
-
                         const movie =
                             movies.find(
-                                function (item) {
+                                function (
+                                    item
+                                ) {
 
-                                    return item.id === id;
+                                    return item.id ===
+                                        movieElement.dataset.id;
 
                                 }
                             );
 
 
                         if (!movie) {
-
-                            showMessage(
-                                "❌ Film introuvable"
-                            );
-
                             return;
                         }
 
@@ -1346,11 +1836,13 @@ poster:
 
 
     /* =====================================================
-       BOUTONS FAVORIS DE L'ACCUEIL
+       FAVORIS ACCUEIL
        ===================================================== */
 
     document
-        .querySelectorAll(".favorite-btn")
+        .querySelectorAll(
+            ".favorite-btn"
+        )
         .forEach(
             function (button) {
 
@@ -1374,15 +1866,14 @@ poster:
                         }
 
 
-                        const id =
-                            movieElement.dataset.id;
-
-
                         const movie =
                             movies.find(
-                                function (item) {
+                                function (
+                                    item
+                                ) {
 
-                                    return item.id === id;
+                                    return item.id ===
+                                        movieElement.dataset.id;
 
                                 }
                             );
@@ -1400,11 +1891,13 @@ poster:
 
 
     /* =====================================================
-       BOUTONS TÉLÉCHARGEMENT DE L'ACCUEIL
+       TÉLÉCHARGEMENT ACCUEIL
        ===================================================== */
 
     document
-        .querySelectorAll(".download-btn")
+        .querySelectorAll(
+            ".download-btn"
+        )
         .forEach(
             function (button) {
 
@@ -1428,15 +1921,14 @@ poster:
                         }
 
 
-                        const id =
-                            movieElement.dataset.id;
-
-
                         const movie =
                             movies.find(
-                                function (item) {
+                                function (
+                                    item
+                                ) {
 
-                                    return item.id === id;
+                                    return item.id ===
+                                        movieElement.dataset.id;
 
                                 }
                             );
@@ -1480,7 +1972,9 @@ poster:
             );
 
 
-        if (list.length === 0) {
+        if (
+            list.length === 0
+        ) {
 
             favoriteList.innerHTML = `
 
@@ -1500,6 +1994,7 @@ poster:
             `;
 
             return;
+
         }
 
 
@@ -1511,6 +2006,7 @@ poster:
                         "div"
                     );
 
+
                 item.className =
                     "favorite-card";
 
@@ -1519,10 +2015,15 @@ poster:
 
                     <div
                         class="poster"
+                        style="
+                            background-size:cover;
+                            background-position:center;
+                        "
                     ></div>
 
                     <h3>
                         ${escapeHTML(
+                            movie.tmdbTitle ||
                             movie.title
                         )}
                     </h3>
@@ -1558,43 +2059,15 @@ poster:
                     );
 
 
-                const original =
-                    document.querySelector(
-                        '.movie[data-id="' +
-                        movie.id +
-                        '"]'
-                    );
-
-
-                const originalPoster =
-                    original
-                        ? original.querySelector(
-                            ".poster"
-                        )
-                        : null;
-
-
                 if (
-                    originalPoster &&
-                    poster
+                    poster &&
+                    movie.poster
                 ) {
 
-                    const style =
-                        window.getComputedStyle(
-                            originalPoster
-                        );
-
-                    poster.style.background =
-                        style.background;
-
                     poster.style.backgroundImage =
-                        style.backgroundImage;
-
-                    poster.style.backgroundSize =
-                        "cover";
-
-                    poster.style.backgroundPosition =
-                        "center";
+                        "url('" +
+                        movie.poster +
+                        "')";
 
                 }
 
@@ -1668,7 +2141,9 @@ poster:
             );
 
 
-        if (list.length === 0) {
+        if (
+            list.length === 0
+        ) {
 
             downloadList.innerHTML = `
 
@@ -1688,6 +2163,7 @@ poster:
             `;
 
             return;
+
         }
 
 
@@ -1699,6 +2175,7 @@ poster:
                         "div"
                     );
 
+
                 item.className =
                     "download-item";
 
@@ -1708,6 +2185,10 @@ poster:
                     <div
                         class="
                             download-item-poster
+                        "
+                        style="
+                            background-size:cover;
+                            background-position:center;
                         "
                     ></div>
 
@@ -1719,6 +2200,7 @@ poster:
 
                         <h3>
                             ${escapeHTML(
+                                movie.tmdbTitle ||
                                 movie.title
                             )}
                         </h3>
@@ -1758,43 +2240,15 @@ poster:
                     );
 
 
-                const original =
-                    document.querySelector(
-                        '.movie[data-id="' +
-                        movie.id +
-                        '"]'
-                    );
-
-
-                const originalPoster =
-                    original
-                        ? original.querySelector(
-                            ".poster"
-                        )
-                        : null;
-
-
                 if (
-                    originalPoster &&
-                    poster
+                    poster &&
+                    movie.poster
                 ) {
 
-                    const style =
-                        window.getComputedStyle(
-                            originalPoster
-                        );
-
-                    poster.style.background =
-                        style.background;
-
                     poster.style.backgroundImage =
-                        style.backgroundImage;
-
-                    poster.style.backgroundSize =
-                        "cover";
-
-                    poster.style.backgroundPosition =
-                        "center";
+                        "url('" +
+                        movie.poster +
+                        "')";
 
                 }
 
@@ -1837,6 +2291,7 @@ poster:
                             saveDownloads();
 
                             renderDownloads();
+
 
                             showMessage(
                                 "⬇ Téléchargement supprimé"
@@ -1912,24 +2367,28 @@ poster:
 
 
                 document
-                    .querySelectorAll(".movie")
+                    .querySelectorAll(
+                        ".movie"
+                    )
                     .forEach(
-                        function (movie) {
+                        function (
+                            movieElement
+                        ) {
 
                             const title =
                                 (
-                                    movie.dataset.title ||
+                                    movieElement.dataset.title ||
                                     ""
                                 )
                                 .toLowerCase();
 
 
-                            movie.style.display =
+                            movieElement.style.display =
                                 title.includes(
                                     text
                                 )
-                                ? ""
-                                : "none";
+                                    ? ""
+                                    : "none";
 
                         }
                     );
@@ -2186,5 +2645,13 @@ poster:
     renderFavorites();
 
     renderDownloads();
+
+
+    /*
+     * Charger TMDB après le démarrage
+     * de JTN STREAM.
+     */
+
+    loadTMDBMovies();
 
 });
