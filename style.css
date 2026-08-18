@@ -16,10 +16,6 @@ body {
     overflow-x: hidden;
 }
 
-button,
-a {
-    -webkit-tap-highlight-color: transparent;
-}
 
 /* ================= HEADER ================= */
 
@@ -29,7 +25,6 @@ a {
     left: 0;
     width: 100%;
     height: 58px;
-
     z-index: 100;
 
     display: flex;
@@ -57,7 +52,6 @@ a {
 
 .header-actions {
     display: flex;
-    align-items: center;
     gap: 8px;
 }
 
@@ -75,11 +69,13 @@ a {
     font-size: 18px;
 }
 
+
 /* ================= MENU ================= */
 
 .menu {
     display: none;
 }
+
 
 /* ================= RECHERCHE ================= */
 
@@ -121,6 +117,7 @@ a {
     font-size: 15px;
 }
 
+
 /* ================= HERO ================= */
 
 .hero {
@@ -154,16 +151,13 @@ a {
 .badge {
     font-size: 11px;
     font-weight: bold;
-
     letter-spacing: 2px;
-
     margin-bottom: 10px;
 }
 
 .hero h1 {
     font-size: 42px;
     line-height: .95;
-
     margin-bottom: 14px;
 }
 
@@ -204,11 +198,11 @@ a {
     color: white;
 }
 
+
 /* ================= CONTENU ================= */
 
 main {
     margin-top: -25px;
-
     position: relative;
     z-index: 5;
 }
@@ -219,7 +213,6 @@ main {
 
 .category h2 {
     font-size: 19px;
-
     margin: 0 15px 10px;
 }
 
@@ -239,8 +232,13 @@ main {
     display: none;
 }
 
+
+/* ================= CARTE FILM ================= */
+
 .movie {
     flex: 0 0 125px;
+
+    cursor: pointer;
 }
 
 .poster {
@@ -252,8 +250,35 @@ main {
     background-size: cover;
     background-position: center;
 
-    background-color: #181818;
+    transition: transform .2s ease;
 }
+
+.movie:active .poster {
+    transform: scale(.96);
+}
+
+
+/* ================= CACHER LES BOUTONS SUR ACCUEIL ================= */
+
+.movie .movie-actions,
+.movie .download-btn {
+    display: none;
+}
+
+.movie h3 {
+    font-size: 12px;
+
+    margin-top: 6px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    color: #ddd;
+}
+
 
 /* ================= POSTERS ================= */
 
@@ -294,44 +319,248 @@ main {
 }
 
 .poster10 {
-    background: linear-gradient(145deg,#321313,#050505);
+    background: linear-gradient(145deg,#29102f,#050505);
 }
 
 .poster11 {
-    background: linear-gradient(145deg,#102b3b,#050505);
+    background: linear-gradient(145deg,#102c38,#050505);
 }
 
 .poster12 {
-    background: linear-gradient(145deg,#251347,#050505);
+    background: linear-gradient(145deg,#36111d,#050505);
 }
 
 .poster13 {
-    background: linear-gradient(145deg,#49300b,#050505);
+    background: linear-gradient(145deg,#4a2508,#050505);
 }
 
-/* ================= FILMS ================= */
 
-.movie h3 {
-    font-size: 12px;
+/* =====================================================
+   FICHE DU FILM
+===================================================== */
 
-    margin-top: 6px;
+.movie-details-page {
+    display: none;
 
-    white-space: nowrap;
+    position: fixed;
 
-    overflow: hidden;
+    inset: 0;
 
-    text-overflow: ellipsis;
+    z-index: 250;
 
-    color: #ddd;
+    overflow-y: auto;
+
+    background: #050505;
+
+    padding-bottom: 110px;
 }
 
-.movie-actions {
+.movie-details-page.active {
+    display: block;
+}
+
+
+/* IMAGE DE LA FICHE */
+
+.details-hero {
+    position: relative;
+
+    width: 100%;
+
+    min-height: 470px;
+
+    background-size: cover;
+    background-position: center top;
+
+    display: flex;
+    align-items: flex-end;
+}
+
+.details-hero::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            #050505 0%,
+            rgba(5,5,5,.75) 35%,
+            rgba(5,5,5,.15) 75%,
+            rgba(5,5,5,.2)
+        );
+}
+
+
+/* CONTENU */
+
+.details-content {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    padding: 25px 18px 30px;
+}
+
+.details-title {
+    font-size: 30px;
+
+    font-weight: 900;
+
+    margin-bottom: 12px;
+}
+
+.details-meta {
     display: flex;
 
-    gap: 5px;
+    gap: 10px;
 
-    margin-top: 7px;
+    flex-wrap: wrap;
+
+    color: #bbb;
+
+    font-size: 12px;
+
+    margin-bottom: 16px;
 }
+
+.details-description {
+    color: #ddd;
+
+    font-size: 14px;
+
+    line-height: 1.55;
+
+    margin-bottom: 20px;
+
+    max-width: 600px;
+}
+
+
+/* ================= BOUTONS FICHE ================= */
+
+.details-actions {
+    display: flex;
+
+    gap: 8px;
+
+    margin-bottom: 25px;
+}
+
+.details-watch-btn {
+    flex: 1;
+
+    min-height: 44px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: white;
+
+    color: black;
+
+    font-weight: bold;
+
+    font-size: 13px;
+}
+
+.details-download-btn {
+    flex: 1;
+
+    min-height: 44px;
+
+    border: 1px solid #444;
+
+    border-radius: 6px;
+
+    background: #181818;
+
+    color: white;
+
+    font-weight: bold;
+
+    font-size: 13px;
+}
+
+.details-favorite-btn {
+    width: 48px;
+
+    min-height: 44px;
+
+    border: 1px solid #444;
+
+    border-radius: 6px;
+
+    background: #181818;
+
+    color: white;
+
+    font-size: 22px;
+}
+
+.details-favorite-btn.active {
+    background: #e50914;
+
+    border-color: #e50914;
+}
+
+
+/* ================= AUTRES FILMS ================= */
+
+.details-recommendations {
+    padding: 0 15px;
+}
+
+.details-recommendations h2 {
+    font-size: 19px;
+
+    margin-bottom: 12px;
+}
+
+.details-recommendations .movie-row {
+    padding: 0 0 10px;
+}
+
+
+/* Les boutons restent cachés dans les recommandations */
+
+.details-recommendations .movie-actions,
+.details-recommendations .download-btn {
+    display: none;
+}
+
+
+/* ================= FERMER FICHE ================= */
+
+.details-close {
+    position: absolute;
+
+    top: 15px;
+    left: 15px;
+
+    z-index: 10;
+
+    width: 40px;
+    height: 40px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(0,0,0,.7);
+
+    color: white;
+
+    font-size: 22px;
+}
+
+
+/* ================= ANCIENS BOUTONS ================= */
 
 .watch-btn {
     flex: 1;
@@ -401,6 +630,7 @@ main {
     border-color: #e50914;
 }
 
+
 /* ================= PAGES ================= */
 
 .favorites-page,
@@ -456,6 +686,7 @@ main {
     font-size: 22px;
 }
 
+
 /* ================= FAVORIS ================= */
 
 .favorite-list {
@@ -467,28 +698,67 @@ main {
     gap: 14px;
 }
 
-.favorite-item {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 10px;
-
-    padding: 12px;
-
+.favorite-card {
     background: #151515;
 
     border-radius: 7px;
-}
 
-.favorite-item strong {
-    font-size: 13px;
+    padding-bottom: 10px;
 
     overflow: hidden;
+}
 
-    text-overflow: ellipsis;
+.favorite-card .poster {
+    width: 100%;
+    height: 210px;
+
+    border-radius: 0;
+}
+
+.favorite-card h3 {
+    font-size: 13px;
+
+    padding: 8px 8px 0;
+}
+
+.favorite-card-actions {
+    display: flex;
+
+    gap: 5px;
+
+    padding: 8px;
+}
+
+.favorite-watch {
+    flex: 1;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: white;
+
+    color: black;
+
+    padding: 8px;
+
+    font-size: 10px;
+
+    font-weight: bold;
+}
+
+.favorite-remove {
+    border: 1px solid #333;
+
+    border-radius: 5px;
+
+    background: #222;
+
+    color: white;
+
+    padding: 8px;
+
+    font-size: 10px;
 }
 
 .empty-message {
@@ -498,6 +768,7 @@ main {
 
     padding: 45px 10px;
 }
+
 
 /* ================= TELECHARGEMENTS ================= */
 
@@ -512,31 +783,82 @@ main {
 .download-item {
     display: flex;
 
-    align-items: center;
-
     gap: 12px;
 
-    padding: 12px;
+    padding: 10px;
 
     background: #151515;
 
     border-radius: 7px;
 }
 
-.download-item strong {
-    flex: 1;
+.download-item-poster {
+    width: 60px;
+    height: 85px;
 
-    font-size: 13px;
+    flex-shrink: 0;
+
+    border-radius: 5px;
+
+    background: #252525;
 }
 
-/* ================= VIDEO PLAYER ================= */
+.download-info {
+    flex: 1;
+}
+
+.download-info h3 {
+    font-size: 14px;
+
+    margin-bottom: 6px;
+}
+
+.download-info p {
+    color: #888;
+
+    font-size: 11px;
+}
+
+.watch-offline-btn,
+.delete-download-btn {
+    margin-top: 8px;
+
+    padding: 7px 9px;
+
+    border-radius: 5px;
+
+    font-size: 10px;
+
+    font-weight: bold;
+}
+
+.watch-offline-btn {
+    border: none;
+
+    background: white;
+
+    color: black;
+}
+
+.delete-download-btn {
+    border: 1px solid #333;
+
+    background: #222;
+
+    color: white;
+
+    margin-left: 4px;
+}
+
+
+/* ================= VIDEO ================= */
 
 .player {
     position: fixed;
 
     inset: 0;
 
-    z-index: 99999;
+    z-index: 500;
 
     display: none;
 
@@ -544,60 +866,48 @@ main {
 
     justify-content: center;
 
-    background: #000;
+    background: black;
+}
+
+.player.active {
+    display: flex;
 }
 
 .player video {
     width: 100%;
 
-    height: auto;
-
     max-height: 100vh;
-
-    object-fit: contain;
-
-    background: #000;
-}
-
-.player iframe {
-    width: 100%;
-
-    height: 90vh;
-
-    border: 0;
-
-    background: #000;
 }
 
 .close-player {
     position: absolute;
 
     top: 15px;
-
     left: 15px;
 
-    z-index: 100000;
+    z-index: 10;
 
-    width: 45px;
-
-    height: 45px;
+    width: 40px;
+    height: 40px;
 
     border: none;
 
     border-radius: 50%;
 
-    background: rgba(0,0,0,.8);
+    background: rgba(0,0,0,.7);
 
     color: white;
 
-    font-size: 22px;
-
-    font-weight: bold;
+    font-size: 20px;
 }
 
-.close-player:active {
-    transform: scale(.9);
+.player iframe {
+    width: 100%;
+    height: 90vh;
+    border: 0;
+    background: #000;
 }
+
 
 /* ================= BARRE DU BAS ================= */
 
@@ -605,7 +915,6 @@ main {
     position: fixed;
 
     left: 50%;
-
     bottom: 14px;
 
     transform: translateX(-50%);
@@ -682,161 +991,95 @@ main {
     font-size: 9px;
 }
 
-/* ================= MESSAGE ================= */
 
-#jtnMessage {
-    position: fixed;
+/* =====================================================
+   INTRO NETFLIX JTN STREAM
+   NE PAS MODIFIER
+===================================================== */
 
-    bottom: 90px;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    z-index: 999999;
-
-    background: #181818;
-
-    color: white;
-
-    padding: 14px 22px;
-
-    border-radius: 14px;
-
-    font-weight: 600;
-
-    box-shadow:
-        0 10px 30px rgba(0,0,0,.5);
-
-    max-width: 90%;
-
-    text-align: center;
+#intro{
+    position:fixed;
+    inset:0;
+    background:#000;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    z-index:999999;
+    overflow:hidden;
+    animation:introFadeOut 5s forwards;
 }
 
-/* ================= INTRO JTN STREAM ================= */
-
-#intro {
-    position: fixed;
-
-    inset: 0;
-
-    background: #000;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    align-items: center;
-
-    z-index: 999999;
-
-    overflow: hidden;
-
-    animation: introFadeOut 5s forwards;
+.intro-light{
+    position:absolute;
+    width:0;
+    height:100%;
+    background:#e50914;
+    box-shadow:0 0 60px #e50914;
+    animation:lightMove 1.2s ease forwards;
 }
 
-.intro-light {
-    position: absolute;
-
-    width: 0;
-
-    height: 100%;
-
-    background: #e50914;
-
-    box-shadow: 0 0 60px #e50914;
-
-    animation: lightMove 1.2s ease forwards;
+#introLogo{
+    width:220px;
+    max-width:70%;
+    opacity:0;
+    animation:logoShow 2s ease forwards;
+    animation-delay:1s;
 }
 
-#introLogo {
-    width: 220px;
-
-    max-width: 70%;
-
-    opacity: 0;
-
-    animation: logoShow 2s ease forwards;
-
-    animation-delay: 1s;
+#intro h2{
+    margin-top:20px;
+    color:white;
+    letter-spacing:4px;
+    opacity:0;
+    animation:textShow 1s ease forwards;
+    animation-delay:2s;
 }
 
-#intro h2 {
-    margin-top: 20px;
-
-    color: white;
-
-    letter-spacing: 4px;
-
-    text-align: center;
-
-    opacity: 0;
-
-    animation: textShow 1s ease forwards;
-
-    animation-delay: 2s;
-}
-
-@keyframes lightMove {
-
-    0% {
-        width: 0;
+@keyframes lightMove{
+    0%{
+        width:0;
     }
-
-    100% {
-        width: 100%;
-
-        opacity: 0;
+    100%{
+        width:100%;
+        opacity:0;
     }
 }
 
-@keyframes logoShow {
-
-    0% {
-        opacity: 0;
-
-        transform: scale(.2);
+@keyframes logoShow{
+    0%{
+        opacity:0;
+        transform:scale(.2);
     }
-
-    100% {
-        opacity: 1;
-
-        transform: scale(1);
-
-        filter:
-            drop-shadow(0 0 25px #e50914);
+    100%{
+        opacity:1;
+        transform:scale(1);
+        filter:drop-shadow(0 0 25px #e50914);
     }
 }
 
-@keyframes textShow {
-
-    from {
-        opacity: 0;
+@keyframes textShow{
+    from{
+        opacity:0;
     }
-
-    to {
-        opacity: 1;
+    to{
+        opacity:1;
     }
 }
 
-@keyframes introFadeOut {
-
-    0%, 85% {
-        opacity: 1;
+@keyframes introFadeOut{
+    0%,85%{
+        opacity:1;
     }
-
-    100% {
-        opacity: 0;
-
-        visibility: hidden;
-
-        pointer-events: none;
+    100%{
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
     }
 }
 
-/* ================= MOBILE ================= */
+
+/* ================= PETITS ÉCRANS ================= */
 
 @media (max-width: 360px) {
 
@@ -850,8 +1093,11 @@ main {
 
     .poster {
         width: 110px;
-
         height: 158px;
+    }
+
+    .favorite-card .poster {
+        height: 180px;
     }
 
     .bottom-nav {
@@ -866,30 +1112,11 @@ main {
         font-size: 22px;
     }
 
+    .details-title {
+        font-size: 26px;
+    }
+
+    .details-hero {
+        min-height: 430px;
+    }
 }
-
-/* ================= TABLET / GRAND ÉCRAN ================= */
-
-@media (min-width: 700px) {
-
-    .hero-content {
-        padding-left: 45px;
-
-        padding-bottom: 60px;
-    }
-
-    .hero h1 {
-        font-size: 55px;
-    }
-
-    .movie {
-        flex-basis: 160px;
-    }
-
-    .poster {
-        width: 160px;
-
-        height: 230px;
-    }
-
-    }
