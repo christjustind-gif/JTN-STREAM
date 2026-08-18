@@ -1,1513 +1,1101 @@
-document.addEventListener("DOMContentLoaded", function () {
+/* =====================================================
+   JTN STREAM
+   SCRIPT COMPLET
+===================================================== */
 
-    /* =====================================================
-       JTN STREAM — CONFIGURATION
-    ===================================================== */
 
-    const TMDB_API_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZDgwNzc3NjIwNTY4MWM4Y2Q4ODNmMTYxM2Q1MjllYyIsIm5iZiI6MTc4NzA2NzEyNi4yMDgsInN1YiI6IjZhODQ3YWY2NThiYzMyOTYzZDJiYjc5NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.IY6NXG4HAHmvdHuKjA2CTG7o23k-QVsZqd2xOURjOWs";
+/* =====================================================
+   TMDB
+===================================================== */
 
-    const TMDB_IMAGE =
-        "https://image.tmdb.org/t/p/";
+// METS TON JETON TMDB ENTRE LES GUILLEMETS
+const TMDB_API_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlOWRjMjc3MWUwYjdmYjI0NTBhZDFlODNlYzg1YzA1YiIsIm5iZiI6MTc4NzA2NzEyNi4yMDgsInN1YiI6IjZhODQ3YWY2NThiYzMyOTYzZDJiYjc5NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.OX6oEL57vReKEQ1VbSjSVOVfZ4F3RBuJRioXbcUKs_A";
 
-    /* =====================================================
-       ÉLÉMENTS HTML
-    ===================================================== */
+const TMDB_IMAGE = "https://image.tmdb.org/t/p/w500";
+const TMDB_BACKDROP = "https://image.tmdb.org/t/p/w1280";
 
-    const homePage =
-        document.getElementById("homePage");
 
-    const favoritesPage =
-        document.getElementById("favoritesPage");
+/* =====================================================
+   FILMS — 13 FILMS
+===================================================== */
 
-    const downloadsPage =
-        document.getElementById("downloadsPage");
+const movies = [
 
-    const favoriteList =
-        document.getElementById("favoriteList");
+    {
+        id: "film1",
+        title: "Avengers: Endgame",
+        category: "Films",
+        type: "video",
+        video: "videos/avengers-endgame.mp4"
+    },
 
-    const downloadList =
-        document.getElementById("downloadList");
+    {
+        id: "film2",
+        title: "Spider-Man: No Way Home",
+        category: "Films",
+        type: "video",
+        video: "videos/spider-man-no-way-home.mp4"
+    },
 
-    const player =
-        document.getElementById("player");
+    {
+        id: "film3",
+        title: "The Dark Knight",
+        category: "Films",
+        type: "video",
+        video: "videos/the-dark-knight.mp4"
+    },
 
-    const video =
-        document.getElementById("video");
+    {
+        id: "film4",
+        title: "Top Gun: Maverick",
+        category: "Films",
+        type: "video",
+        video: "videos/top-gun-maverick.mp4"
+    },
 
-    const vdoFrame =
-        document.getElementById("vdoFrame");
+    {
+        id: "film5",
+        title: "Avatar",
+        category: "Films",
+        type: "video",
+        video: "videos/avatar.mp4"
+    },
 
-    const closePlayer =
-        document.getElementById("closePlayer");
+    {
+        id: "film6",
+        title: "Titanic",
+        category: "Films",
+        type: "video",
+        video: "videos/titanic.mp4"
+    },
 
-    const searchBtn =
-        document.getElementById("searchBtn");
+    {
+        id: "film7",
+        title: "Inception",
+        category: "Films",
+        type: "video",
+        video: "videos/inception.mp4"
+    },
 
-    const searchBox =
-        document.getElementById("searchBox");
+    {
+        id: "film8",
+        title: "Interstellar",
+        category: "Films",
+        type: "video",
+        video: "videos/interstellar.mp4"
+    },
 
-    const searchInput =
-        document.getElementById("searchInput");
+    {
+        id: "film9",
+        title: "The Matrix",
+        category: "Films",
+        type: "video",
+        video: "videos/the-matrix.mp4"
+    },
 
-    const homeBtn =
-        document.getElementById("homeBtn");
+    {
+        id: "film10",
+        title: "John Wick",
+        category: "Action",
+        type: "video",
+        video: "videos/john-wick.mp4"
+    },
 
-    const favoritesBtn =
-        document.getElementById("favoritesBtn");
+    {
+        id: "film11",
+        title: "Joker",
+        category: "Films",
+        type: "video",
+        video: "videos/joker.mp4"
+    },
 
-    const downloadsBtn =
-        document.getElementById("downloadsBtn");
+    {
+        id: "film12",
+        title: "Jurassic World",
+        category: "Films",
+        type: "video",
+        video: "videos/jurassic-world.mp4"
+    },
 
-    const backFromFavorites =
-        document.getElementById("backFromFavorites");
+    {
+        id: "film13",
+        title: "Black Panther",
+        category: "Action",
+        type: "video",
+        video: "videos/black-panther.mp4"
+    }
 
-    const backFromDownloads =
-        document.getElementById("backFromDownloads");
+];
 
-    const heroPlay =
-        document.getElementById("heroPlay");
 
-    const heroInfo =
-        document.getElementById("heroInfo");
+/* =====================================================
+   ÉLÉMENTS HTML
+===================================================== */
 
-    const settingsBtn =
-        document.getElementById("settingsBtn");
+const intro =
+    document.getElementById("intro");
 
-    const settingsBtnBottom =
-        document.getElementById(
-            "settingsBtnBottom"
-        );
+const homePage =
+    document.getElementById("homePage");
 
-    /* =====================================================
-       FICHE DU FILM HTML
-    ===================================================== */
+const movieDetailsPage =
+    document.getElementById("movieDetailsPage");
 
-    const movieDetailsPage =
-        document.getElementById(
-            "movieDetailsPage"
-        );
+const detailsBackdrop =
+    document.getElementById("detailsBackdrop");
 
-    const closeMovieDetails =
-        document.getElementById(
-            "closeMovieDetails"
-        );
+const detailsPoster =
+    document.getElementById("detailsPoster");
 
-    const detailsBackdrop =
-        document.getElementById(
-            "detailsBackdrop"
-        );
+const detailsTitle =
+    document.getElementById("detailsTitle");
 
-    const detailsPoster =
-        document.getElementById(
-            "detailsPoster"
-        );
+const detailsInfo =
+    document.getElementById("detailsInfo");
 
-    const detailsTitle =
-        document.getElementById(
-            "detailsTitle"
-        );
+const detailsDescription =
+    document.getElementById("detailsDescription");
 
-    const detailsInfo =
-        document.getElementById(
-            "detailsInfo"
-        );
+const detailsRecommendations =
+    document.getElementById("detailsRecommendations");
 
-    const detailsDescription =
-        document.getElementById(
-            "detailsDescription"
-        );
+const closeMovieDetails =
+    document.getElementById("closeMovieDetails");
 
-    const detailsWatchBtn =
-        document.getElementById(
-            "detailsWatchBtn"
-        );
+const detailsWatchBtn =
+    document.getElementById("detailsWatchBtn");
 
-    const detailsDownloadBtn =
-        document.getElementById(
-            "detailsDownloadBtn"
-        );
+const detailsDownloadBtn =
+    document.getElementById("detailsDownloadBtn");
 
-    const detailsFavoriteBtn =
-        document.getElementById(
-            "detailsFavoriteBtn"
-        );
+const detailsFavoriteBtn =
+    document.getElementById("detailsFavoriteBtn");
 
-    const detailsRecommendations =
-        document.getElementById(
-            "detailsRecommendations"
-        );
+const player =
+    document.getElementById("player");
 
-    /* =====================================================
-       FILMS — 13 FILMS
-    ===================================================== */
+const video =
+    document.getElementById("video");
 
-    const movies = [
+const vdoFrame =
+    document.getElementById("vdoFrame");
 
-        {
-            id: "film1",
-            title: "Avengers: Endgame",
-            category: "Films",
-            type: "video",
-            video: "videos/avengers-endgame.mp4"
-        },
+const closePlayer =
+    document.getElementById("closePlayer");
 
-        {
-            id: "film2",
-            title: "Spider-Man: No Way Home",
-            category: "Films",
-            type: "video",
-            video: "videos/spider-man-no-way-home.mp4"
-        },
+const favoritesPage =
+    document.getElementById("favoritesPage");
 
-        {
-            id: "film3",
-            title: "The Dark Knight",
-            category: "Films",
-            type: "video",
-            video: "videos/the-dark-knight.mp4"
-        },
+const downloadsPage =
+    document.getElementById("downloadsPage");
 
-        {
-            id: "film4",
-            title: "Top Gun: Maverick",
-            category: "Films",
-            type: "video",
-            video: "videos/top-gun-maverick.mp4"
-        },
+const favoriteList =
+    document.getElementById("favoriteList");
 
-        {
-            id: "film5",
-            title: "Avatar",
-            category: "Films",
-            type: "video",
-            video: "videos/avatar.mp4"
-        },
+const downloadList =
+    document.getElementById("downloadList");
 
-        {
-            id: "film6",
-            title: "Titanic",
-            category: "Films",
-            type: "video",
-            video: "videos/titanic.mp4"
-        },
+const homeBtn =
+    document.getElementById("homeBtn");
 
-        {
-            id: "film7",
-            title: "Inception",
-            category: "Films",
-            type: "video",
-            video: "videos/inception.mp4"
-        },
+const favoritesBtn =
+    document.getElementById("favoritesBtn");
 
-        {
-            id: "film8",
-            title: "Interstellar",
-            category: "Films",
-            type: "video",
-            video: "videos/interstellar.mp4"
-        },
+const downloadsBtn =
+    document.getElementById("downloadsBtn");
 
-        {
-            id: "film9",
-            title: "The Matrix",
-            category: "Films",
-            type: "video",
-            video: "videos/the-matrix.mp4"
-        },
+const settingsBtnBottom =
+    document.getElementById("settingsBtnBottom");
 
-        {
-            id: "film10",
-            title: "John Wick",
-            category: "Action",
-            type: "video",
-            video: "videos/john-wick.mp4"
-        },
+const backFromFavorites =
+    document.getElementById("backFromFavorites");
 
-        {
-            id: "film11",
-            title: "Joker",
-            category: "Films",
-            type: "video",
-            video: "videos/joker.mp4"
-        },
+const backFromDownloads =
+    document.getElementById("backFromDownloads");
 
-        {
-            id: "film12",
-            title: "Jurassic World",
-            category: "Films",
-            type: "video",
-            video: "videos/jurassic-world.mp4"
-        },
+const searchBtn =
+    document.getElementById("searchBtn");
 
-        {
-            id: "film13",
-            title: "Black Panther",
-            category: "Action",
-            type: "video",
-            video: "videos/black-panther.mp4"
+const searchBox =
+    document.getElementById("searchBox");
+
+const searchInput =
+    document.getElementById("searchInput");
+
+const settingsBtn =
+    document.getElementById("settingsBtn");
+
+
+/* =====================================================
+   ÉCHAPPER HTML
+===================================================== */
+
+function escapeHTML(value) {
+
+    if (value === null || value === undefined) {
+        return "";
+    }
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+/* =====================================================
+   TROUVER UN FILM
+===================================================== */
+
+function getMovieById(id) {
+
+    return movies.find(
+        function (movie) {
+            return movie.id === id;
         }
+    );
 
-    ];
+}
 
-    /* =====================================================
-       ÉTAT
-    ===================================================== */
 
-    let currentMovie = null;
+/* =====================================================
+   TMDB — RECHERCHE
+===================================================== */
 
-    let favorites = [];
+async function searchTMDB(movieName) {
 
-    let downloads = [];
+    if (
+        !TMDB_API_KEY ||
+        TMDB_API_KEY === "TON_JETON_TMDB_ICI"
+    ) {
 
-    /* =====================================================
-       CHARGER FAVORIS
-    ===================================================== */
+        console.warn(
+            "TMDB : jeton non configuré."
+        );
+
+        return null;
+    }
+
 
     try {
 
-        favorites =
-            JSON.parse(
-                localStorage.getItem(
-                    "JTN_STREAM_FAVORITES"
-                ) || "[]"
-            );
+        const response =
+            await fetch(
+                "https://api.themoviedb.org/3/search/movie" +
+                "?query=" +
+                encodeURIComponent(movieName) +
+                "&language=fr-FR" +
+                "&include_adult=false",
+                {
+                    headers: {
 
-        if (!Array.isArray(favorites)) {
-            favorites = [];
-        }
+                        Authorization:
+                            "Bearer " +
+                            TMDB_API_KEY,
 
-    } catch (error) {
-
-        favorites = [];
-
-    }
-
-    /* =====================================================
-       CHARGER TÉLÉCHARGEMENTS
-    ===================================================== */
-
-    try {
-
-        downloads =
-            JSON.parse(
-                localStorage.getItem(
-                    "JTN_STREAM_DOWNLOADS"
-                ) || "[]"
-            );
-
-        if (!Array.isArray(downloads)) {
-            downloads = [];
-        }
-
-    } catch (error) {
-
-        downloads = [];
-
-    }
-
-    /* =====================================================
-       HTML SÉCURISÉ
-    ===================================================== */
-
-    function escapeHTML(text) {
-
-        const element =
-            document.createElement("div");
-
-        element.textContent =
-            text || "";
-
-        return element.innerHTML;
-    }
-
-    /* =====================================================
-       MESSAGE
-    ===================================================== */
-
-    function showMessage(message) {
-
-        let box =
-            document.getElementById(
-                "jtnMessage"
-            );
-
-        if (!box) {
-
-            box =
-                document.createElement("div");
-
-            box.id =
-                "jtnMessage";
-
-            box.style.position =
-                "fixed";
-
-            box.style.bottom =
-                "100px";
-
-            box.style.left =
-                "50%";
-
-            box.style.transform =
-                "translateX(-50%)";
-
-            box.style.zIndex =
-                "999999";
-
-            box.style.background =
-                "#181818";
-
-            box.style.color =
-                "#fff";
-
-            box.style.padding =
-                "14px 20px";
-
-            box.style.borderRadius =
-                "14px";
-
-            box.style.fontWeight =
-                "bold";
-
-            box.style.textAlign =
-                "center";
-
-            box.style.boxShadow =
-                "0 5px 25px rgba(0,0,0,.5)";
-
-            document.body.appendChild(box);
-        }
-
-        box.textContent =
-            message;
-
-        box.style.display =
-            "block";
-
-        clearTimeout(
-            window.jtnMessageTimer
-        );
-
-        window.jtnMessageTimer =
-            setTimeout(function () {
-
-                box.style.display =
-                    "none";
-
-            }, 2500);
-    }
-
-    /* =====================================================
-       TROUVER UN FILM
-    ===================================================== */
-
-    function getMovieById(id) {
-
-        return movies.find(
-            function (movie) {
-                return movie.id === id;
-            }
-        );
-    }
-
-    /* =====================================================
-       TMDB — RECHERCHE
-    ===================================================== */
-
-    async function searchTMDB(movieName) {
-
-        try {
-
-            const response =
-                await fetch(
-                    "https://api.themoviedb.org/3/search/movie" +
-                    "?query=" +
-                    encodeURIComponent(movieName) +
-                    "&language=fr-FR" +
-                    "&include_adult=false",
-                    {
-                        headers: {
-                            Authorization:
-                                "Bearer " +
-                                TMDB_API_KEY,
-
-                            accept:
-                                "application/json"
-                        }
+                        accept:
+                            "application/json"
                     }
-                );
-
-            if (!response.ok) {
-
-                throw new Error(
-                    "TMDB HTTP " +
-                    response.status
-                );
-            }
-
-            const data =
-    await response.json();
-
-console.log(
-    "🔑 TMDB KEY présente :",
-    !!TMDB_API_KEY
-);
-
-console.log(
-    "📡 TMDB DATA :",
-    data
-);
-
-if (
-    data.results &&
-    data.results.length > 0
-) {
-
-                return data.results[0];
-            }
-
-            return null;
-
-        } catch (error) {
-
-            console.error(
-                "Erreur TMDB :",
-                error
+                }
             );
 
-            return null;
-        }
-    }
 
-    /* =====================================================
-       TMDB — DÉTAILS
-    ===================================================== */
+        if (!response.ok) {
 
-    async function getTMDBDetails(movieId) {
-
-        try {
-
-            const response =
-                await fetch(
-                    "https://api.themoviedb.org/3/movie/" +
-                    movieId +
-                    "?language=fr-FR",
-                    {
-                        headers: {
-                            Authorization:
-                                "Bearer " +
-                                TMDB_API_KEY,
-
-                            accept:
-                                "application/json"
-                        }
-                    }
-                );
-
-            if (!response.ok) {
-
-                throw new Error(
-                    "TMDB DETAILS HTTP " +
-                    response.status
-                );
-            }
-
-            return await response.json();
-
-        } catch (error) {
-
-            console.error(
-                "Erreur détails TMDB :",
-                error
+            throw new Error(
+                "TMDB HTTP " +
+                response.status
             );
-
-            return null;
         }
-    }
 
-    /* =====================================================
-       CHARGER TMDB POUR LES 13 FILMS
-    ===================================================== */
 
-    async function loadTMDBMovies() {
+        const data =
+            await response.json();
 
-        console.log(
-            "🎬 Chargement TMDB..."
-        );
 
-        for (
-            const movie of movies
+        if (
+            data.results &&
+            data.results.length > 0
         ) {
 
-            try {
+            return data.results[0];
 
-                const result =
-                    await searchTMDB(
-                        movie.title
-                    );
+        }
 
-                if (!result) {
 
-                    console.warn(
-                        "❌ TMDB non trouvé :",
-                        movie.title
-                    );
+        return null;
 
-                    continue;
-                }
+    } catch (error) {
 
-                movie.tmdbId =
-                    result.id;
+        console.error(
+            "Erreur recherche TMDB :",
+            error
+        );
 
-                movie.tmdbTitle =
-                    result.title ||
-                    movie.title;
+        return null;
+    }
 
-                movie.overview =
-                    result.overview ||
-                    "";
+}
 
-                movie.rating =
-                    result.vote_average ||
-                    0;
 
-                movie.releaseDate =
-                    result.release_date ||
-                    "";
+/* =====================================================
+   TMDB — DÉTAILS
+===================================================== */
 
-                movie.poster =
-                    result.poster_path
-                        ? TMDB_IMAGE +
-                          "w500" +
-                          result.poster_path
-                        : "";
+async function getTMDBDetails(movieId) {
 
-                movie.backdrop =
-                    result.backdrop_path
-                        ? TMDB_IMAGE +
-                          "w1280" +
-                          result.backdrop_path
-                        : movie.poster;
+    if (
+        !TMDB_API_KEY ||
+        TMDB_API_KEY === "TON_JETON_TMDB_ICI"
+    ) {
 
-                const details =
-                    await getTMDBDetails(
-                        result.id
-                    );
+        return null;
+    }
 
-                if (details) {
 
-                    movie.overview =
-                        details.overview ||
-                        movie.overview;
+    try {
 
-                    movie.rating =
-                        details.vote_average ||
-                        movie.rating;
+        const response =
+            await fetch(
+                "https://api.themoviedb.org/3/movie/" +
+                movieId +
+                "?language=fr-FR",
+                {
+                    headers: {
 
-                    movie.releaseDate =
-                        details.release_date ||
-                        movie.releaseDate;
+                        Authorization:
+                            "Bearer " +
+                            TMDB_API_KEY,
 
-                    if (
-                        details.poster_path
-                    ) {
-
-                        movie.poster =
-                            TMDB_IMAGE +
-                            "w500" +
-                            details.poster_path;
+                        accept:
+                            "application/json"
                     }
-
-                    if (
-                        details.backdrop_path
-                    ) {
-
-                        movie.backdrop =
-                            TMDB_IMAGE +
-                            "w1280" +
-                            details.backdrop_path;
-                    }
-
-                    movie.genres =
-                        details.genres ||
-                        [];
                 }
+            );
 
-                updateMovieCard(movie);
 
-                console.log(
-                    "✅ TMDB chargé :",
+        if (!response.ok) {
+
+            throw new Error(
+                "TMDB DETAILS HTTP " +
+                response.status
+            );
+        }
+
+
+        return await response.json();
+
+    } catch (error) {
+
+        console.error(
+            "Erreur détails TMDB :",
+            error
+        );
+
+        return null;
+    }
+
+}
+
+
+/* =====================================================
+   CHARGER LES INFORMATIONS TMDB
+===================================================== */
+
+async function loadTMDBMovies() {
+
+    if (
+        !TMDB_API_KEY ||
+        TMDB_API_KEY === "TON_JETON_TMDB_ICI"
+    ) {
+
+        console.warn(
+            "TMDB : configure ton jeton."
+        );
+
+        return;
+    }
+
+
+    console.log(
+        "TMDB : chargement des 13 films..."
+    );
+
+
+    for (
+        const movie of movies
+    ) {
+
+        try {
+
+            const result =
+                await searchTMDB(
                     movie.title
                 );
 
-            } catch (error) {
 
-                console.error(
-                    "Erreur TMDB :",
-                    movie.title,
-                    error
+            if (!result) {
+
+                console.warn(
+                    "TMDB : film non trouvé :",
+                    movie.title
                 );
+
+                continue;
             }
-        }
 
-        updateFavoriteButtons();
 
-        console.log(
-            "🎬 TMDB terminé pour les 13 films."
-        );
-    }
+            movie.tmdbId =
+                result.id;
 
-    /* =====================================================
-       METTRE À JOUR UNE CARTE
-    ===================================================== */
 
-    function updateMovieCard(movie) {
+            movie.tmdbTitle =
+                result.title ||
+                movie.title;
 
-        const element =
-            document.querySelector(
-                '.movie[data-id="' +
-                movie.id +
-                '"]'
+
+            movie.overview =
+                result.overview ||
+                "";
+
+
+            movie.rating =
+                result.vote_average ||
+                0;
+
+
+            movie.releaseDate =
+                result.release_date ||
+                "";
+
+
+            movie.tmdbPoster =
+                result.poster_path
+                    ? TMDB_IMAGE +
+                      result.poster_path
+                    : "";
+
+
+            movie.backdrop =
+                result.backdrop_path
+                    ? TMDB_BACKDROP +
+                      result.backdrop_path
+                    : "";
+
+
+            const details =
+                await getTMDBDetails(
+                    result.id
+                );
+
+
+            if (details) {
+
+                movie.overview =
+                    details.overview ||
+                    movie.overview;
+
+
+                movie.rating =
+                    details.vote_average ||
+                    movie.rating;
+
+
+                movie.releaseDate =
+                    details.release_date ||
+                    movie.releaseDate;
+
+
+                movie.tmdbPoster =
+                    details.poster_path
+                        ? TMDB_IMAGE +
+                          details.poster_path
+                        : movie.tmdbPoster;
+
+
+                movie.backdrop =
+                    details.backdrop_path
+                        ? TMDB_BACKDROP +
+                          details.backdrop_path
+                        : movie.backdrop;
+
+
+                movie.genres =
+                    details.genres ||
+                    [];
+
+            }
+
+
+            if (movie.tmdbPoster) {
+
+                movie.poster =
+                    movie.tmdbPoster;
+
+            }
+
+
+            updateMovieCard(
+                movie
             );
 
-        if (!element) {
-            return;
+
+            console.log(
+                "TMDB chargé :",
+                movie.title
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Erreur TMDB pour",
+                movie.title,
+                error
+            );
+
         }
 
-        const title =
+    }
+
+
+    console.log(
+        "TMDB : chargement terminé."
+    );
+
+}
+
+
+/* =====================================================
+   METTRE À JOUR UNE CARTE
+===================================================== */
+
+function updateMovieCard(movie) {
+
+    if (!movie) {
+        return;
+    }
+
+
+    const card =
+        document.querySelector(
+            '.movie[data-id="' +
+            movie.id +
+            '"]'
+        );
+
+
+    if (!card) {
+
+        console.warn(
+            "Carte introuvable :",
+            movie.id
+        );
+
+        return;
+    }
+
+
+    const poster =
+        card.querySelector(
+            ".poster"
+        );
+
+
+    const titleElement =
+        card.querySelector(
+            "h3"
+        );
+
+
+    if (titleElement) {
+
+        titleElement.textContent =
             movie.tmdbTitle ||
             movie.title;
 
-        element.dataset.title =
-            title;
+    }
 
-        const titleElement =
-            element.querySelector(
-                "h3"
+
+    if (
+        poster &&
+        movie.tmdbPoster
+    ) {
+
+        poster.style.backgroundImage =
+            "url('" +
+            movie.tmdbPoster +
+            "')";
+
+        poster.style.backgroundSize =
+            "cover";
+
+        poster.style.backgroundPosition =
+            "center";
+
+    }
+
+}
+
+
+/* =====================================================
+   METTRE À JOUR TOUTES LES CARTES
+===================================================== */
+
+function updateAllMovieCards() {
+
+    movies.forEach(
+        function (movie) {
+
+            updateMovieCard(
+                movie
             );
 
-        if (titleElement) {
-
-            titleElement.textContent =
-                title;
         }
+    );
 
-        const poster =
-            element.querySelector(
-                ".poster"
-            );
+}
 
-        if (
-            poster &&
-            movie.poster
-        ) {
 
-            poster.style.backgroundImage =
-                "url('" +
-                movie.poster +
-                "')";
+/* =====================================================
+   CLIC SUR LES 13 CARTES
+===================================================== */
 
-            poster.style.backgroundSize =
-                "cover";
+function setupMovieCards() {
 
-            poster.style.backgroundPosition =
-                "center";
-        }
-
-        const image =
-            element.querySelector("img");
-
-        if (
-            image &&
-            movie.poster
-        ) {
-
-            image.src =
-                movie.poster;
-
-            image.alt =
-                title;
-        }
-    }
-
-    /* =====================================================
-       CLIQUE SUR LES 13 CARTES
-    ===================================================== */
-
-    function setupMovieCards() {
-
-        const cards =
-            document.querySelectorAll(
-                ".movie"
-            );
-
-        cards.forEach(
-            function (card) {
-
-                card.addEventListener(
-                    "click",
-                    function (event) {
-
-                        if (
-                            event.target.closest(
-                                ".favorite-btn"
-                            )
-                        ) {
-                            return;
-                        }
-
-                        const id =
-                            card.dataset.id;
-
-                        const movie =
-                            getMovieById(id);
-
-                        if (!movie) {
-
-                            showMessage(
-                                "❌ Film introuvable"
-                            );
-
-                            return;
-                        }
-
-                        openMovieDetails(
-                            movie
-                        );
-                    }
-                );
-            }
+    const cards =
+        document.querySelectorAll(
+            ".movie"
         );
 
-        console.log(
-            "🎬 Cartes configurées :",
-            cards.length
-        );
-    }
 
-    /* =====================================================
-       FICHE DU FILM
-    ===================================================== */
+    cards.forEach(
+        function (card) {
 
-    function openMovieDetails(movie) {
-
-        if (!movie) {
-            return;
-        }
-
-        currentMovie =
-            movie;
-
-        if (!movieDetailsPage) {
-
-            showMessage(
-                "❌ Fiche du film introuvable"
-            );
-
-            return;
-        }
-
-        if (detailsTitle) {
-
-            detailsTitle.textContent =
-                movie.tmdbTitle ||
-                movie.title;
-        }
-
-        if (detailsPoster) {
-
-            if (movie.poster) {
-
-                detailsPoster.style.backgroundImage =
-                    "url('" +
-                    movie.poster +
-                    "')";
-
-                detailsPoster.style.backgroundSize =
-                    "cover";
-
-                detailsPoster.style.backgroundPosition =
-                    "center";
-
-            } else {
-
-                detailsPoster.style.backgroundImage =
-                    "none";
-            }
-        }
-
-        if (detailsBackdrop) {
-
-            if (movie.backdrop) {
-
-                detailsBackdrop.style.backgroundImage =
-                    "url('" +
-                    movie.backdrop +
-                    "')";
-
-            } else {
-
-                detailsBackdrop.style.backgroundImage =
-                    "none";
-            }
-        }
-
-        if (detailsInfo) {
-
-            const rating =
-                movie.rating
-                    ? Number(
-                        movie.rating
-                    ).toFixed(1)
-                    : "—";
-
-            const date =
-                movie.releaseDate ||
-                "Date inconnue";
-
-            const category =
-                movie.category ||
-                "Film";
-
-            detailsInfo.textContent =
-                category +
-                " • ⭐ " +
-                rating +
-                "/10 • 📅 " +
-                date;
-        }
-
-        if (detailsDescription) {
-
-            detailsDescription.textContent =
-                movie.overview ||
-                "Aucun résumé disponible.";
-        }
-
-        updateDetailsFavoriteButton();
-
-        renderRecommendations();
-
-        movieDetailsPage.style.display =
-            "block";
-
-        document.body.style.overflow =
-            "hidden";
-    }
-
-    /* =====================================================
-       FERMER LA FICHE
-    ===================================================== */
-
-    function closeDetails() {
-
-        if (movieDetailsPage) {
-
-            movieDetailsPage.style.display =
-                "none";
-        }
-
-        currentMovie =
-            null;
-
-        document.body.style.overflow =
-            "";
-    }
-
-    if (closeMovieDetails) {
-
-        closeMovieDetails.addEventListener(
-            "click",
-            closeDetails
-        );
-    }
-    /* =====================================================
-       BOUTON REGARDER DE LA FICHE
-    ===================================================== */
-
-    if (detailsWatchBtn) {
-
-        detailsWatchBtn.addEventListener(
-            "click",
-            function () {
-
-                if (!currentMovie) {
-                    showMessage(
-                        "❌ Aucun film sélectionné"
-                    );
-                    return;
-                }
-
-                closeDetails();
-
-                watchMovie(
-                    currentMovie
-                );
-            }
-        );
-    }
-
-    /* =====================================================
-       BOUTON FAVORI DE LA FICHE
-    ===================================================== */
-
-    if (detailsFavoriteBtn) {
-
-        detailsFavoriteBtn.addEventListener(
-            "click",
-            function () {
-
-                if (!currentMovie) {
-                    return;
-                }
-
-                toggleFavorite(
-                    currentMovie
-                );
-
-                updateDetailsFavoriteButton();
-            }
-        );
-    }
-
-    /* =====================================================
-       BOUTON TÉLÉCHARGER DE LA FICHE
-    ===================================================== */
-
-    if (detailsDownloadBtn) {
-
-        detailsDownloadBtn.addEventListener(
-            "click",
-            function () {
-
-                if (!currentMovie) {
-
-                    showMessage(
-                        "❌ Aucun film sélectionné"
-                    );
-
-                    return;
-                }
-
-                addDownload(
-                    currentMovie
-                );
-            }
-        );
-    }
-
-    /* =====================================================
-       BOUTON FAVORI — APPARENCE
-    ===================================================== */
-
-    function updateDetailsFavoriteButton() {
-
-        if (
-            !detailsFavoriteBtn ||
-            !currentMovie
-        ) {
-            return;
-        }
-
-        if (
-            favorites.includes(
-                currentMovie.id
-            )
-        ) {
-
-            detailsFavoriteBtn.textContent =
-                "♥ Retirer des favoris";
-
-            detailsFavoriteBtn.classList.add(
-                "active"
-            );
-
-        } else {
-
-            detailsFavoriteBtn.textContent =
-                "♡ Ajouter aux favoris";
-
-            detailsFavoriteBtn.classList.remove(
-                "active"
-            );
-        }
-    }
-
-    /* =====================================================
-       FAVORIS — SAUVEGARDER
-    ===================================================== */
-
-    function saveFavorites() {
-
-        localStorage.setItem(
-            "JTN_STREAM_FAVORITES",
-            JSON.stringify(
-                favorites
-            )
-        );
-    }
-
-    /* =====================================================
-       FAVORIS — BOUTONS DES CARTES
-    ===================================================== */
-
-    function updateFavoriteButtons() {
-
-        document
-            .querySelectorAll(".movie")
-            .forEach(
-                function (card) {
+            card.addEventListener(
+                "click",
+                function () {
 
                     const id =
                         card.dataset.id;
 
-                    let button =
-                        card.querySelector(
-                            ".favorite-btn"
+                    const movie =
+                        getMovieById(
+                            id
                         );
 
-                    if (!button) {
+
+                    if (!movie) {
+
+                        console.error(
+                            "Film introuvable :",
+                            id
+                        );
+
                         return;
                     }
 
-                    if (
-                        favorites.includes(id)
-                    ) {
 
-                        button.textContent =
-                            "♥";
+                    openMovieDetails(
+                        movie
+                    );
 
-                        button.classList.add(
-                            "active"
-                        );
-
-                    } else {
-
-                        button.textContent =
-                            "♡";
-
-                        button.classList.remove(
-                            "active"
-                        );
-                    }
                 }
             );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   FICHE DU FILM
+===================================================== */
+
+function openMovieDetails(movie) {
+
+    if (!movie) {
+        return;
     }
 
-    /* =====================================================
-       AJOUTER / RETIRER FAVORI
-    ===================================================== */
 
-    function toggleFavorite(movie) {
+    if (movieDetailsPage) {
 
-        if (!movie) {
-            return;
-        }
+        movieDetailsPage.classList.add(
+            "active"
+        );
 
-        const index =
-            favorites.indexOf(
-                movie.id
-            );
+    }
 
-        if (index !== -1) {
 
-            favorites.splice(
-                index,
-                1
-            );
+    document.body.style.overflow =
+        "hidden";
 
-            showMessage(
-                "♡ Retiré des favoris"
-            );
+
+    const title =
+        movie.tmdbTitle ||
+        movie.title ||
+        "Titre inconnu";
+
+
+    const overview =
+        movie.overview ||
+        "Aucun résumé disponible.";
+
+
+    const rating =
+        movie.rating
+            ? Number(
+                movie.rating
+            ).toFixed(1)
+            : "—";
+
+
+    const releaseDate =
+        movie.releaseDate ||
+        "Date inconnue";
+
+
+    const poster =
+        movie.poster ||
+        "";
+
+
+    const backdrop =
+        movie.backdrop ||
+        poster;
+
+
+    if (detailsTitle) {
+
+        detailsTitle.textContent =
+            title;
+
+    }
+
+
+    if (detailsDescription) {
+
+        detailsDescription.textContent =
+            overview;
+
+    }
+
+
+    if (detailsInfo) {
+
+        const category =
+            movie.category ||
+            "Film";
+
+
+        detailsInfo.textContent =
+            category +
+            " • ⭐ " +
+            rating +
+            "/10 • 📅 " +
+            releaseDate;
+
+    }
+
+
+    if (detailsPoster) {
+
+        if (poster) {
+
+            detailsPoster.style.backgroundImage =
+                "url('" +
+                poster +
+                "')";
 
         } else {
 
-            favorites.push(
-                movie.id
-            );
+            detailsPoster.style.backgroundImage =
+                "linear-gradient(145deg,#461010,#111)";
 
-            showMessage(
-                "♥ Ajouté aux favoris"
-            );
         }
 
-        saveFavorites();
-
-        updateFavoriteButtons();
-
-        renderFavorites();
     }
 
-    /* =====================================================
-       FAVORIS — AFFICHAGE
-    ===================================================== */
 
-    function renderFavorites() {
+    if (detailsBackdrop) {
 
-        if (!favoriteList) {
-            return;
+        if (backdrop) {
+
+            detailsBackdrop.style.backgroundImage =
+                "linear-gradient(to bottom, rgba(0,0,0,.05), #050505 85%, #050505), url('" +
+                backdrop +
+                "')";
+
+        } else {
+
+            detailsBackdrop.style.backgroundImage =
+                "linear-gradient(to bottom, rgba(0,0,0,.05), #050505 85%, #050505)";
+
         }
 
-        favoriteList.innerHTML = "";
+    }
 
-        if (favorites.length === 0) {
 
-            favoriteList.innerHTML = `
-                <p style="
-                    color:#aaa;
-                    text-align:center;
-                    padding:40px 20px;
-                ">
-                    ❤️ Aucun favori pour le moment.
-                </p>
-            `;
+    updateFavoriteButton(
+        movie
+    );
 
-            return;
-        }
 
-        favorites.forEach(
-            function (id) {
+    loadRecommendations(
+        movie
+    );
 
-                const movie =
-                    getMovieById(id);
 
-                if (!movie) {
-                    return;
-                }
+    if (detailsWatchBtn) {
 
-                const item =
+        detailsWatchBtn.onclick =
+            function () {
+
+                watchMovie(
+                    movie
+                );
+
+            };
+
+    }
+
+
+    if (detailsDownloadBtn) {
+
+        detailsDownloadBtn.onclick =
+            function () {
+
+                addDownload(
+                    movie
+                );
+
+            };
+
+    }
+
+
+    if (detailsFavoriteBtn) {
+
+        detailsFavoriteBtn.onclick =
+            function () {
+
+                toggleFavorite(
+                    movie
+                );
+
+            };
+
+    }
+
+}
+
+
+/* =====================================================
+   FERMER LA FICHE
+===================================================== */
+
+function closeDetailsPage() {
+
+    if (movieDetailsPage) {
+
+        movieDetailsPage.classList.remove(
+            "active"
+        );
+
+    }
+
+
+    document.body.style.overflow =
+        "";
+
+}
+
+
+if (closeMovieDetails) {
+
+    closeMovieDetails.onclick =
+        closeDetailsPage;
+
+}
+
+
+/* =====================================================
+   RECOMMANDATIONS
+===================================================== */
+
+function loadRecommendations(currentMovie) {
+
+    if (!detailsRecommendations) {
+        return;
+    }
+
+
+    detailsRecommendations.innerHTML =
+        "";
+
+
+    movies
+        .filter(
+            function (movie) {
+
+                return movie.id !==
+                    currentMovie.id;
+
+            }
+        )
+        .slice(0, 6)
+        .forEach(
+            function (movie) {
+
+                const card =
                     document.createElement(
                         "div"
                     );
 
-                item.className =
-                    "favorite-item";
 
-                item.innerHTML = `
+                card.className =
+                    "details-recommendation-card";
 
-                    <div
-                        class="poster"
-                        style="
-                            background-image:url('${movie.poster || ""}');
-                            background-size:cover;
-                            background-position:center;
-                        "
-                    ></div>
 
-                    <div>
-                        <h3>
-                            ${escapeHTML(
-                                movie.tmdbTitle ||
-                                movie.title
-                            )}
-                        </h3>
-
-                        <button
-                            type="button"
-                            class="favorite-watch-btn"
-                        >
-                            ▶ Regarder
-                        </button>
-
-                        <button
-                            type="button"
-                            class="favorite-remove-btn"
-                        >
-                            ♡ Retirer
-                        </button>
-                    </div>
-                `;
-
-                const watch =
-                    item.querySelector(
-                        ".favorite-watch-btn"
-                    );
-
-                const remove =
-                    item.querySelector(
-                        ".favorite-remove-btn"
-                    );
-
-                if (watch) {
-
-                    watch.onclick =
-                        function () {
-
-                            watchMovie(
-                                movie
-                            );
-                        };
-                }
-
-                if (remove) {
-
-                    remove.onclick =
-                        function () {
-
-                            toggleFavorite(
-                                movie
-                            );
-                        };
-                }
-
-                favoriteList.appendChild(
-                    item
-                );
-            }
-        );
-    }
-
-    /* =====================================================
-       TÉLÉCHARGEMENTS — SAUVEGARDER
-    ===================================================== */
-
-    function saveDownloads() {
-
-        localStorage.setItem(
-            "JTN_STREAM_DOWNLOADS",
-            JSON.stringify(
-                downloads
-            )
-        );
-    }
-
-    /* =====================================================
-       AJOUTER TÉLÉCHARGEMENT
-    ===================================================== */
-
-    function addDownload(movie) {
-
-        if (!movie) {
-            return;
-        }
-
-        if (!movie.video) {
-
-            showMessage(
-                "❌ Vidéo non disponible"
-            );
-
-            return;
-        }
-
-        if (
-            downloads.includes(
-                movie.id
-            )
-        ) {
-
-            showMessage(
-                "ℹ️ Déjà dans les téléchargements"
-            );
-
-            return;
-        }
-
-        downloads.push(
-            movie.id
-        );
-
-        saveDownloads();
-
-        renderDownloads();
-
-        showMessage(
-            "⬇ Ajouté aux téléchargements"
-        );
-    }
-
-    /* =====================================================
-       TÉLÉCHARGEMENTS — AFFICHAGE
-    ===================================================== */
-
-    function renderDownloads() {
-
-        if (!downloadList) {
-            return;
-        }
-
-        downloadList.innerHTML = "";
-
-        if (downloads.length === 0) {
-
-            downloadList.innerHTML = `
-                <p style="
-                    color:#aaa;
-                    text-align:center;
-                    padding:40px 20px;
-                ">
-                    ⬇️ Aucun téléchargement.
-                </p>
-            `;
-
-            return;
-        }
-
-        downloads.forEach(
-            function (id) {
-
-                const movie =
-                    getMovieById(id);
-
-                if (!movie) {
-                    return;
-                }
-
-                const item =
+                const poster =
                     document.createElement(
                         "div"
                     );
 
-                item.className =
-                    "download-item";
 
-                item.innerHTML = `
+                poster.className =
+                    "poster";
 
-                    <div
-                        class="poster"
-                        style="
-                            background-image:url('${movie.poster || ""}');
-                            background-size:cover;
-                            background-position:center;
-                        "
-                    ></div>
 
-                    <div>
+                if (movie.poster) {
 
-                        <h3>
-                            ${escapeHTML(
-                                movie.tmdbTitle ||
-                                movie.title
-                            )}
-                        </h3>
+                    poster.style.backgroundImage =
+                        "url('" +
+                        movie.poster +
+                        "')";
 
-                        <button
-                            type="button"
-                            class="download-watch-btn"
-                        >
-                            ▶ Regarder
-                        </button>
-
-                        <button
-                            type="button"
-                            class="download-remove-btn"
-                        >
-                            ✕ Supprimer
-                        </button>
-
-                    </div>
-                `;
-
-                const watch =
-                    item.querySelector(
-                        ".download-watch-btn"
-                    );
-
-                const remove =
-                    item.querySelector(
-                        ".download-remove-btn"
-                    );
-
-                if (watch) {
-
-                    watch.onclick =
-                        function () {
-
-                            watchMovie(
-                                movie
-                            );
-                        };
                 }
 
-                if (remove) {
 
-                    remove.onclick =
-                        function () {
+                const title =
+                    document.createElement(
+                        "h3"
+                    );
 
-                            downloads =
-                                downloads.filter(
-                                    function (
-                                        movieId
-                                    ) {
-                                        return (
-                                            movieId !==
-                                            movie.id
-                                        );
-                                    }
-                                );
 
-                            saveDownloads();
+                title.textContent =
+                    movie.tmdbTitle ||
+                    movie.title;
 
-                            renderDownloads();
 
-                            showMessage(
-                                "🗑 Supprimé"
-                            );
-                        };
-                }
-
-                downloadList.appendChild(
-                    item
+                card.appendChild(
+                    poster
                 );
+
+
+                card.appendChild(
+                    title
+                );
+
+
+                card.addEventListener(
+                    "click",
+                    function () {
+
+                        openMovieDetails(
+                            movie
+                        );
+
+                    }
+                );
+
+
+                detailsRecommendations.appendChild(
+                    card
+                );
+
             }
         );
+
+}
+
+
+/* =====================================================
+   REGARDER
+===================================================== */
+
+function watchMovie(movie) {
+
+    if (!movie) {
+        return;
     }
 
-    /* =====================================================
-       LECTEUR
-    ===================================================== */
 
-    function watchMovie(movie) {
+    if (!player) {
+        return;
+    }
 
-        if (!movie) {
-            return;
-        }
 
-        if (!player) {
+    player.classList.add(
+        "active"
+    );
 
-            showMessage(
-                "❌ Lecteur introuvable"
-            );
 
-            return;
-        }
+    document.body.style.overflow =
+        "hidden";
 
-        if (video) {
 
-            video.pause();
+    /* =================================================
+       RÉINITIALISER LE LECTEUR VIDÉO
+    ================================================= */
 
-            video.removeAttribute(
-                "src"
-            );
+    if (video) {
 
-            video.load();
+        video.pause();
 
-            video.style.display =
-                "none";
-        }
+        video.removeAttribute(
+            "src"
+        );
+
+        video.load();
+
+        video.style.display =
+            "none";
+
+    }
+
+
+    if (vdoFrame) {
+
+        vdoFrame.src =
+            "";
+
+        vdoFrame.style.display =
+            "none";
+
+    }
+
+
+    /* =================================================
+       VIDÉO EXTERNE
+    ================================================= */
+
+    if (
+        movie.video &&
+        (
+            movie.video.startsWith(
+                "http://"
+            ) ||
+            movie.video.startsWith(
+                "https://"
+            )
+        )
+    ) {
 
         if (vdoFrame) {
-
-            vdoFrame.src =
-                "";
-
-            vdoFrame.style.display =
-                "none";
-        }
-
-        if (
-            movie.type === "iframe" &&
-            movie.video
-        ) {
-
-            if (!vdoFrame) {
-
-                showMessage(
-                    "❌ Lecteur iframe introuvable"
-                );
-
-                return;
-            }
 
             vdoFrame.src =
                 movie.video;
@@ -1515,17 +1103,22 @@ if (
             vdoFrame.style.display =
                 "block";
 
-            player.style.display =
-                "flex";
-
-            return;
         }
 
-        if (
-            movie.type === "video" &&
-            movie.video &&
-            video
-        ) {
+        return;
+
+    }
+
+
+    /* =================================================
+       VIDÉO LOCALE
+    ================================================= */
+
+    if (
+        movie.video
+    ) {
+
+        if (video) {
 
             video.src =
                 movie.video;
@@ -1533,121 +1126,892 @@ if (
             video.style.display =
                 "block";
 
-            player.style.display =
-                "flex";
-
             video.load();
 
-            video.play().catch(
-                function () {
 
-                    showMessage(
-                        "▶ Appuie sur ▶ pour démarrer"
-                    );
-                }
-            );
+            const playPromise =
+                video.play();
 
-            return;
-        }
 
-        showMessage(
-            "🎬 Vidéo non disponible"
-        );
-    }
+            if (playPromise) {
 
-    /* =====================================================
-       FERMER LECTEUR
-    ===================================================== */
+                playPromise.catch(
+                    function (error) {
 
-    function closeVideo() {
-
-        if (video) {
-
-            video.pause();
-
-            video.removeAttribute(
-                "src"
-            );
-
-            video.load();
-
-            video.style.display =
-                "none";
-        }
-
-        if (vdoFrame) {
-
-            vdoFrame.src =
-                "";
-
-            vdoFrame.style.display =
-                "none";
-        }
-
-        if (player) {
-
-            player.style.display =
-                "none";
-        }
-    }
-
-    if (closePlayer) {
-
-        closePlayer.addEventListener(
-            "click",
-            closeVideo
-        );
-    }
-
-    /* =====================================================
-       RECOMMANDATIONS
-    ===================================================== */
-
-    function renderRecommendations() {
-
-        if (!detailsRecommendations) {
-            return;
-        }
-
-        detailsRecommendations.innerHTML =
-            "";
-
-        movies
-            .filter(
-                function (movie) {
-
-                    return (
-                        !currentMovie ||
-                        movie.id !==
-                        currentMovie.id
-                    );
-                }
-            )
-            .slice(0, 6)
-            .forEach(
-                function (movie) {
-
-                    const card =
-                        document.createElement(
-                            "div"
+                        console.log(
+                            "Lecture automatique bloquée :",
+                            error
                         );
 
-                    card.className =
-                        "movie";
+                    }
+                );
 
-                    card.dataset.id =
-                        movie.id;
+            }
 
-                    card.innerHTML = `
+        }
 
-                        <div
-                            class="poster"
-                            style="
-                                background-image:url('${movie.poster || ""}');
-                                background-size:cover;
-                                background-position:center;
-                            "
-                        ></div>
+        return;
+
+    }
+
+
+    /* =================================================
+       AUCUNE VIDÉO
+    ================================================= */
+
+    console.warn(
+        "Aucune vidéo disponible pour :",
+        movie.title
+    );
+
+
+    player.classList.remove(
+        "active"
+    );
+
+
+    document.body.style.overflow =
+        "";
+
+}
+
+
+/* =====================================================
+   FERMER LE LECTEUR
+===================================================== */
+
+if (closePlayer) {
+
+    closePlayer.onclick =
+        function () {
+
+
+            /* ARRÊTER VIDÉO */
+
+            if (video) {
+
+                video.pause();
+
+                video.removeAttribute(
+                    "src"
+                );
+
+                video.load();
+
+                video.style.display =
+                    "none";
+
+            }
+
+
+            /* ARRÊTER IFRAME */
+
+            if (vdoFrame) {
+
+                vdoFrame.src =
+                    "";
+
+                vdoFrame.style.display =
+                    "none";
+
+            }
+
+
+            /* FERMER */
+
+            if (player) {
+
+                player.classList.remove(
+                    "active"
+                );
+
+            }
+
+
+            /* REMETTRE LE SCROLL */
+
+            document.body.style.overflow =
+                "";
+
+        };
+
+}
+
+
+/* =====================================================
+   FIN — REGARDER
+===================================================== */
+
+/* =====================================================
+   CARTES DES FILMS — CLIC
+===================================================== */
+
+function setupMovieCards() {
+
+    const cards =
+        document.querySelectorAll(
+            ".movie"
+        );
+
+
+    cards.forEach(
+        function (card) {
+
+            card.addEventListener(
+                "click",
+                function () {
+
+                    const id =
+                        card.dataset.id;
+
+
+                    const movie =
+                        getMovieById(id);
+
+
+                    if (!movie) {
+
+                        console.warn(
+                            "Film introuvable :",
+                            id
+                        );
+
+                        return;
+                    }
+
+
+                    /* Récupérer la vidéo du HTML
+                       si elle existe */
+
+                    if (
+                        card.dataset.video
+                    ) {
+
+                        movie.video =
+                            card.dataset.video;
+
+                    }
+
+
+                    openMovieDetails(
+                        movie
+                    );
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   RÉCUPÉRER UN FILM PAR ID
+===================================================== */
+
+function getMovieById(id) {
+
+    if (!id) {
+        return null;
+    }
+
+
+    return movies.find(
+        function (movie) {
+
+            return movie.id === id;
+
+        }
+    ) || null;
+
+}
+
+
+/* =====================================================
+   METTRE À JOUR UNE CARTE
+===================================================== */
+
+function updateMovieCard(movie) {
+
+    if (!movie) {
+        return;
+    }
+
+
+    const card =
+        document.querySelector(
+            '.movie[data-id="' +
+            movie.id +
+            '"]'
+        );
+
+
+    if (!card) {
+        return;
+    }
+
+
+    const titleElement =
+        card.querySelector(
+            "h3"
+        );
+
+
+    if (titleElement) {
+
+        titleElement.textContent =
+            movie.tmdbTitle ||
+            movie.title;
+
+    }
+
+
+    const poster =
+        card.querySelector(
+            ".poster"
+        );
+
+
+    if (
+        poster &&
+        movie.poster
+    ) {
+
+        poster.style.backgroundImage =
+            'url("' +
+            movie.poster +
+            '")';
+
+    }
+
+}
+
+
+/* =====================================================
+   METTRE À JOUR TOUTES LES CARTES
+===================================================== */
+
+function updateAllMovieCards() {
+
+    movies.forEach(
+        function (movie) {
+
+            updateMovieCard(
+                movie
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   OUVRIR LA FICHE DU FILM
+===================================================== */
+
+function openMovieDetails(movie) {
+
+    if (!movie) {
+        return;
+    }
+
+
+    const page =
+        document.getElementById(
+            "movieDetailsPage"
+        );
+
+
+    if (!page) {
+        return;
+    }
+
+
+    const title =
+        movie.tmdbTitle ||
+        movie.title ||
+        "Titre inconnu";
+
+
+    const rating =
+        movie.rating
+            ? Number(
+                movie.rating
+            ).toFixed(1)
+            : "—";
+
+
+    const date =
+        movie.releaseDate ||
+        "Date inconnue";
+
+
+    const description =
+        movie.overview ||
+        "Aucun résumé disponible.";
+
+
+    const poster =
+        movie.poster ||
+        "";
+
+
+    const backdrop =
+        movie.backdrop ||
+        poster;
+
+
+    const detailsTitle =
+        document.getElementById(
+            "detailsTitle"
+        );
+
+
+    const detailsInfo =
+        document.getElementById(
+            "detailsInfo"
+        );
+
+
+    const detailsDescription =
+        document.getElementById(
+            "detailsDescription"
+        );
+
+
+    const detailsPoster =
+        document.getElementById(
+            "detailsPoster"
+        );
+
+
+    const detailsBackdrop =
+        document.getElementById(
+            "detailsBackdrop"
+        );
+
+
+    if (detailsTitle) {
+
+        detailsTitle.textContent =
+            title;
+
+    }
+
+
+    if (detailsInfo) {
+
+        detailsInfo.textContent =
+            movie.category +
+            " • ⭐ " +
+            rating +
+            "/10 • 📅 " +
+            date;
+
+    }
+
+
+    if (detailsDescription) {
+
+        detailsDescription.textContent =
+            description;
+
+    }
+
+
+    if (detailsPoster) {
+
+        detailsPoster.style.backgroundImage =
+            poster
+                ? 'url("' +
+                  poster +
+                  '")'
+                : "";
+
+    }
+
+
+    if (detailsBackdrop) {
+
+        detailsBackdrop.style.backgroundImage =
+            backdrop
+                ? `
+                    linear-gradient(
+                        to bottom,
+                        rgba(0,0,0,.15),
+                        #050505 85%
+                    ),
+                    url("${backdrop}")
+                  `
+                : "";
+
+    }
+
+
+    page.classList.add(
+        "active"
+    );
+
+
+    document.body.style.overflow =
+        "hidden";
+
+
+    currentMovie =
+        movie;
+
+
+    setupDetailsButtons(
+        movie
+    );
+
+
+    renderRecommendations(
+        movie
+    );
+
+}
+
+
+/* =====================================================
+   BOUTONS DE LA FICHE
+===================================================== */
+
+function setupDetailsButtons(movie) {
+
+    const watchButton =
+        document.getElementById(
+            "detailsWatchBtn"
+        );
+
+
+    const favoriteButton =
+        document.getElementById(
+            "detailsFavoriteBtn"
+        );
+
+
+    const downloadButton =
+        document.getElementById(
+            "detailsDownloadBtn"
+        );
+
+
+    if (watchButton) {
+
+        watchButton.onclick =
+            function () {
+
+                watchMovie(
+                    movie
+                );
+
+            };
+
+    }
+
+
+    if (favoriteButton) {
+
+        favoriteButton.onclick =
+            function () {
+
+                toggleFavorite(
+                    movie
+                );
+
+                updateFavoriteButton(
+                    movie
+                );
+
+            };
+
+    }
+
+
+    if (downloadButton) {
+
+        downloadButton.onclick =
+            function () {
+
+                addDownload(
+                    movie
+                );
+
+            };
+
+    }
+
+
+    updateFavoriteButton(
+        movie
+    );
+
+}
+
+
+/* =====================================================
+   BOUTON FAVORI
+===================================================== */
+
+function updateFavoriteButton(movie) {
+
+    const button =
+        document.getElementById(
+            "detailsFavoriteBtn"
+        );
+
+
+    if (!button) {
+        return;
+    }
+
+
+    const favorites =
+        JSON.parse(
+            localStorage.getItem(
+                "jtn_favorites"
+            ) || "[]"
+        );
+
+
+    const exists =
+        favorites.some(
+            function (item) {
+
+                return item.id ===
+                    movie.id;
+
+            }
+        );
+
+
+    button.textContent =
+        exists
+            ? "♥ Retirer des favoris"
+            : "♡ Ajouter aux favoris";
+
+}
+
+
+/* =====================================================
+   AJOUTER / RETIRER FAVORI
+===================================================== */
+
+function toggleFavorite(movie) {
+
+    if (!movie) {
+        return;
+    }
+
+
+    let favorites =
+        JSON.parse(
+            localStorage.getItem(
+                "jtn_favorites"
+            ) || "[]"
+        );
+
+
+    const index =
+        favorites.findIndex(
+            function (item) {
+
+                return item.id ===
+                    movie.id;
+
+            }
+        );
+
+
+    if (index !== -1) {
+
+        favorites.splice(
+            index,
+            1
+        );
+
+    } else {
+
+        favorites.push(
+            movie
+        );
+
+    }
+
+
+    localStorage.setItem(
+        "jtn_favorites",
+        JSON.stringify(
+            favorites
+        )
+    );
+
+
+    renderFavorites();
+
+}
+
+
+/* =====================================================
+   AFFICHER LES FAVORIS
+===================================================== */
+
+function renderFavorites() {
+
+    const list =
+        document.getElementById(
+            "favoriteList"
+        );
+
+
+    if (!list) {
+        return;
+    }
+
+
+    const favorites =
+        JSON.parse(
+            localStorage.getItem(
+                "jtn_favorites"
+            ) || "[]"
+        );
+
+
+    if (
+        favorites.length === 0
+    ) {
+
+        list.innerHTML =
+            `
+                <div class="empty-message">
+                    Aucun favori pour le moment.
+                </div>
+            `;
+
+        return;
+
+    }
+
+
+    list.innerHTML =
+        "";
+
+
+    favorites.forEach(
+        function (movie) {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "favorite-card";
+
+
+            const poster =
+                movie.poster ||
+                "";
+
+
+            card.innerHTML =
+                `
+                    <div
+                        class="poster"
+                        style="
+                            background-image:
+                            url('${poster}');
+                            background-size:cover;
+                            background-position:center;
+                        "
+                    ></div>
+
+                    <h3>
+                        ${escapeHTML(
+                            movie.tmdbTitle ||
+                            movie.title
+                        )}
+                    </h3>
+
+                    <div class="favorite-card-actions">
+
+                        <button
+                            class="favorite-watch"
+                        >
+                            ▶ Regarder
+                        </button>
+
+                        <button
+                            class="favorite-remove"
+                        >
+                            Retirer
+                        </button>
+
+                    </div>
+                `;
+
+
+            card.querySelector(
+                ".favorite-watch"
+            ).onclick =
+                function () {
+
+                    watchMovie(
+                        movie
+                    );
+
+                };
+
+
+            card.querySelector(
+                ".favorite-remove"
+            ).onclick =
+                function () {
+
+                    toggleFavorite(
+                        movie
+                    );
+
+                };
+
+
+            list.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   TÉLÉCHARGEMENTS
+===================================================== */
+
+function addDownload(movie) {
+
+    if (!movie) {
+        return;
+    }
+
+
+    let downloads =
+        JSON.parse(
+            localStorage.getItem(
+                "jtn_downloads"
+            ) || "[]"
+        );
+
+
+    const exists =
+        downloads.some(
+            function (item) {
+
+                return item.id ===
+                    movie.id;
+
+            }
+        );
+
+
+    if (!exists) {
+
+        downloads.push(
+            movie
+        );
+
+    }
+
+
+    localStorage.setItem(
+        "jtn_downloads",
+        JSON.stringify(
+            downloads
+        )
+    );
+
+
+    renderDownloads();
+
+}
+
+
+/* =====================================================
+   AFFICHER LES TÉLÉCHARGEMENTS
+===================================================== */
+
+function renderDownloads() {
+
+    const list =
+        document.getElementById(
+            "downloadList"
+        );
+
+
+    if (!list) {
+        return;
+    }
+
+
+    const downloads =
+        JSON.parse(
+            localStorage.getItem(
+                "jtn_downloads"
+            ) || "[]"
+        );
+
+
+    if (
+        downloads.length === 0
+    ) {
+
+        list.innerHTML =
+            `
+                <div class="empty-message">
+                    Aucun téléchargement.
+                </div>
+            `;
+
+        return;
+
+    }
+
+
+    list.innerHTML =
+        "";
+
+
+    downloads.forEach(
+        function (movie) {
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "download-item";
+
+
+            item.innerHTML =
+                `
+                    <div
+                        class="download-item-poster"
+                        style="
+                            background-image:
+                            url('${movie.poster || ""}');
+                            background-size:cover;
+                            background-position:center;
+                        "
+                    ></div>
+
+                    <div class="download-info">
 
                         <h3>
                             ${escapeHTML(
@@ -1655,328 +2019,705 @@ if (
                                 movie.title
                             )}
                         </h3>
-                    `;
 
-                    card.onclick =
-                        function () {
+                        <p>
+                            Disponible dans JTN STREAM
+                        </p>
 
-                            openMovieDetails(
-                                movie
-                            );
-                        };
+                        <button
+                            class="watch-offline-btn"
+                        >
+                            ▶ Regarder
+                        </button>
 
-                    detailsRecommendations.appendChild(
-                        card
-                    );
-                }
-            );
-    }
+                        <button
+                            class="delete-download-btn"
+                        >
+                            Supprimer
+                        </button>
 
-    /* =====================================================
-       ACCUEIL
-    ===================================================== */
+                    </div>
+                `;
 
-    function showHome() {
 
-        closeDetails();
-
-        if (homePage) {
-            homePage.style.display =
-                "block";
-        }
-
-        if (favoritesPage) {
-            favoritesPage.style.display =
-                "none";
-        }
-
-        if (downloadsPage) {
-            downloadsPage.style.display =
-                "none";
-        }
-    }
-
-    if (homeBtn) {
-
-        homeBtn.addEventListener(
-            "click",
-            showHome
-        );
-    }
-
-    /* =====================================================
-       FAVORIS PAGE
-    ===================================================== */
-
-    function showFavorites() {
-
-        closeDetails();
-
-        if (homePage) {
-            homePage.style.display =
-                "none";
-        }
-
-        if (favoritesPage) {
-            favoritesPage.style.display =
-                "block";
-        }
-
-        if (downloadsPage) {
-            downloadsPage.style.display =
-                "none";
-        }
-
-        renderFavorites();
-    }
-
-    if (favoritesBtn) {
-
-        favoritesBtn.addEventListener(
-            "click",
-            showFavorites
-        );
-    }
-
-    if (backFromFavorites) {
-
-        backFromFavorites.addEventListener(
-            "click",
-            showHome
-        );
-    }
-
-    /* =====================================================
-       TÉLÉCHARGEMENTS PAGE
-    ===================================================== */
-
-    function showDownloads() {
-
-        closeDetails();
-
-        if (homePage) {
-            homePage.style.display =
-                "none";
-        }
-
-        if (favoritesPage) {
-            favoritesPage.style.display =
-                "none";
-        }
-
-        if (downloadsPage) {
-            downloadsPage.style.display =
-                "block";
-        }
-
-        renderDownloads();
-    }
-
-    if (downloadsBtn) {
-
-        downloadsBtn.addEventListener(
-            "click",
-            showDownloads
-        );
-    }
-
-    if (backFromDownloads) {
-
-        backFromDownloads.addEventListener(
-            "click",
-            showHome
-        );
-    }
-
-    /* =====================================================
-       RECHERCHE
-    ===================================================== */
-
-    if (searchBtn && searchBox) {
-
-        searchBtn.addEventListener(
-            "click",
-            function () {
-
-                if (
-                    searchBox.style.display ===
-                    "block"
-                ) {
-
-                    searchBox.style.display =
-                        "none";
-
-                } else {
-
-                    searchBox.style.display =
-                        "block";
-
-                    if (searchInput) {
-                        searchInput.focus();
-                    }
-                }
-            }
-        );
-    }
-
-    if (searchInput) {
-
-        searchInput.addEventListener(
-            "input",
-            function () {
-
-                const query =
-                    searchInput.value
-                        .trim()
-                        .toLowerCase();
-
-                document
-                    .querySelectorAll(
-                        "#homePage .movie"
-                    )
-                    .forEach(
-                        function (card) {
-
-                            const title =
-                                (
-                                    card.dataset.title ||
-                                    card.textContent ||
-                                    ""
-                                ).toLowerCase();
-
-                            if (
-                                !query ||
-                                title.includes(query)
-                            ) {
-
-                                card.style.display =
-                                    "";
-
-                            } else {
-
-                                card.style.display =
-                                    "none";
-                            }
-                        }
-                    );
-            }
-        );
-    }
-
-    /* =====================================================
-       HERO — REGARDER
-    ===================================================== */
-
-    if (heroPlay) {
-
-        heroPlay.addEventListener(
-            "click",
-            function () {
-
-                const movie =
-                    getMovieById(
-                        "film1"
-                    );
-
-                if (movie) {
+            item.querySelector(
+                ".watch-offline-btn"
+            ).onclick =
+                function () {
 
                     watchMovie(
                         movie
                     );
-                }
-            }
-        );
-    }
 
-    /* =====================================================
-       HERO — INFOS
-    ===================================================== */
+                };
 
-    if (heroInfo) {
 
-        heroInfo.addEventListener(
-            "click",
-            function () {
+            item.querySelector(
+                ".delete-download-btn"
+            ).onclick =
+                function () {
 
-                const movie =
-                    getMovieById(
-                        "film1"
+                    deleteDownload(
+                        movie.id
                     );
 
-                if (movie) {
+                };
 
-                    openMovieDetails(
-                        movie
-                    );
-                }
+
+            list.appendChild(
+                item
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   SUPPRIMER TÉLÉCHARGEMENT
+===================================================== */
+
+function deleteDownload(id) {
+
+    let downloads =
+        JSON.parse(
+            localStorage.getItem(
+                "jtn_downloads"
+            ) || "[]"
+        );
+
+
+    downloads =
+        downloads.filter(
+            function (movie) {
+
+                return movie.id !==
+                    id;
+
             }
         );
-    }
 
-    /* =====================================================
-       PARAMÈTRES
-    ===================================================== */
 
-    function openSettings() {
+    localStorage.setItem(
+        "jtn_downloads",
+        JSON.stringify(
+            downloads
+        )
+    );
 
-        window.location.href =
-            "settings.html";
-    }
-
-    if (settingsBtn) {
-
-        settingsBtn.addEventListener(
-            "click",
-            openSettings
-        );
-    }
-
-    if (settingsBtnBottom) {
-
-        settingsBtnBottom.addEventListener(
-            "click",
-            openSettings
-        );
-    }
-
-    /* =====================================================
-       INITIALISATION
-    ===================================================== */
-
-    if (movieDetailsPage) {
-
-        movieDetailsPage.style.display =
-            "none";
-    }
-
-    if (favoritesPage) {
-
-        favoritesPage.style.display =
-            "none";
-    }
-
-    if (downloadsPage) {
-
-        downloadsPage.style.display =
-            "none";
-    }
-
-    if (player) {
-
-        player.style.display =
-            "none";
-    }
-
-    setupMovieCards();
-
-    renderFavorites();
 
     renderDownloads();
 
-    loadTMDBMovies();
+}
 
-    console.log(
-        "🚀 JTN STREAM démarré correctement."
+
+/* =====================================================
+   RECOMMANDATIONS
+===================================================== */
+
+function renderRecommendations(movie) {
+
+    const container =
+        document.getElementById(
+            "detailsRecommendations"
+        );
+
+
+    if (!container) {
+        return;
+    }
+
+
+    container.innerHTML =
+        "";
+
+
+    movies
+        .filter(
+            function (item) {
+
+                return item.id !==
+                    movie.id;
+
+            }
+        )
+        .slice(
+            0,
+            6
+        )
+        .forEach(
+            function (item) {
+
+                const card =
+                    document.createElement(
+                        "article"
+                    );
+
+
+                card.className =
+                    "details-recommendation-card";
+
+
+                card.innerHTML =
+                    `
+                        <div
+                            class="poster"
+                            style="
+                                background-image:
+                                url('${item.poster || ""}');
+                                background-size:cover;
+                                background-position:center;
+                            "
+                        ></div>
+
+                        <h3>
+                            ${escapeHTML(
+                                item.tmdbTitle ||
+                                item.title
+                            )}
+                        </h3>
+                    `;
+
+
+                card.onclick =
+                    function () {
+
+                        openMovieDetails(
+                            item
+                        );
+
+                    };
+
+
+                container.appendChild(
+                    card
+                );
+
+            }
+        );
+
+}
+
+
+/* =====================================================
+   FERMER FICHE DU FILM
+===================================================== */
+
+if (closeMovieDetails) {
+
+    closeMovieDetails.onclick =
+        function () {
+
+            const page =
+                document.getElementById(
+                    "movieDetailsPage"
+                );
+
+
+            if (page) {
+
+                page.classList.remove(
+                    "active"
+                );
+
+            }
+
+
+            document.body.style.overflow =
+                "";
+
+        };
+
+}
+
+
+/* =====================================================
+   NAVIGATION ACCUEIL
+===================================================== */
+
+function showHome() {
+
+    const detailsPage =
+        document.getElementById(
+            "movieDetailsPage"
+        );
+
+
+    const favoritesPage =
+        document.getElementById(
+            "favoritesPage"
+        );
+
+
+    const downloadsPage =
+        document.getElementById(
+            "downloadsPage"
+        );
+
+
+    const homePage =
+        document.getElementById(
+            "homePage"
+        );
+
+
+    if (detailsPage) {
+
+        detailsPage.classList.remove(
+            "active"
+        );
+
+    }
+
+
+    if (favoritesPage) {
+
+        favoritesPage.classList.remove(
+            "active"
+        );
+
+    }
+
+
+    if (downloadsPage) {
+
+        downloadsPage.classList.remove(
+            "active"
+        );
+
+    }
+
+
+    if (homePage) {
+
+        homePage.style.display =
+            "";
+
+    }
+
+
+    document.body.style.overflow =
+        "";
+
+}
+
+
+/* =====================================================
+   NAVIGATION FAVORIS
+===================================================== */
+
+function showFavorites() {
+
+    const homePage =
+        document.getElementById(
+            "homePage"
+        );
+
+
+    const favoritesPage =
+        document.getElementById(
+            "favoritesPage"
+        );
+
+
+    const downloadsPage =
+        document.getElementById(
+            "downloadsPage"
+        );
+
+
+    if (homePage) {
+
+        homePage.style.display =
+            "none";
+
+    }
+
+
+    if (downloadsPage) {
+
+        downloadsPage.classList.remove(
+            "active"
+        );
+
+    }
+
+
+    if (favoritesPage) {
+
+        favoritesPage.classList.add(
+            "active"
+        );
+
+    }
+
+
+    renderFavorites();
+
+}
+
+
+/* =====================================================
+   NAVIGATION TÉLÉCHARGEMENTS
+===================================================== */
+
+function showDownloads() {
+
+    const homePage =
+        document.getElementById(
+            "homePage"
+        );
+
+
+    const favoritesPage =
+        document.getElementById(
+            "favoritesPage"
+        );
+
+
+    const downloadsPage =
+        document.getElementById(
+            "downloadsPage"
+        );
+
+
+    if (homePage) {
+
+        homePage.style.display =
+            "none";
+
+    }
+
+
+    if (favoritesPage) {
+
+        favoritesPage.classList.remove(
+            "active"
+        );
+
+    }
+
+
+    if (downloadsPage) {
+
+        downloadsPage.classList.add(
+            "active"
+        );
+
+    }
+
+
+    renderDownloads();
+
+}
+
+
+/* =====================================================
+   BOUTONS NAVIGATION BAS
+===================================================== */
+
+if (homeBtn) {
+
+    homeBtn.onclick =
+        function () {
+
+            showHome();
+
+        };
+
+}
+
+
+/* =====================================================
+   BOUTON FAVORIS
+===================================================== */
+
+if (favoritesBtn) {
+
+    favoritesBtn.onclick =
+        function () {
+
+            showFavorites();
+
+        };
+
+}
+
+
+/* =====================================================
+   BOUTON TÉLÉCHARGEMENTS
+===================================================== */
+
+if (downloadsBtn) {
+
+    downloadsBtn.onclick =
+        function () {
+
+            showDownloads();
+
+        };
+
+}
+
+
+/* =====================================================
+   RETOUR FAVORIS
+===================================================== */
+
+if (backFromFavorites) {
+
+    backFromFavorites.onclick =
+        function () {
+
+            showHome();
+
+        };
+
+}
+
+
+/* =====================================================
+   RETOUR TÉLÉCHARGEMENTS
+===================================================== */
+
+if (backFromDownloads) {
+
+    backFromDownloads.onclick =
+        function () {
+
+            showHome();
+
+        };
+
+}
+
+
+/* =====================================================
+   PARAMÈTRES
+===================================================== */
+
+if (settingsBtnBottom) {
+
+    settingsBtnBottom.onclick =
+        function () {
+
+            window.location.href =
+                "settings.html";
+
+        };
+
+}
+
+
+if (settingsBtn) {
+
+    settingsBtn.onclick =
+        function () {
+
+            window.location.href =
+                "settings.html";
+
+        };
+
+}
+
+
+/* =====================================================
+   HERO — REGARDER
+===================================================== */
+
+if (heroPlay) {
+
+    heroPlay.onclick =
+        function () {
+
+            const movie =
+                getMovieById("film1");
+
+            if (movie) {
+
+                watchMovie(movie);
+
+            }
+
+        };
+
+}
+
+
+/* =====================================================
+   HERO — INFOS
+===================================================== */
+
+if (heroInfo) {
+
+    heroInfo.onclick =
+        function () {
+
+            const movie =
+                getMovieById("film1");
+
+            if (movie) {
+
+                openMovieDetails(movie);
+
+            }
+
+        };
+
+}
+
+
+/* =====================================================
+   RECHERCHE
+===================================================== */
+
+if (searchInput) {
+
+    searchInput.addEventListener(
+        "input",
+        function () {
+
+            const query =
+                searchInput.value
+                    .trim()
+                    .toLowerCase();
+
+
+            const cards =
+                document.querySelectorAll(
+                    ".movie"
+                );
+
+
+            cards.forEach(
+                function (card) {
+
+                    const title =
+                        (
+                            card.dataset.title ||
+                            card.querySelector("h3")?.textContent ||
+                            ""
+                        ).toLowerCase();
+
+
+                    if (
+                        !query ||
+                        title.includes(query)
+                    ) {
+
+                        card.style.display =
+                            "";
+
+                    } else {
+
+                        card.style.display =
+                            "none";
+
+                    }
+
+                }
+            );
+
+        }
     );
 
-});
+}
+
+
+/* =====================================================
+   FERMER LA RECHERCHE
+===================================================== */
+
+document.addEventListener(
+    "click",
+    function (event) {
+
+        if (
+            searchBox &&
+            searchBox.classList.contains("active") &&
+            !searchBox.contains(event.target) &&
+            !searchBtn?.contains(event.target)
+        ) {
+
+            searchBox.classList.remove(
+                "active"
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =====================================================
+   INITIALISATION
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        console.log(
+            "JTN STREAM : démarrage..."
+        );
+
+
+        setupMovieCards();
+
+
+        updateAllMovieCards();
+
+
+        renderFavorites();
+
+
+        renderDownloads();
+
+
+        loadTMDBMovies();
+
+    }
+);
