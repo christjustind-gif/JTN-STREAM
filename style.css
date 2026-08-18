@@ -17,7 +17,9 @@ body {
 }
 
 
-/* ================= HEADER ================= */
+/* =====================================================
+   HEADER
+===================================================== */
 
 .header {
     position: fixed;
@@ -25,6 +27,7 @@ body {
     left: 0;
     width: 100%;
     height: 58px;
+
     z-index: 100;
 
     display: flex;
@@ -52,6 +55,7 @@ body {
 
 .header-actions {
     display: flex;
+    align-items: center;
     gap: 8px;
 }
 
@@ -66,18 +70,23 @@ body {
     background: rgba(255,255,255,.12);
 
     color: white;
+
     font-size: 18px;
 }
 
 
-/* ================= MENU ================= */
+/* =====================================================
+   MENU
+===================================================== */
 
 .menu {
     display: none;
 }
 
 
-/* ================= RECHERCHE ================= */
+/* =====================================================
+   RECHERCHE
+===================================================== */
 
 .search-box {
     position: fixed;
@@ -118,7 +127,9 @@ body {
 }
 
 
-/* ================= HERO ================= */
+/* =====================================================
+   HERO
+===================================================== */
 
 .hero {
     position: relative;
@@ -145,19 +156,25 @@ body {
 
 .hero-content {
     width: 100%;
+
     padding: 0 20px 45px;
 }
 
 .badge {
     font-size: 11px;
+
     font-weight: bold;
+
     letter-spacing: 2px;
+
     margin-bottom: 10px;
 }
 
 .hero h1 {
     font-size: 42px;
+
     line-height: .95;
+
     margin-bottom: 14px;
 }
 
@@ -167,6 +184,7 @@ body {
     color: #ddd;
 
     font-size: 14px;
+
     line-height: 1.45;
 
     margin-bottom: 20px;
@@ -181,6 +199,7 @@ body {
     height: 42px;
 
     border: none;
+
     border-radius: 5px;
 
     padding: 0 18px;
@@ -199,11 +218,15 @@ body {
 }
 
 
-/* ================= CONTENU ================= */
+/* =====================================================
+   CONTENU
+===================================================== */
 
 main {
     margin-top: -25px;
+
     position: relative;
+
     z-index: 5;
 }
 
@@ -213,6 +236,7 @@ main {
 
 .category h2 {
     font-size: 19px;
+
     margin: 0 15px 10px;
 }
 
@@ -233,7 +257,9 @@ main {
 }
 
 
-/* ================= CARTE FILM ================= */
+/* =====================================================
+   FILM — ACCUEIL
+===================================================== */
 
 .movie {
     flex: 0 0 125px;
@@ -241,7 +267,11 @@ main {
     cursor: pointer;
 }
 
-.poster {
+.movie:active {
+    transform: scale(.97);
+}
+
+.movie .poster {
     width: 125px;
     height: 180px;
 
@@ -250,25 +280,25 @@ main {
     background-size: cover;
     background-position: center;
 
-    transition: transform .2s ease;
+    transition: transform .2s;
 }
 
-.movie:active .poster {
-    transform: scale(.96);
+.movie:hover .poster {
+    transform: scale(1.02);
 }
 
 
-/* ================= CACHER LES BOUTONS SUR ACCUEIL ================= */
-
-.movie .movie-actions,
-.movie .download-btn {
-    display: none;
-}
+/*
+   IMPORTANT :
+   Sur l'accueil il n'y a plus
+   les boutons Regarder / Favoris /
+   Télécharger.
+*/
 
 .movie h3 {
     font-size: 12px;
 
-    margin-top: 6px;
+    margin-top: 7px;
 
     white-space: nowrap;
 
@@ -280,58 +310,112 @@ main {
 }
 
 
-/* ================= POSTERS ================= */
+/* =====================================================
+   POSTERS
+===================================================== */
 
 .poster1 {
-    background: linear-gradient(145deg,#601313,#111);
+    background: linear-gradient(
+        145deg,
+        #601313,
+        #111
+    );
 }
 
 .poster2 {
-    background: linear-gradient(145deg,#071b32,#020205);
+    background: linear-gradient(
+        145deg,
+        #071b32,
+        #020205
+    );
 }
 
 .poster3 {
-    background: linear-gradient(145deg,#5b3307,#111);
+    background: linear-gradient(
+        145deg,
+        #5b3307,
+        #111
+    );
 }
 
 .poster4 {
-    background: linear-gradient(145deg,#263a2c,#050505);
+    background: linear-gradient(
+        145deg,
+        #263a2c,
+        #050505
+    );
 }
 
 .poster5 {
-    background: linear-gradient(145deg,#391212,#090909);
+    background: linear-gradient(
+        145deg,
+        #391212,
+        #090909
+    );
 }
 
 .poster6 {
-    background: linear-gradient(145deg,#171744,#050505);
+    background: linear-gradient(
+        145deg,
+        #171744,
+        #050505
+    );
 }
 
 .poster7 {
-    background: linear-gradient(145deg,#432a09,#090909);
+    background: linear-gradient(
+        145deg,
+        #432a09,
+        #090909
+    );
 }
 
 .poster8 {
-    background: linear-gradient(145deg,#3d1749,#0b050e);
+    background: linear-gradient(
+        145deg,
+        #3d1749,
+        #0b050e
+    );
 }
 
 .poster9 {
-    background: linear-gradient(145deg,#173b39,#050908);
+    background: linear-gradient(
+        145deg,
+        #173b39,
+        #050908
+    );
 }
 
 .poster10 {
-    background: linear-gradient(145deg,#29102f,#050505);
+    background: linear-gradient(
+        145deg,
+        #201d45,
+        #050505
+    );
 }
 
 .poster11 {
-    background: linear-gradient(145deg,#102c38,#050505);
+    background: linear-gradient(
+        145deg,
+        #173c27,
+        #050505
+    );
 }
 
 .poster12 {
-    background: linear-gradient(145deg,#36111d,#050505);
+    background: linear-gradient(
+        145deg,
+        #471c48,
+        #050505
+    );
 }
 
 .poster13 {
-    background: linear-gradient(145deg,#4a2508,#050505);
+    background: linear-gradient(
+        145deg,
+        #124b6a,
+        #050505
+    );
 }
 
 
@@ -340,19 +424,17 @@ main {
 ===================================================== */
 
 .movie-details-page {
-    display: none;
-
     position: fixed;
 
     inset: 0;
 
-    z-index: 250;
+    z-index: 450;
+
+    display: none;
 
     overflow-y: auto;
 
     background: #050505;
-
-    padding-bottom: 110px;
 }
 
 .movie-details-page.active {
@@ -360,160 +442,233 @@ main {
 }
 
 
-/* IMAGE DE LA FICHE */
+/* =====================================================
+   FOND DE LA FICHE
+===================================================== */
 
-.details-hero {
-    position: relative;
-
-    width: 100%;
-
-    min-height: 470px;
-
-    background-size: cover;
-    background-position: center top;
-
-    display: flex;
-    align-items: flex-end;
-}
-
-.details-hero::after {
-    content: "";
-
+.details-backdrop {
     position: absolute;
 
-    inset: 0;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 480px;
 
     background:
         linear-gradient(
-            to top,
-            #050505 0%,
-            rgba(5,5,5,.75) 35%,
-            rgba(5,5,5,.15) 75%,
-            rgba(5,5,5,.2)
+            to bottom,
+            rgba(0,0,0,.05),
+            #050505 85%,
+            #050505
         );
+
+    background-size: cover;
+
+    background-position: center;
+
+    opacity: .8;
 }
 
 
-/* CONTENU */
+/* =====================================================
+   BOUTON FERMER
+===================================================== */
 
-.details-content {
+.details-close {
+    position: fixed;
+
+    top: 15px;
+    left: 15px;
+
+    z-index: 20;
+
+    width: 42px;
+    height: 42px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(20,20,20,.8);
+
+    color: white;
+
+    font-size: 20px;
+}
+
+.details-close:active {
+    transform: scale(.9);
+}
+
+
+/* =====================================================
+   CONTENU FICHE
+===================================================== */
+
+.movie-details-content {
     position: relative;
 
-    z-index: 2;
+    z-index: 5;
 
     width: 100%;
 
-    padding: 25px 18px 30px;
+    max-width: 700px;
+
+    margin: 0 auto;
+
+    padding: 70px 20px 120px;
+
+    text-align: center;
 }
+
+
+/* =====================================================
+   AFFICHE FICHE
+===================================================== */
+
+.details-poster {
+    width: 210px;
+    height: 300px;
+
+    margin: 0 auto 20px;
+
+    border-radius: 9px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #461010,
+            #111
+        );
+
+    background-size: cover;
+
+    background-position: center;
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.65);
+}
+
+
+/* =====================================================
+   TITRE
+===================================================== */
 
 .details-title {
-    font-size: 30px;
+    font-size: 29px;
 
-    font-weight: 900;
+    line-height: 1.1;
 
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 
-.details-meta {
-    display: flex;
 
-    gap: 10px;
+/* =====================================================
+   INFORMATIONS
+===================================================== */
 
-    flex-wrap: wrap;
+.details-info {
+    color: #aaa;
 
-    color: #bbb;
-
-    font-size: 12px;
-
-    margin-bottom: 16px;
-}
-
-.details-description {
-    color: #ddd;
-
-    font-size: 14px;
-
-    line-height: 1.55;
+    font-size: 13px;
 
     margin-bottom: 20px;
-
-    max-width: 600px;
 }
 
 
-/* ================= BOUTONS FICHE ================= */
+/* =====================================================
+   BOUTONS FICHE
+===================================================== */
 
 .details-actions {
     display: flex;
 
-    gap: 8px;
+    flex-direction: column;
 
-    margin-bottom: 25px;
+    gap: 9px;
+
+    max-width: 420px;
+
+    margin: 0 auto 30px;
 }
 
-.details-watch-btn {
-    flex: 1;
+.details-actions button {
+    width: 100%;
 
-    min-height: 44px;
+    min-height: 46px;
 
     border: none;
 
     border-radius: 6px;
 
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+.details-watch-btn {
     background: white;
 
     color: black;
-
-    font-weight: bold;
-
-    font-size: 13px;
 }
 
 .details-download-btn {
-    flex: 1;
-
-    min-height: 44px;
-
-    border: 1px solid #444;
-
-    border-radius: 6px;
-
-    background: #181818;
+    background: #242424;
 
     color: white;
 
-    font-weight: bold;
-
-    font-size: 13px;
+    border: 1px solid #333 !important;
 }
 
 .details-favorite-btn {
-    width: 48px;
-
-    min-height: 44px;
-
-    border: 1px solid #444;
-
-    border-radius: 6px;
-
-    background: #181818;
+    background: #242424;
 
     color: white;
 
-    font-size: 22px;
+    border: 1px solid #333 !important;
 }
 
-.details-favorite-btn.active {
-    background: #e50914;
-
-    border-color: #e50914;
+.details-actions button:active {
+    transform: scale(.98);
 }
 
 
-/* ================= AUTRES FILMS ================= */
+/* =====================================================
+   DESCRIPTION
+===================================================== */
+
+.details-description {
+    text-align: left;
+
+    margin-top: 25px;
+
+    margin-bottom: 35px;
+}
+
+.details-description h2 {
+    font-size: 19px;
+
+    margin-bottom: 10px;
+}
+
+.details-description p {
+    color: #aaa;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   RECOMMANDATIONS
+===================================================== */
 
 .details-recommendations {
-    padding: 0 15px;
+    text-align: left;
+
+    margin-top: 20px;
 }
 
 .details-recommendations h2 {
@@ -522,116 +677,56 @@ main {
     margin-bottom: 12px;
 }
 
-.details-recommendations .movie-row {
-    padding: 0 0 10px;
+.details-movie-row {
+    display: flex;
+
+    gap: 9px;
+
+    overflow-x: auto;
+
+    padding-bottom: 10px;
+
+    scrollbar-width: none;
 }
 
-
-/* Les boutons restent cachés dans les recommandations */
-
-.details-recommendations .movie-actions,
-.details-recommendations .download-btn {
+.details-movie-row::-webkit-scrollbar {
     display: none;
 }
 
+.details-recommendation-card {
+    flex: 0 0 125px;
 
-/* ================= FERMER FICHE ================= */
-
-.details-close {
-    position: absolute;
-
-    top: 15px;
-    left: 15px;
-
-    z-index: 10;
-
-    width: 40px;
-    height: 40px;
-
-    border: none;
-
-    border-radius: 50%;
-
-    background: rgba(0,0,0,.7);
-
-    color: white;
-
-    font-size: 22px;
+    cursor: pointer;
 }
 
-
-/* ================= ANCIENS BOUTONS ================= */
-
-.watch-btn {
-    flex: 1;
-
-    border: none;
+.details-recommendation-card .poster {
+    width: 125px;
+    height: 180px;
 
     border-radius: 5px;
 
-    background: white;
-
-    color: black;
-
-    padding: 8px 3px;
-
-    font-size: 10px;
-
-    font-weight: bold;
+    background-size: cover;
+    background-position: center;
 }
 
-.favorite-btn {
-    width: 35px;
+.details-recommendation-card h3 {
+    font-size: 12px;
 
-    border: 1px solid #333;
+    margin-top: 7px;
 
-    border-radius: 5px;
+    white-space: nowrap;
 
-    background: #181818;
+    overflow: hidden;
 
-    color: white;
+    text-overflow: ellipsis;
 
-    font-size: 20px;
-
-    line-height: 1;
-}
-
-.favorite-btn.active {
-    background: #e50914;
-
-    border-color: #e50914;
-
-    color: white;
-}
-
-.download-btn {
-    width: 100%;
-
-    margin-top: 5px;
-
-    padding: 8px 4px;
-
-    border: 1px solid #333;
-
-    border-radius: 5px;
-
-    background: #181818;
-
-    color: white;
-
-    font-size: 10px;
-
-    font-weight: bold;
-}
-
-.download-btn.downloaded {
-    background: #e50914;
-
-    border-color: #e50914;
+    color: #ddd;
 }
 
 
-/* ================= PAGES ================= */
+/* =====================================================
+   PAGES FAVORIS / TÉLÉCHARGEMENTS
+===================================================== */
 
 .favorites-page,
 .downloads-page {
@@ -687,7 +782,9 @@ main {
 }
 
 
-/* ================= FAVORIS ================= */
+/* =====================================================
+   FAVORIS
+===================================================== */
 
 .favorite-list {
     display: grid;
@@ -770,7 +867,9 @@ main {
 }
 
 
-/* ================= TELECHARGEMENTS ================= */
+/* =====================================================
+   TÉLÉCHARGEMENTS
+===================================================== */
 
 .download-list {
     display: flex;
@@ -851,7 +950,19 @@ main {
 }
 
 
-/* ================= VIDEO ================= */
+/* =====================================================
+   BOUTONS FILMS — CACHÉS SUR L'ACCUEIL
+===================================================== */
+
+.movie .movie-actions,
+.movie .download-btn {
+    display: none;
+}
+
+
+/* =====================================================
+   LECTEUR
+===================================================== */
 
 .player {
     position: fixed;
@@ -901,15 +1012,10 @@ main {
     font-size: 20px;
 }
 
-.player iframe {
-    width: 100%;
-    height: 90vh;
-    border: 0;
-    background: #000;
-}
 
-
-/* ================= BARRE DU BAS ================= */
+/* =====================================================
+   BARRE DU BAS
+===================================================== */
 
 .bottom-nav {
     position: fixed;
@@ -993,93 +1099,135 @@ main {
 
 
 /* =====================================================
-   INTRO NETFLIX JTN STREAM
+   INTRO JTN STREAM
    NE PAS MODIFIER
 ===================================================== */
 
-#intro{
-    position:fixed;
-    inset:0;
-    background:#000;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    z-index:999999;
-    overflow:hidden;
-    animation:introFadeOut 5s forwards;
+#intro {
+    position: fixed;
+
+    inset: 0;
+
+    background: #000;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 999999;
+
+    overflow: hidden;
+
+    animation: introFadeOut 5s forwards;
 }
 
-.intro-light{
-    position:absolute;
-    width:0;
-    height:100%;
-    background:#e50914;
-    box-shadow:0 0 60px #e50914;
-    animation:lightMove 1.2s ease forwards;
+.intro-light {
+    position: absolute;
+
+    width: 0;
+
+    height: 100%;
+
+    background: #e50914;
+
+    box-shadow: 0 0 60px #e50914;
+
+    animation: lightMove 1.2s ease forwards;
 }
 
-#introLogo{
-    width:220px;
-    max-width:70%;
-    opacity:0;
-    animation:logoShow 2s ease forwards;
-    animation-delay:1s;
+#introLogo {
+    width: 220px;
+
+    max-width: 70%;
+
+    opacity: 0;
+
+    animation: logoShow 2s ease forwards;
+
+    animation-delay: 1s;
 }
 
-#intro h2{
-    margin-top:20px;
-    color:white;
-    letter-spacing:4px;
-    opacity:0;
-    animation:textShow 1s ease forwards;
-    animation-delay:2s;
+#intro h2 {
+    margin-top: 20px;
+
+    color: white;
+
+    letter-spacing: 4px;
+
+    opacity: 0;
+
+    animation: textShow 1s ease forwards;
+
+    animation-delay: 2s;
 }
 
-@keyframes lightMove{
-    0%{
-        width:0;
-    }
-    100%{
-        width:100%;
-        opacity:0;
-    }
-}
+@keyframes lightMove {
 
-@keyframes logoShow{
-    0%{
-        opacity:0;
-        transform:scale(.2);
+    0% {
+        width: 0;
     }
-    100%{
-        opacity:1;
-        transform:scale(1);
-        filter:drop-shadow(0 0 25px #e50914);
-    }
-}
 
-@keyframes textShow{
-    from{
-        opacity:0;
-    }
-    to{
-        opacity:1;
-    }
-}
-
-@keyframes introFadeOut{
-    0%,85%{
-        opacity:1;
-    }
-    100%{
-        opacity:0;
-        visibility:hidden;
-        pointer-events:none;
+    100% {
+        width: 100%;
+        opacity: 0;
     }
 }
 
+@keyframes logoShow {
 
-/* ================= PETITS ÉCRANS ================= */
+    0% {
+        opacity: 0;
+
+        transform: scale(.2);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform: scale(1);
+
+        filter:
+            drop-shadow(
+                0 0 25px #e50914
+            );
+    }
+}
+
+@keyframes textShow {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes introFadeOut {
+
+    0%,
+    85% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+
+        visibility: hidden;
+
+        pointer-events: none;
+    }
+}
+
+
+/* =====================================================
+   PETITS ÉCRANS
+===================================================== */
 
 @media (max-width: 360px) {
 
@@ -1091,9 +1239,14 @@ main {
         flex-basis: 110px;
     }
 
-    .poster {
+    .movie .poster {
         width: 110px;
         height: 158px;
+    }
+
+    .details-poster {
+        width: 180px;
+        height: 260px;
     }
 
     .favorite-card .poster {
@@ -1111,12 +1264,4 @@ main {
     .nav-icon {
         font-size: 22px;
     }
-
-    .details-title {
-        font-size: 26px;
     }
-
-    .details-hero {
-        min-height: 430px;
-    }
-}
