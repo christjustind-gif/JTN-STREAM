@@ -99,6 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
             poster:
                 "the-last-mission.jpg"
         },
+  
 
         {
             id: "film2",
@@ -209,6 +210,53 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
     ];
+    function updateTMDBDisplay() {
+
+    movies.forEach(function (movie) {
+
+        const element =
+            document.querySelector(
+                '.movie[data-id="' +
+                movie.id +
+                '"]'
+            );
+
+        if (!element) {
+            return;
+        }
+
+        const titleElement =
+            element.querySelector(
+                "[data-movie-title]"
+            );
+
+        if (titleElement) {
+            titleElement.textContent =
+                movie.title;
+        }
+
+        const poster =
+            element.querySelector(".poster");
+
+        if (poster && movie.poster) {
+
+            poster.style.backgroundImage =
+                "url('" + movie.poster + "')";
+
+            poster.style.backgroundSize =
+                "cover";
+
+            poster.style.backgroundPosition =
+                "center";
+        }
+
+    });
+
+} 
+// DÉMARRER TMDB
+loadTMDBMovies();
+
+});
 
 
     /* =====================================================
