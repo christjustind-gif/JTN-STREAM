@@ -20,7 +20,6 @@ const TMDB_BACKDROP = "https://image.tmdb.org/t/p/w1280";
 const IA_API =
     "https://archive.org";
 
-
 /* =====================================================
    RECHERCHE INTERNET ARCHIVE
 ===================================================== */
