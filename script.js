@@ -2862,25 +2862,77 @@ document.addEventListener(
 
 
         loadTMDBMovies();
+       searchAllMoviesInternetArchive();
 
     }
 );
 /* =====================================================
-   TEST INTERNET ARCHIVE
+   RECHERCHER AUTOMATIQUEMENT LES 13 FILMS
 ===================================================== */
 
-async function testInternetArchive() {
+async function searchAllMoviesInternetArchive() {
 
-    const results =
-        await searchInternetArchive(
-            "The Great Train Robbery"
+    const container =
+        document.getElementById(
+            "internetArchiveResults"
         );
 
-    console.log(
-        "Résultats Internet Archive :",
-        results
-    );
+    if (!container) {
+        return;
+    }
 
+    container.innerHTML =
+        "<p>🔎 Recherche des films...</p>";
+
+    container.innerHTML = "";
+
+    for (const movie of movies) {
+
+        const results =
+            await searchInternetArchive(
+                movie.title
+            );
+
+        if (!results.length) {
+            continue;
+        }
+
+        results.forEach(
+            function (item) {
+
+                const card =
+                    document.createElement(
+                        "article"
+                    );
+
+                card.className = "movie";
+
+                card.innerHTML = `
+                    <div class="poster">
+                        🎬
+                    </div>
+
+                    <h3>
+                        ${
+                            item.title ||
+                            movie.title
+                        }
+                    </h3>
+
+                    <p>
+                        ${item.year || ""}
+                    </p>
+                `;
+
+                container.appendChild(card);
+            }
+        );
+    }
+
+    if (!container.children.length) {
+
+        container.innerHTML =
+            "<p>❌ Aucun résultat trouvé.</p>";
+    }
 }
 
-testInternetArchive();
