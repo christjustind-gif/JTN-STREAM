@@ -108,9 +108,9 @@ async function showInternetArchiveMovies(movieName) {
         "<p>🔎 Recherche en cours...</p>";
 
     const results =
-        await searchInternetArchive(
-            movieName
-        );
+    await searchInternetArchive(
+        movie.title
+    );
 
     if (!results.length) {
 
