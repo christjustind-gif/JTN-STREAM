@@ -89,6 +89,75 @@ async function searchInternetArchive(movieName) {
 
 }
 
+/* =====================================================
+   AFFICHER INTERNET ARCHIVE
+===================================================== */
+
+async function showInternetArchiveMovies(movieName) {
+
+    const container =
+        document.getElementById(
+            "internetArchiveResults"
+        );
+
+    if (!container) {
+        return;
+    }
+
+    container.innerHTML =
+        "<p>🔎 Recherche en cours...</p>";
+
+    const results =
+        await searchInternetArchive(
+            movieName
+        );
+
+    if (!results.length) {
+
+        container.innerHTML =
+            "<p>❌ Aucun résultat trouvé.</p>";
+
+        return;
+    }
+
+    container.innerHTML = "";
+
+    results.forEach(
+        function (item) {
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+            card.className =
+                "movie";
+
+            card.innerHTML =
+                `
+                    <div class="poster">
+                        🎬
+                    </div>
+
+                    <h3>
+                        ${
+                            item.title ||
+                            "Titre inconnu"
+                        }
+                    </h3>
+
+                    <p>
+                        ${item.year || ""}
+                    </p>
+                `;
+
+            container.appendChild(
+                card
+            );
+
+        }
+    );
+}
 
 /* =====================================================
    FILMS — 13 FILMS
